@@ -5,7 +5,10 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.ValueProps;
+using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Models;
 using Runesmith2.Runesmith2Code.Structs;
 
@@ -147,10 +150,31 @@ public static class RunesmithHook
         if (originalCost.Total < 0) return originalCost;
 
         var modifiedCost = originalCost;
-        foreach (var model in combatState.IterateHookListeners().OfType<IModifyElementsCost>())
-            model.TryModifyElementsCost(card, modifiedCost, out modifiedCost);
+        (_, modifiedCost) = TryModifyElementsCost(combatState, card, modifiedCost);
 
         return modifiedCost;
+    }
+
+    public static (bool, Elements) TryModifyElementsCost(ICombatState combatState, CardModel card, Elements modifiedCost)
+    {
+        var isModified = false;
+        foreach (var model in combatState.IterateHookListeners())
+        {
+            switch (model)
+            {
+                case IModifyElementsCost modifyElementsCost:
+                    isModified |= modifyElementsCost.TryModifyElementsCost(card, modifiedCost, out modifiedCost);
+                    break;
+                case BrilliantScarf scarf:
+                    isModified |= scarf.TryModifyElementsCost(card, modifiedCost, out modifiedCost);
+                    break;
+                case VoidFormPower voidForm:
+                    isModified |= voidForm.TryModifyElementsCost(card, modifiedCost, out modifiedCost);
+                    break;
+            }
+        }
+
+        return (isModified, modifiedCost);
     }
 
     public static Task AfterElementsSpent(ICombatState combatState, Elements amount, Player spender)

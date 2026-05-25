@@ -4,6 +4,7 @@ using Godot;
 using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.UI;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Utils;
@@ -81,7 +82,7 @@ public partial class NElementsIcon : TextureRect
             UpdateElementsCostColor(pileType, runesmithCard, elementsCostColor, i);
         }
 
-        Visible = runesmithCard.GetElementsCostWithModifiers().Total >= 0;
+        Visible = elementsCost.Total >= 0;
 
         var shouldShowUnplayableIcon = false;
         if (pileType == PileType.Hand && !runesmithCard.CanPlay(out var reason, out _))
@@ -94,6 +95,12 @@ public partial class NElementsIcon : TextureRect
         int index)
     {
         var (fontColor, _, fontOutlineColor) = GetFontColor(index);
+        
+        if (card.WasElementsCostJustUpgraded)
+        {
+            fontColor = StsColors.green;
+            fontOutlineColor = StsColors.energyGreenOutline;
+        }
 
         if (pileType == PileType.Hand)
         {

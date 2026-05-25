@@ -50,7 +50,7 @@ internal class CardModelEndOfTurnCleanupPatch
     private static void Postfix(CardModel __instance)
     {
         if (__instance is Runesmith2Card card)
-            if (card._temporaryElementsCosts.RemoveAll(c => c.ClearsWhenTurnEnds) > 0)
+            if (card.TemporaryElementsCosts.RemoveAll(c => c.ClearsWhenTurnEnds) > 0)
                 card.InvokeElementsCostChanged();
     }
 }
@@ -89,7 +89,7 @@ internal class CardModelOnPlayWrapperPatch
     private static void ElementsCostChanged(CardModel instance)
     {
         if (instance is not Runesmith2Card card) return;
-        if (card._temporaryElementsCosts.RemoveAll(c => c.ClearsWhenCardIsPlayed) > 0) card.InvokeElementsCostChanged();
+        if (card.TemporaryElementsCosts.RemoveAll(c => c.ClearsWhenCardIsPlayed) > 0) card.InvokeElementsCostChanged();
     }
 }
 
@@ -106,6 +106,18 @@ internal class CardModelCostsEnergyOrStarPatch
                 __result = true;
 
         if (card.CurrentElementsCost.Total > 0) __result = true;
+    }
+}
+
+[HarmonyPatch(typeof(CardModel), nameof(CardModel.FinalizeUpgradeInternal))]
+internal class CardModelFinalizeUpgradeInternalPatch
+{
+    [HarmonyPostfix]
+    private static void Postfix(CardModel __instance)
+    {
+        if (__instance is not Runesmith2Card card) return;
+
+        card.WasElementsCostJustUpgraded = false;
     }
 }
 

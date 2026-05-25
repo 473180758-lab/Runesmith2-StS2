@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using Runesmith2.Runesmith2Code.CardSelection;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.Extensions;
+using Runesmith2.Runesmith2Code.Hooks;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Utils;
 
@@ -18,8 +19,10 @@ public class FissionHammer : Runesmith2Card
 {
     public FissionHammer() : base(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
     {
-        WithDamage(11, 2);
-        WithCards(1, 1);
+        WithDamage(11, 3);
+        WithCards(1);
+        WithCalculatedVar("CalculatedEnhanceBy", 1,
+            (c, _) => RunesmithHook.ModifyEnhanceAmount(c.CombatState!, c.Owner, c.GetEnhance(), c, out var _), 1);
         WithTip(RunesmithHoverTip.Enhance);
         WithTags(RunesmithEnum.Hammer);
     }
@@ -37,7 +40,7 @@ public class FissionHammer : Runesmith2Card
             .SpawningHitVfxOnEachCreature()
             .Execute(choiceContext);
 
-        var enhanceBy = this.GetEnhance();
+        var enhanceBy = this.GetEnhance() + DynamicVars["CalculatedEnhanceByBase"].IntValue;
         if (enhanceBy > 0)
         {
             var cards = (await CardSelectCmd.FromHand(choiceContext, Owner,

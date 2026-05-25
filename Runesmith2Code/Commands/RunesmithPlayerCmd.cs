@@ -27,7 +27,7 @@ public static class RunesmithPlayerCmd
                 // TODO play sfx
                 runesmithCombatState?.GainElements(finalAmount);
 
-            await RunesmithHook.AfterElementsGained(combatState, amount, player, cardPlay);
+            await RunesmithHook.AfterElementsGained(combatState, finalAmount, player, cardPlay);
         }
     }
 

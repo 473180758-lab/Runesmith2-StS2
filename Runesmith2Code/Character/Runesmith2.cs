@@ -54,7 +54,7 @@ public class Runesmith2 : PlaceholderCharacterModel
         These are just some of the simplest assets, given some placeholders to differentiate your character with.
         You don't have to, but you're suggested to rename these images. */
     public override string CustomIconTexturePath => "character_icon_runesmith.png".CharacterUiPath();
-    protected override string IconPath => "runesmith_icon".TopPanelScenePath();
+    protected override string IconPath => "runesmith_icon".ScenePath("top_panel");
     public override string CustomIconOutlineTexturePath => "character_icon_runesmith_outline.png".CharacterUiPath();
     public override string CustomCharacterSelectIconPath => "char_select_runesmith.png".CharacterUiPath();
     public override string CustomCharacterSelectLockedIconPath => "char_select_runesmith_locked.png".CharacterUiPath();
@@ -81,12 +81,16 @@ public class Runesmith2 : PlaceholderCharacterModel
 
     public override Color RemoteTargetingLineOutline => new("6b492bff");
 
+    public override string CustomTrailPath => "card_trail_runesmith".ScenePath("vfx");
+
     public override NCreatureVisuals CreateCustomVisuals()
     {
         return NodeFactory<NCreatureVisuals>.CreateFromScene(RunesmithResource.NCreatureVisualsRunesmithPath);
     }
 
-    public override string CustomMerchantAnimPath => "runesmith_merchant".MerchantScenePath();
+    public override string CustomMerchantAnimPath => "runesmith_merchant".ScenePath("merchant");
+
+    public override string CustomRestSiteAnimPath => "runesmith_rest_site".ScenePath("rest_site");
 
     public override string CustomCharacterSelectBg => RunesmithResource.NCharSelectBgRunesmithPath;
 }

@@ -3,7 +3,10 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Helpers.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Models.Relics;
 using Runesmith2.Runesmith2Code.Cards;
+using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Hooks;
 using Runesmith2.Runesmith2Code.Structs;
 
@@ -38,10 +41,8 @@ public static class RunesmithCardCostHelper
         out Elements hookModifiedCost)
     {
         hookModifiedCost = card.BaseElementsCost;
-        var isModified = false;
-        foreach (var item in state.IterateHookListeners())
-            if (item is IModifyElementsCost runesmithModel)
-                isModified |= runesmithModel.TryModifyElementsCost(card, hookModifiedCost, out hookModifiedCost);
+
+        (var isModified, hookModifiedCost) = RunesmithHook.TryModifyElementsCost(state, card, hookModifiedCost);
 
         return isModified;
     }

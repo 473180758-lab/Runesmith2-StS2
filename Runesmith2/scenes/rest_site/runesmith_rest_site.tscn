@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://cagx0evc8knd4"]
+
+[ext_resource type="Script" uid="uid://epjdj6ablxk8" path="res://Runesmith2Code/Nodes/RunesmithNRestSiteCharacter.cs" id="1_bf75j"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dpycj8odoxu7y" path="res://Runesmith2/images/character/rest_site/runesmith_rest_site_skel_data.tres" id="2_bf75j"]
+[ext_resource type="Script" uid="uid://ci1l32truajsy" path="res://Runesmith2Code/Nodes/RunesmithNSelectionReticle.cs" id="3_xjcoh"]
+
+[node name="RunesmithRestSite" type="Node2D"]
+position = Vector2(0, 43)
+scale = Vector2(0.36, 0.36)
+script = ExtResource("1_bf75j")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_bf75j")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+
+[node name="ControlRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="SelectionReticle" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -304.61542
+offset_top = -436.92313
+offset_right = 492.30774
+offset_bottom = 604.6155
+mouse_filter = 2
+script = ExtResource("3_xjcoh")
+
+[node name="Hitbox" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -304.61542
+offset_top = -436.92313
+offset_right = 492.30774
+offset_bottom = 604.6155
+
+[node name="ThoughtBubbleRight" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 432.30774
+offset_top = -409.23077
+offset_right = 432.30774
+offset_bottom = -409.23077
+
+[node name="ThoughtBubbleLeft" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -246.15385
+offset_top = -409.23077
+offset_right = -246.15385
+offset_bottom = -409.23077

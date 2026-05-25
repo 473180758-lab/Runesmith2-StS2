@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dpycj8odoxu7y"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://crcc2rgl68tsn" path="res://Runesmith2/images/character/rest_site/runesmith_rest_site.atlas" id="1_1gi00"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://c4p5lgm5nws7k" path="res://Runesmith2/images/character/rest_site/runesmith_rest_site.skel" id="2_8eq05"]
+
+[resource]
+atlas_res = ExtResource("1_1gi00")
+skeleton_file_res = ExtResource("2_8eq05")

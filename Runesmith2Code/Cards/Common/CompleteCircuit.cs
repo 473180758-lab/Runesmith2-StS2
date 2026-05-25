@@ -14,7 +14,7 @@ public class CompleteCircuit : Runesmith2Card
 {
     public CompleteCircuit() : base(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
     {
-        WithDamage(5, 4);
+        WithDamage(5, 3);
         WithVar(new ChargeGainVar(1));
     }
 

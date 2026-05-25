@@ -38,12 +38,8 @@ public class Duplicate : Runesmith2Card
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
         var runeQueue = Owner.PlayerCombatState?.RuneQueue();
-        if (runeQueue != null)
+        if (runeQueue != null && runeQueue.HasAny())
         {
-            // await RuneCmd.BreakOldest(choiceContext, Owner);
-            // if (!runeQueue.HasAny())
-            //     return;
-            // await Cmd.CustomScaledWait(0.1f, 0.2f);
             var clonedRune = runeQueue.Runes[^1].CreateClone();
             await RuneCmd.Craft(choiceContext, clonedRune, Owner, play, clonedRune.ChargeVal, clonedRune.PassiveVal,
                 clonedRune.Upgraded);

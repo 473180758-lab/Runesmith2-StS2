@@ -1,9 +1,11 @@
 #region
 
+using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using Runesmith2.Runesmith2Code.Commands;
+using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Models;
@@ -23,6 +25,7 @@ public class Teleport : Runesmith2Card
     public Teleport() : base(0, CardType.Skill, CardRarity.Rare, TargetType.AnyAlly)
     {
         WithTip(RunesmithHoverTip.Break);
+        WithVar(new ChargeGainVar(0).WithUpgrade(2));
     }
 
     protected override async Task OnPlay(
@@ -40,6 +43,8 @@ public class Teleport : Runesmith2Card
             await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
             await RuneCmd.Break(choiceContext, Owner, runeOrig);
+
+            runeCopy.ChargeVal += DynamicVars[ChargeGainVar.defaultName].IntValue;
 
             await RuneCmd.AddRune(choiceContext, runeCopy, play.Target.Player, play);
         }

@@ -34,9 +34,8 @@ public class ElementalDecay : Runesmith2Card
             null,
             this
         )).ToList();
-
-        // Do not add X cost (or do it and gain elements to energy count??)
-        var totalCost = cards.Select(c => c.EnergyCost.CostsX ? 0 : c.EnergyCost.GetAmountToSpend())
+        
+        var totalCost = cards.Select(c => c.EnergyCost.GetAmountToSpend())
             .Aggregate(0, (a, b) => a + b);
 
         if (totalCost > 0)

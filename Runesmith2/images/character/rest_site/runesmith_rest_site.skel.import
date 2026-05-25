@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://c4p5lgm5nws7k"
+path="res://.godot/imported/runesmith_rest_site.skel-1334f80d58cf865c9e120ffb722646d3.spskel"
+
+[deps]
+
+source_file="res://Runesmith2/images/character/rest_site/runesmith_rest_site.skel"
+dest_files=["res://.godot/imported/runesmith_rest_site.skel-1334f80d58cf865c9e120ffb722646d3.spskel"]
+
+[params]
+

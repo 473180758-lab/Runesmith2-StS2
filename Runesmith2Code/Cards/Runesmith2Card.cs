@@ -98,9 +98,9 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
 
     public virtual Elements CanonicalElementsCost => new(-1, -1, -1);
 
-    public List<TemporaryCardCost> _temporaryElementsCosts = [];
+    public List<TemporaryCardCost> TemporaryElementsCosts = [];
 
-    public TemporaryCardCost? TemporaryElementsCost => _temporaryElementsCosts.LastOrDefault();
+    public TemporaryCardCost? TemporaryElementsCost => TemporaryElementsCosts.LastOrDefault();
 
     public Elements BaseElementsCost
     {
@@ -136,7 +136,7 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
     protected override void DeepCloneFields()
     {
         base.DeepCloneFields();
-        _temporaryElementsCosts = _temporaryElementsCosts.ToList();
+        TemporaryElementsCosts = TemporaryElementsCosts.ToList();
     }
 
     // AfterCloned
@@ -168,7 +168,7 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
     private void AddTemporaryElementsCost(TemporaryCardCost cost)
     {
         AssertMutable();
-        _temporaryElementsCosts.Add(cost);
+        TemporaryElementsCosts.Add(cost);
         ElementsCostChanged?.Invoke();
     }
 
@@ -205,12 +205,32 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
                 }
 
                 runesmithCombatState.LoseElements(amount);
-                await RunesmithHook.AfterElementsSpent(Owner.Creature.CombatState, amount, Owner);
+                await RunesmithHook.AfterElementsSpent(Owner.Creature.CombatState!, amount, Owner);
             }
         }
     }
 
-    public bool IsPlayedWithoutElements = false;
+    public bool WasElementsCostJustUpgraded { set; get; }
+
+    public void UpgradeElementsCostBy(Elements addend)
+    {
+        if (addend.Total == 0)
+            return;
+        var baseElementsCost = BaseElementsCost;
+        BaseElementsCost += addend;
+        WasElementsCostJustUpgraded = false;
+        if (BaseElementsCost.Total >= baseElementsCost.Total)
+            return;
+        TemporaryElementsCosts.RemoveAll((Predicate<TemporaryCardCost>) (c => c.Cost > BaseElementsCost.Total));
+    }
+
+    protected override void AfterDowngraded()
+    {
+        var cardModel = (Runesmith2Card) ModelDb.GetById<CardModel>(Id).ToMutable();
+        BaseElementsCost = cardModel.CanonicalElementsCost;
+    }
+
+    public bool IsPlayedWithoutElements;
 
     // OnPlayWrapper - patch done
 

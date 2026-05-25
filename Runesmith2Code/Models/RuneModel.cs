@@ -29,12 +29,7 @@ namespace Runesmith2.Runesmith2Code.Models;
 public abstract class RuneModel : AbstractModel, ICustomModel
 {
     public const string LocTable = "runes";
-
-    private static readonly ModelId[] _validRunes =
-    [
-        ModelDb.GetId<FlammaRune>()
-    ];
-
+    
     private RuneModel _canonicalInstance;
 
     public virtual decimal PassiveVal { get; set; }

@@ -15,8 +15,6 @@ namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
 
 public class WhiteBalance : Runesmith2Card
 {
-    private const string CalculatedHitsKey = "CalculatedHits";
-
     public WhiteBalance() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
         WithCalculatedDamage(0, 4, (card, _) =>

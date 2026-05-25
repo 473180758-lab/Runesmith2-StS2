@@ -22,6 +22,7 @@ public class Flowstate : Runesmith2Card
         WithPower<AmpPower>(4, 2);
         WithVar(new AquaVar(2).WithUpgrade(1));
         WithTip(RunesmithHoverTip.Elements);
+        WithCards(1);
     }
 
     protected override async Task OnPlay(
@@ -30,6 +31,7 @@ public class Flowstate : Runesmith2Card
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await CommonActions.ApplySelf<AmpPower>(choiceContext, this);
+        await CommonActions.Draw(this, choiceContext);
         await RunesmithPlayerCmd.GainElements(new Elements(this), Owner, play);
     }
 }
