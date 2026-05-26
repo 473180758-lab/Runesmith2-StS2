@@ -17,7 +17,7 @@ public class AugmentedBodyPower : Runesmith2Power
 {
     public override PowerType Type => PowerType.Buff;
 
-    public override PowerStackType StackType => PowerStackType.Counter;
+    public override PowerStackType StackType => PowerStackType.Single;
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [

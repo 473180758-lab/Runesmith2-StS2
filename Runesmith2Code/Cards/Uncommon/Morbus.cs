@@ -24,8 +24,8 @@ public class Morbus : Runesmith2RecipeCard
         WithVars(new ChargeVar(3).WithUpgrade(1));
         WithTip(RunesmithHoverTip.Craft);
         WithRuneTip<MorbusRune>();
-        WithTip(new TooltipSource(_ => HoverTipFactory.FromPower<WeakPower>()));
-        WithTip(new TooltipSource(_ => HoverTipFactory.FromPower<VulnerablePower>()));
+        WithTip(typeof(WeakPower));
+        WithTip(typeof(VulnerablePower));
     }
 
     public override Elements CanonicalElementsCost => new(2, 0, 1);

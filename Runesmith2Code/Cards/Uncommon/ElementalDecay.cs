@@ -19,7 +19,7 @@ public class ElementalDecay : Runesmith2Card
     public ElementalDecay() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
         WithCards(1, 1);
-        WithTip(new TooltipSource(_ => HoverTipFactory.FromKeyword(CardKeyword.Exhaust)));
+        WithTip(CardKeyword.Exhaust);
         WithTip(RunesmithHoverTip.Elements);
     }
 

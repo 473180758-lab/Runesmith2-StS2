@@ -20,9 +20,12 @@ public class Empowerment : Runesmith2Card
 {
     public Empowerment() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
-        WithTip(new TooltipSource(_ => HoverTipFactory.FromPower<VigorPower>()));
-        WithTip(new TooltipSource(_ => HoverTipFactory.FromPower<BracePower>()));
-        WithTip(new TooltipSource(_ => HoverTipFactory.FromPower<AmpPower>()));
+        WithTips(_ =>
+        [
+            HoverTipFactory.FromPower<VigorPower>(), 
+            HoverTipFactory.FromPower<BracePower>(),
+            HoverTipFactory.FromPower<AmpPower>()
+        ]);
         WithTip(RunesmithHoverTip.Elements);
         WithKeyword(CardKeyword.Exhaust, UpgradeType.Remove);
     }

@@ -75,7 +75,7 @@ public class Runesmith2 : PlaceholderCharacterModel
 
     public override VfxColor SpeechBubbleColor => VfxColor.Gold;
 
-    public override Color MapDrawingColor => new("a17a4f");
+    public override Color MapDrawingColor => new("69543f");
 
     public override Color RemoteTargetingLineColor => new("c4784fff");
 

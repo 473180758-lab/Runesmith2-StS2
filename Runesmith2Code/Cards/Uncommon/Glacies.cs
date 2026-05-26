@@ -24,7 +24,7 @@ public class Glacies : Runesmith2RecipeCard
         WithVars(new ChargeVar(3).WithUpgrade(1));
         WithTip(RunesmithHoverTip.Craft);
         WithRuneTip<GlaciesRune>();
-        WithTip(new TooltipSource(_ => HoverTipFactory.FromPower<IceColdPower>()));
+        WithTip(typeof(IceColdPower));
     }
 
     public override Elements CanonicalElementsCost => new(0, 2, 1);

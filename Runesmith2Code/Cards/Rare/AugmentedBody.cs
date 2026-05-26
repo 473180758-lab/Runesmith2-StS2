@@ -19,7 +19,7 @@ public class AugmentedBody : Runesmith2Card
     public AugmentedBody() : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
         WithTip(RunesmithHoverTip.Improved);
-        WithTip(new TooltipSource(_ => HoverTipFactory.FromKeyword(CardKeyword.Retain)));
+        WithTip(CardKeyword.Retain);
     }
 
     protected override async Task OnPlay(

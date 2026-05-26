@@ -22,7 +22,7 @@ public class Vulcanus : Runesmith2RecipeCard
     {
         WithVars(new PotencyVar(4).WithUpgrade(2), new ChargeVar(3));
         WithTip(RunesmithHoverTip.Craft);
-        WithTip(new TooltipSource(_ => HoverTipFactory.Static(StaticHoverTip.Block)));
+        WithTip(StaticHoverTip.Block);
         WithRuneTip<VulcanusRune>();
     }
 

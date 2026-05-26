@@ -1,5 +1,5 @@
 {
-  "RUNESMITH2-AETUS_RUNE.description": "Orb: Gains Energy.",
+  "RUNESMITH2-AETUS_RUNE.description": "Rune: Gains Energy.",
   "RUNESMITH2-AETUS_RUNE.smartDescription": "[gold]Passive:[/gold] At the start of turn, gain {energyPrefix:energyIcons(1)}.\n[gold]Break:[/gold] Gain {energyPrefix:energyIcons(2)}.",
   "RUNESMITH2-AETUS_RUNE.title": "Aetus",
   "RUNESMITH2-ALBUS_RUNE.description": "Rune: Gives [gold]Charge[/gold] to ALL non-Albus Runes.",
@@ -22,7 +22,7 @@
   "RUNESMITH2-INCENDIUM_RUNE.description": "Rune: Deals damage to ALL enemies.",
   "RUNESMITH2-INCENDIUM_RUNE.smartDescription": "[gold]Passive:[/gold] At the end of turn, deal [blue]{Passive}[/blue] damage to ALL enemies.\n[gold]Break:[/gold] Deal [blue]{Break}[/blue] damage to ALL enemies.",
   "RUNESMITH2-INCENDIUM_RUNE.title": "Incendium",
-  "RUNESMITH2-MAGMA_RUNE.description": "Rune: Deals damage to random enemies and gains [gold]Block[/gold].",
+  "RUNESMITH2-MAGMA_RUNE.description": "Rune: Deals damage to random enemies and gains half [gold]Block[/gold].",
   "RUNESMITH2-MAGMA_RUNE.smartDescription": "[gold]Passive:[/gold] At the end of turn, deal [blue]{Passive}[/blue] damage to a random enemy and gain [blue]{CalculatedPassive}[/blue] [gold]Block[/gold].\n[gold]Break:[/gold] Deal [blue]{Break}[/blue] damage to a random enemy and gain [blue]{CalculatedBreak}[/blue] [gold]Block[/gold].",
   "RUNESMITH2-MAGMA_RUNE.title": "Magma",
   "RUNESMITH2-MORBUS_RUNE.description": "Rune: Applies [gold]Weak[/gold] and [gold]Vulnerable[/gold] to ALL enemies.",

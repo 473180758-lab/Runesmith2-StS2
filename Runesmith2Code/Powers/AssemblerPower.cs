@@ -18,8 +18,10 @@ public class AssemblerPower : Runesmith2Power
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Single;
+    
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
-    public CardModel? PickedCard { get; set; }
+    private CardModel? PickedCard { get; set; }
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips
     {
