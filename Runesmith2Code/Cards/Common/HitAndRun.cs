@@ -14,7 +14,7 @@ public class HitAndRun : Runesmith2Card
 {
     public HitAndRun() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
     {
-        WithDamage(6, 2);
+        WithDamage(8, 3);
         WithPower<BracePower>(2, 1);
     }
 

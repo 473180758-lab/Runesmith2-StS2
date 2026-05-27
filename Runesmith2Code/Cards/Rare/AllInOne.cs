@@ -19,7 +19,8 @@ public class AllInOne : Runesmith2Card
         WithTip(RunesmithHoverTip.Break);
         WithTip(RunesmithHoverTip.Charge);
         WithTip(RunesmithHoverTip.Potency);
-        WithKeyword(CardKeyword.Exhaust, UpgradeType.Remove);
+        WithKeyword(CardKeyword.Exhaust);
+        WithCostUpgradeBy(-1);
     }
 
     protected override bool ShouldGlowGoldInternal

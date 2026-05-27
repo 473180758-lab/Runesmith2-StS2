@@ -13,12 +13,12 @@ using Runesmith2.Runesmith2Code.Utils;
 
 namespace Runesmith2.Runesmith2Code.Cards.Rare;
 
-public class Lucky7 : Runesmith2Card
+public class Gladius : Runesmith2Card
 {
-    public Lucky7() : base(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
+    public Gladius() : base(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
     {
-        WithDamage(35, 14);
-        WithTags(RunesmithEnum.Recipe);
+        WithDamage(40, 10);
+        WithTags(RunesmithTags.Recipe);
         WithTip(RunesmithHoverTip.Recipe);
     }
 
@@ -45,7 +45,7 @@ public class Lucky7 : Runesmith2Card
         
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .TargetingAllOpponents(CombatState)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_giant_horizontal_slash")
             .Execute(choiceContext);
     }
 }

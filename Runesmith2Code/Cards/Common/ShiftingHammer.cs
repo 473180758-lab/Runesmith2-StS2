@@ -24,7 +24,7 @@ public class ShiftingHammer : Runesmith2Card
         WithVar(new EnhanceByVar(2));
         WithVar(new CardsVar(1));
         WithTip(RunesmithHoverTip.Enhance);
-        WithTags(RunesmithEnum.Hammer);
+        WithTags(RunesmithTags.Hammer);
     }
 
     protected override async Task OnPlay(

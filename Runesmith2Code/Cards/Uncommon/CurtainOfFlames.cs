@@ -22,7 +22,7 @@ public class CurtainOfFlames : Runesmith2Card
     public CurtainOfFlames() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
         WithPower<BracePower>(6, 2);
-        WithVar(new IgnisVar(2).WithUpgrade(1));
+        WithVar(new IgnisVar(3).WithUpgrade(1));
     }
 
     protected override async Task OnPlay(

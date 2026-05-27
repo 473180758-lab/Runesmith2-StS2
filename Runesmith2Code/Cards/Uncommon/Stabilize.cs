@@ -17,7 +17,7 @@ public class Stabilize : Runesmith2Card
 {
     public Stabilize() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
-        WithBlock(6, 1);
+        WithBlock(7, 2);
         WithVar(new ChargeGainVar(3).WithUpgrade(1));
         WithTip(RunesmithHoverTip.Charge);
     }

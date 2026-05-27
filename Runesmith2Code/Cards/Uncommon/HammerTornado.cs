@@ -19,7 +19,7 @@ public class HammerTornado : Runesmith2Card
 
     public HammerTornado() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
-        WithDamage(9, 4);
+        WithDamage(9, 3);
         WithVar(new CardsVar(1));
         WithCalculatedVar(CalculatedHitsKey, 1, (card, _) =>
         {
@@ -28,7 +28,7 @@ public class HammerTornado : Runesmith2Card
         });
         WithTip(RunesmithHoverTip.Charge);
         WithTip(RunesmithHoverTip.Break);
-        WithTags(RunesmithEnum.Hammer);
+        WithTags(RunesmithTags.Hammer);
     }
 
     public override RuneBreakType RuneBreakType => RuneBreakType.Oldest;

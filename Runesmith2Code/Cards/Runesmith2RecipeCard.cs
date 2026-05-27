@@ -26,7 +26,7 @@ public abstract class Runesmith2RecipeCard : Runesmith2Card
     protected Runesmith2RecipeCard(int cost, CardType type, CardRarity rarity, TargetType target) : base(cost, type,
         rarity, target)
     {
-        WithTags(RunesmithEnum.Recipe);
+        WithTags(RunesmithTags.Recipe);
         WithTip(RunesmithHoverTip.Recipe);
         WithTip(RunesmithHoverTip.Craft);
     }

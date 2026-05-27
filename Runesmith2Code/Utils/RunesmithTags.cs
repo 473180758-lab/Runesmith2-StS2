@@ -7,25 +7,9 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 
 namespace Runesmith2.Runesmith2Code.Utils;
 
-public static class RunesmithEnum
+public static class RunesmithTags
 {
     [CustomEnum] public static CardTag Hammer;
     [CustomEnum] public static CardTag Chisel;
     [CustomEnum] public static CardTag Recipe;
-}
-
-public enum ElementType
-{
-    None,
-    Ignis,
-    Terra,
-    Aqua,
-    All
-}
-
-public enum ChargeDepletionType
-{
-    None,
-    StartTurn,
-    EndTurn
 }

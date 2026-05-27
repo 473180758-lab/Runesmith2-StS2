@@ -20,16 +20,16 @@ public class MetalForming : Runesmith2Card
 {
     public MetalForming() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
-        var terra = new TerraVar(1);
         WithCalculatedBlock(0, 2, (card, _) =>
             {
-                if (card.CombatState == null) return 0;
-                return card.Owner.PlayerCombatState?.Elements().Terra +
-                    RunesmithHook.ModifyElementsGain(card.CombatState, card.Owner, Elements.WithTerra(terra.IntValue),
-                        ValueProp.Move, card, out var _).Terra ?? 0;
+                if (card.CombatState == null || card.Owner.PlayerCombatState == null) return 0;
+                return card.Owner.PlayerCombatState.Elements().Terra +
+                       RunesmithHook.ModifyElementsGain(card.CombatState, card.Owner,
+                           Elements.WithTerra(card.DynamicVars[TerraVar.defaultName].IntValue),
+                           ValueProp.Move, card, out var _).Terra;
             },
             ValueProp.Move, 0, 1);
-        WithVars(terra);
+        WithVars(new TerraVar(1));
         WithTip(RunesmithHoverTip.Elements);
     }
 

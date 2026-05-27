@@ -19,7 +19,7 @@ public class AdamantiumHammer : Runesmith2Card, IAfterCardEnhanced
     {
         WithDamage(5, 2);
         WithTip(RunesmithHoverTip.Enhance);
-        WithTags(RunesmithEnum.Hammer);
+        WithTags(RunesmithTags.Hammer);
     }
 
     protected override async Task OnPlay(

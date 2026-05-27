@@ -1,5 +1,6 @@
 #region
 
+using BaseLib.Extensions;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -19,11 +20,11 @@ public class ChromaChisel : Runesmith2Card
 {
     public ChromaChisel() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
-        WithDamage(7, 2);
+        WithDamage(7, 1);
         WithPower<AmpPower>(1, 1);
-        WithVars(new ElementsVar(1));
+        WithVars(new ElementsVar(1).WithUpgrade(1));
         WithTip(RunesmithHoverTip.Elements);
-        WithTags(RunesmithEnum.Chisel);
+        WithTags(RunesmithTags.Chisel);
     }
 
     protected override async Task OnPlay(

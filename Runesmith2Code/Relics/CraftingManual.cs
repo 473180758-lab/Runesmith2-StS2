@@ -27,7 +27,7 @@ public class CraftingManual : Runesmith2Relic
         };
 
         var card = (await CardSelectCmd.FromCombatPile(choiceContext, PileType.Draw.GetPile(Owner), Owner, prefs,
-            c => c.Tags.Contains(RunesmithEnum.Recipe))).FirstOrDefault();
+            c => c.Tags.Contains(RunesmithTags.Recipe))).FirstOrDefault();
         if (card == null)
             return;
         _ = await CardPileCmd.Add(card, PileType.Hand);

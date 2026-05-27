@@ -18,7 +18,7 @@ public class StaticCage : Runesmith2Card
 {
     public StaticCage() : base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
     {
-        WithBlock(7, 2);
+        WithBlock(8, 2);
         WithCards(1, 1);
         WithTip(RunesmithHoverTip.Stasis);
     }

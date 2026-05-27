@@ -17,7 +17,7 @@ public class Electrocute : Runesmith2Card
 {
     public Electrocute() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
-        WithDamage(9, 4);
+        WithDamage(8, 4);
         WithCards(1);
         WithTip(RunesmithHoverTip.Stasis);
     }
@@ -37,8 +37,9 @@ public class Electrocute : Runesmith2Card
 
         var prefs = new CardSelectorPrefs(RunesmithCardSelectorPrefs.StasisSelectionPrompt, DynamicVars.Cards.IntValue);
         var pile = PileType.Draw.GetPile(Owner);
-        var cards = await CardSelectCmd.FromSimpleGrid(choiceContext,
-            pile.Cards.Where(c => c.CanStasis()).ToList(), Owner, prefs);
+        var cards = (await CardSelectCmd.FromSimpleGrid(choiceContext,
+            pile.Cards.Where(c => c.CanStasis()).ToList(), Owner, prefs)).ToList();
         foreach (var card in cards) RunesmithCardCmd.Stasis(card);
+        await CardPileCmd.Add(cards, PileType.Draw, CardPilePosition.Top, null, true);
     }
 }

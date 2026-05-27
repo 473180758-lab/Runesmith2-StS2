@@ -1,9 +1,12 @@
 #region
 
+using BaseLib.Cards.Variables;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
 
 #endregion
@@ -14,8 +17,21 @@ public class Superposition : Runesmith2Card
 {
     public Superposition() : base(3, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
     {
-        WithDamage(15, 6);
-        WithBlock(11, 5);
+        WithDamage(15, 5);
+        WithBlock(11, 4);
+        WithVar(new DisplayVar<Superposition>("OddEven", c =>
+        {
+            var runeQueue = c.Owner.PlayerCombatState?.RuneQueue();
+            var count = 0;
+            if (runeQueue != null)
+            {
+                count = runeQueue.Runes.Count;
+            }
+
+            return count % 2 == 0
+                ? new LocString("cards", "RUNESMITH2-SUPERPOSITION.isEven").GetFormattedText()
+                : new LocString("cards", "RUNESMITH2-SUPERPOSITION.isOdd").GetFormattedText();
+        }));
     }
 
     protected override async Task OnPlay(

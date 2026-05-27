@@ -26,7 +26,7 @@ public class FissionHammer : Runesmith2Card
                 ? RunesmithHook.ModifyEnhanceAmount(c.CombatState, c.Owner, c.GetEnhance(), c, out var _)
                 : c.GetEnhance(), 1);
         WithTip(RunesmithHoverTip.Enhance);
-        WithTags(RunesmithEnum.Hammer);
+        WithTags(RunesmithTags.Hammer);
     }
 
     protected override async Task OnPlay(

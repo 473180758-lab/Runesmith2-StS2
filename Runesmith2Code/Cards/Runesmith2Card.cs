@@ -198,7 +198,7 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
             if (runesmithCombatState != null && Owner.Creature.CombatState != null)
             {
                 // Give elements if unable to play Recipe
-                if (Tags.Contains(RunesmithEnum.Recipe) && !runesmithCombatState.Elements.CanSpend(amount))
+                if (Tags.Contains(RunesmithTags.Recipe) && !runesmithCombatState.Elements.CanSpend(amount))
                 {
                     IsPlayedWithoutElements = true;
                     return;

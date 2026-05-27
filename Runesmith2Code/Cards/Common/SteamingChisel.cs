@@ -24,7 +24,7 @@ public class SteamingChisel : Runesmith2Card
         WithPower<WeakPower>(1, 1);
         WithVars(new IgnisVar(1), new AquaVar(1));
         WithTip(RunesmithHoverTip.Elements);
-        WithTags(RunesmithEnum.Chisel);
+        WithTags(RunesmithTags.Chisel);
     }
 
     protected override async Task OnPlay(

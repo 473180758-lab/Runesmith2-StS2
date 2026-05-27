@@ -1,6 +1,7 @@
 #region
 
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -15,22 +16,28 @@ namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
 
 public class Prism : Runesmith2Card
 {
-    public Prism() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+    public Prism() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
-        WithCalculatedBlock(0, 2,
-            (card, _) => card.CombatState == null
-                ? 0
-                : (card.Owner.PlayerCombatState?.Elements() ?? new Elements()).Total,
-            ValueProp.Move, 0, 1);
-        WithTip(RunesmithHoverTip.Elements);
+        WithDamage(8, 3);
+        WithBlock(6, 2);
+        WithCards(1, 1);
     }
+
+    public override Elements CanonicalElementsCost => new(1);
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var elements = Owner.PlayerCombatState?.Elements() ?? new Elements(0);
-        await CommonActions.CardBlock(this, DynamicVars.CalculatedBlock, play);
-        if (elements.Total > 0) await RunesmithPlayerCmd.LoseElements(elements - elements / 2, Owner);
+        ArgumentNullException.ThrowIfNull(play.Target);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(play.Target)
+            .WithHitFx("vfx/vfx_attack_slash")
+            .Execute(choiceContext);
+        
+        await CommonActions.CardBlock(this, play);
+        
+        await CommonActions.Draw(this, choiceContext);
     }
 }

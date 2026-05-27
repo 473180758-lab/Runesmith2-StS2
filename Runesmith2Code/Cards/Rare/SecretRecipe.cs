@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using Runesmith2.Runesmith2Code.Cards.Uncommon;
 using Runesmith2.Runesmith2Code.Character;
 using Runesmith2.Runesmith2Code.Utils;
 
@@ -27,7 +28,7 @@ public class SecretRecipe : Runesmith2Card
         var cards = CardFactory.GetDistinctForCombat(Owner,
                 ModelDb.CardPool<Runesmith2CardPool>()
                     .GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint)
-                    .Where(c => c.Tags.Contains(RunesmithEnum.Recipe)), 3,
+                    .Where(c => c.Tags.Contains(RunesmithTags.Recipe) && c is not Mundus), 3,
                 Owner.RunState.Rng.CombatCardGeneration
             )
             .ToList();
