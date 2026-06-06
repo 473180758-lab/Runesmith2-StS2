@@ -27,7 +27,7 @@ public class Stabilize : Runesmith2Card
         CardPlay play)
     {
         await CommonActions.CardBlock(this, play);
-        var runeQueue = Owner.PlayerCombatState?.RuneQueue();
+        var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         if (runeQueue != null)
         {
             var amount = DynamicVars[ChargeGainVar.defaultName].IntValue;

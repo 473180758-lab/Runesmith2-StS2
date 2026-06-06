@@ -48,6 +48,7 @@
   "RUNESMITH2-EARTH_SHIELD.title": "Щит земли",
   "RUNESMITH2-ELECTROCUTE.description": "Наносит {Damage:diff()} урона.\nВы перекладываете карту из [gold]стопки добора[/gold] на ее верх и накладываете на нее [gold]Стазис[/gold].",
   "RUNESMITH2-ELECTROCUTE.title": "Электризация",
+  "RUNESMITH2-ELECTROCUTE.selectionScreenPrompt": "Choose a card to [gold]Stasis[/gold] and put on top of the pile.",
   "RUNESMITH2-ELECTROMAGNET.description": "Дает {Block:diff()} [gold]защиты[/gold].\nВы кладете [gold]Усиленную[/gold] карту из [gold]стопки сброса[/gold] в [gold]руку[/gold].",
   "RUNESMITH2-ELECTROMAGNET.selectionScreenPrompt": "Выберите карту, которую хотите взять в руку.",
   "RUNESMITH2-ELECTROMAGNET.title": "Электромагнит",

@@ -34,7 +34,7 @@ public class Empowerment : Runesmith2Card
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var elements = Owner.PlayerCombatState?.Elements() ?? new Elements();
+        var elements = Owner.PlayerCombatState?.GetElements() ?? new Elements();
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
         if (elements.Ignis > 0) await CommonActions.ApplySelf<VigorPower>(choiceContext, this, elements.Ignis);

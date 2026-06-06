@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ba2vnj3rds75l"]
+[gd_scene load_steps=36 format=3 uid="uid://ba2vnj3rds75l"]
 
 [ext_resource type="Script" uid="uid://q58n003d68if" path="res://Runesmith2Code/Nodes/Runes/NRuneVisualsAlbus.cs" id="1_3l647"]
 [ext_resource type="PackedScene" uid="uid://qoq8amhbengs" path="res://Runesmith2/scenes/vfx/runes/rune_particles_glow.tscn" id="1_niw03"]
@@ -7,39 +7,29 @@
 [ext_resource type="Script" uid="uid://c0nvyc7bf102m" path="res://Runesmith2Code/Nodes/NRuneParticlesContainer.cs" id="4_p3clo"]
 [ext_resource type="Shader" uid="uid://cqh6lt3nx1qdc" path="res://Runesmith2/shaders/vfx_common_particle_shader.gdshader" id="5_p3clo"]
 [ext_resource type="Texture2D" uid="uid://br3cn1fapreq" path="res://Runesmith2/images/vfx/lightning_spark_sheet.png" id="6_3l647"]
+[ext_resource type="Shader" uid="uid://crhn73wbcubk" path="res://Runesmith2/shaders/vfx_basic_particle_shader.gdshader" id="6_7o4o7"]
 [ext_resource type="Shader" uid="uid://8ejgpughm3t6" path="res://Runesmith2/shaders/vfx_grayscale_particle_shader.gdshader" id="7_ipjxu"]
 [ext_resource type="Texture2D" uid="uid://bu0xa15k2mxox" path="res://Runesmith2/images/vfx/common_glow.png" id="8_7o4o7"]
-
-[sub_resource type="CurveTexture" id="CurveTexture_41wy4"]
-
-[sub_resource type="Gradient" id="Gradient_38qq7"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_l5x8c"]
-gradient = SubResource("Gradient_38qq7")
+[ext_resource type="Texture2D" uid="uid://cahb1y064e24u" path="res://Runesmith2/images/vfx/fulgor_lightning_sheet.png" id="11_41wy4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w53ri"]
-shader = ExtResource("5_p3clo")
+shader = ExtResource("6_7o4o7")
 shader_parameter/frame_count = 7.0
 shader_parameter/flipbook_size = Vector2(3, 3)
-shader_parameter/lut = SubResource("GradientTexture1D_l5x8c")
 shader_parameter/pivot_offset = Vector2(0, 0)
-shader_parameter/erosion_curve = SubResource("CurveTexture_41wy4")
-shader_parameter/erosion_offset = 0.25
 
 [sub_resource type="Curve" id="Curve_hp5qx"]
 _data = [Vector2(0, 0.5143608), 0.0, 2.550294, 0, 0, Vector2(0.26324236, 0.91946685), 0.3433087, 0.3433087, 0, 0, Vector2(0.7014446, 0.8730993), -0.61461705, -0.61461705, 0, 0, Vector2(1, 0), -3.8674598, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_h0njs"]
+[sub_resource type="CurveTexture" id="CurveTexture_7o4o7"]
 curve = SubResource("Curve_hp5qx")
 
 [sub_resource type="Gradient" id="Gradient_i5e1x"]
 offsets = PackedFloat32Array(0, 0.14017095, 0.25470087, 0.37094018, 0.64102566)
 colors = PackedColorArray(1, 0.965317, 0.6918744, 1, 1, 1, 1, 1, 1.5491692, 1.5491692, 1.5491692, 1, 1, 1, 1, 1, 1, 0.9651095, 0.73350227, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_j1ddu"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_41wy4"]
 gradient = SubResource("Gradient_i5e1x")
 use_hdr = true
 
@@ -51,10 +41,10 @@ emission_sphere_radius = 40.0
 angle_min = -179.99998
 angle_max = 180.00002
 gravity = Vector3(0, 0, 0)
-scale_min = 0.26
-scale_max = 0.39999998
-color_ramp = SubResource("GradientTexture1D_j1ddu")
-alpha_curve = SubResource("CurveTexture_h0njs")
+scale_min = 0.28
+scale_max = 0.35
+color_ramp = SubResource("GradientTexture1D_41wy4")
+alpha_curve = SubResource("CurveTexture_7o4o7")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
@@ -71,7 +61,7 @@ shader_parameter/pivot_offset = Vector2(0, 0)
 shader_parameter/lut = SubResource("GradientTexture1D_hqkpq")
 
 [sub_resource type="Curve" id="Curve_s3o04"]
-_data = [Vector2(0, 0.7706026), 0.0, 1.6025498, 0, 0, Vector2(0.22471909, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.4713674, 0.0, 0, 0]
+_data = [Vector2(0, 0.472874), 0.0, 1.6025498, 0, 0, Vector2(0.27768862, 0.7339966), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.4713674, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_6v1e5"]
@@ -91,6 +81,60 @@ scale_min = 0.75
 scale_max = 0.75
 scale_curve = SubResource("CurveTexture_b1ya6")
 alpha_curve = SubResource("CurveTexture_6v1e5")
+
+[sub_resource type="Curve" id="Curve_38qq7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_etn66"]
+curve = SubResource("Curve_38qq7")
+
+[sub_resource type="Gradient" id="Gradient_l5x8c"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6ybgc"]
+gradient = SubResource("Gradient_l5x8c")
+use_hdr = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hp5qx"]
+shader = ExtResource("5_p3clo")
+shader_parameter/frame_count = 9.0
+shader_parameter/flipbook_size = Vector2(3, 3)
+shader_parameter/lut = SubResource("GradientTexture1D_6ybgc")
+shader_parameter/pivot_offset = Vector2(0, 0)
+shader_parameter/erosion_curve = SubResource("CurveTexture_etn66")
+shader_parameter/erosion_offset = 1.0
+
+[sub_resource type="Curve" id="Curve_h0njs"]
+_data = [Vector2(0, 0.5143608), 0.0, 2.550294, 0, 0, Vector2(0.26324236, 0.91946685), 0.3433087, 0.3433087, 0, 0, Vector2(0.7014446, 0.8730993), -0.61461705, -0.61461705, 0, 0, Vector2(1, 0), -3.8674598, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_i5e1x"]
+curve = SubResource("Curve_h0njs")
+
+[sub_resource type="Gradient" id="Gradient_j1ddu"]
+offsets = PackedFloat32Array(0.07863248, 0.2940171, 0.44102564, 0.757265, 1)
+colors = PackedColorArray(1, 0.9953193, 0.9104349, 1, 1.5491692, 1.5195186, 1.4123205, 1, 1.7675937, 1.7488852, 1.5951927, 1, 0.9797284, 1, 0.8638123, 1, 0.9875707, 1, 0.8062025, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yq2tb"]
+gradient = SubResource("Gradient_j1ddu")
+use_hdr = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s3o04"]
+lifetime_randomness = 0.05
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+angle_min = -179.99998
+angle_max = 180.00002
+gravity = Vector3(0, 0, 0)
+scale_min = 0.17
+scale_max = 0.19999999
+color_ramp = SubResource("GradientTexture1D_yq2tb")
+alpha_curve = SubResource("CurveTexture_i5e1x")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="AlbusRune" type="Node2D"]
 script = ExtResource("1_3l647")
@@ -123,7 +167,7 @@ script = ExtResource("4_p3clo")
 material = SubResource("ShaderMaterial_w53ri")
 position = Vector2(3, -5)
 emitting = false
-amount = 12
+amount = 6
 texture = ExtResource("6_3l647")
 lifetime = 0.6
 one_shot = true
@@ -141,5 +185,16 @@ lifetime = 0.3
 one_shot = true
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_60mwl")
+
+[node name="vfx_lightning" type="GPUParticles2D" parent="FrontParticles"]
+material = SubResource("ShaderMaterial_hp5qx")
+position = Vector2(3, -5)
+emitting = false
+amount = 1
+texture = ExtResource("11_41wy4")
+lifetime = 0.45
+one_shot = true
+explosiveness = 0.85
+process_material = SubResource("ParticleProcessMaterial_s3o04")
 
 [editable path="BackParticles"]

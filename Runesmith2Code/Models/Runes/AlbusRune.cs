@@ -51,7 +51,7 @@ public class AlbusRune : RuneModel
 
     private async Task ChargeRunes(PlayerChoiceContext choiceContext, decimal amount)
     {
-        var runeQueue = Owner.PlayerCombatState?.RuneQueue();
+        var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null) return;
 
         PlayPassiveSfx();

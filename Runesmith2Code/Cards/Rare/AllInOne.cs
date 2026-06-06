@@ -27,7 +27,7 @@ public class AllInOne : Runesmith2Card
     {
         get
         {
-            var runeQueue = Owner.PlayerCombatState?.RuneQueue();
+            var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
             return runeQueue is { Runes.Count: > 1 };
         }
     }
@@ -40,7 +40,7 @@ public class AllInOne : Runesmith2Card
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
-        var runeQueue = Owner.PlayerCombatState?.RuneQueue();
+        var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         if (runeQueue is { Runes.Count: > 1 })
         {
             var brokenRunes = new List<RuneModel>();

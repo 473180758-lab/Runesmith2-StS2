@@ -1,9 +1,143 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuco6rn6y08ul"]
+[gd_scene load_steps=24 format=3 uid="uid://cuco6rn6y08ul"]
 
-[ext_resource type="Texture2D" uid="uid://cf4xgsxum1kdm" path="res://Runesmith2/images/runes/fulgor_rune.png" id="1_8r8fq"]
+[ext_resource type="Script" uid="uid://7wp8phd4gsr3" path="res://Runesmith2Code/Nodes/Runes/NRuneVisualsOneTrack.cs" id="1_06po7"]
+[ext_resource type="PackedScene" uid="uid://qoq8amhbengs" path="res://Runesmith2/scenes/vfx/runes/rune_particles_glow.tscn" id="1_76bpd"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dyb4x8el4n006" path="res://Runesmith2/animations/runes/fulgor/fulgor_skel_data.tres" id="2_dfv3r"]
+[ext_resource type="PackedScene" uid="uid://bfudt51kp1y4d" path="res://Runesmith2/scenes/vfx/runes/rune_break_particles.tscn" id="3_gonr5"]
+[ext_resource type="Script" uid="uid://c0nvyc7bf102m" path="res://Runesmith2Code/Nodes/NRuneParticlesContainer.cs" id="4_06po7"]
+[ext_resource type="Shader" uid="uid://cqh6lt3nx1qdc" path="res://Runesmith2/shaders/vfx_common_particle_shader.gdshader" id="5_1rjto"]
+[ext_resource type="Texture2D" uid="uid://cahb1y064e24u" path="res://Runesmith2/images/vfx/fulgor_lightning_sheet.png" id="6_7y712"]
+[ext_resource type="Texture2D" uid="uid://duj7hj4brmsfj" path="res://Runesmith2/images/vfx/fulgor_lightning2_sheet.png" id="7_f4mep"]
+
+[sub_resource type="Curve" id="Curve_igj16"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_06po7"]
+curve = SubResource("Curve_igj16")
+
+[sub_resource type="Gradient" id="Gradient_3p8nn"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1rjto"]
+gradient = SubResource("Gradient_3p8nn")
+use_hdr = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glfp8"]
+shader = ExtResource("5_1rjto")
+shader_parameter/frame_count = 9.0
+shader_parameter/flipbook_size = Vector2(3, 3)
+shader_parameter/lut = SubResource("GradientTexture1D_1rjto")
+shader_parameter/pivot_offset = Vector2(0, 0)
+shader_parameter/erosion_curve = SubResource("CurveTexture_06po7")
+shader_parameter/erosion_offset = 1.0
+
+[sub_resource type="Curve" id="Curve_w50su"]
+_data = [Vector2(0, 0.5143608), 0.0, 2.550294, 0, 0, Vector2(0.26324236, 0.91946685), 0.3433087, 0.3433087, 0, 0, Vector2(0.7014446, 0.8730993), -0.61461705, -0.61461705, 0, 0, Vector2(1, 0), -3.8674598, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_7y712"]
+curve = SubResource("Curve_w50su")
+
+[sub_resource type="Gradient" id="Gradient_hkl4w"]
+offsets = PackedFloat32Array(0.07863248, 0.2940171, 0.44102564, 0.63931626, 0.791453, 1)
+colors = PackedColorArray(1, 0.735628, 0.8633587, 1, 1.5491692, 1.2934155, 1.4433146, 1, 1.7675937, 0.90175873, 1.2150893, 1, 1, 0.7000561, 0.8546755, 1, 1.6304435, 1.1476828, 1.3583935, 1, 1, 0.6090998, 0.79421926, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f4mep"]
+gradient = SubResource("Gradient_hkl4w")
+use_hdr = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yulf8"]
+lifetime_randomness = 0.05
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+angle_min = -179.99998
+angle_max = 180.00002
+gravity = Vector3(0, 0, 0)
+scale_min = 0.17
+scale_max = 0.19999999
+color_ramp = SubResource("GradientTexture1D_f4mep")
+alpha_curve = SubResource("CurveTexture_7y712")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="Curve" id="Curve_etn66"]
+_data = [Vector2(0, 0.5143608), 0.0, 2.550294, 0, 0, Vector2(0.26324236, 0.91946685), 0.3433087, 0.3433087, 0, 0, Vector2(0.7014446, 0.8730993), -0.61461705, -0.61461705, 0, 0, Vector2(1, 0), -3.8674598, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_y33j4"]
+curve = SubResource("Curve_etn66")
+
+[sub_resource type="Gradient" id="Gradient_6ybgc"]
+offsets = PackedFloat32Array(0.07863248, 0.2940171, 0.44102564, 0.63931626, 0.791453, 1)
+colors = PackedColorArray(1, 0.735628, 0.8633587, 1, 1.5491692, 1.2934155, 1.4433146, 1, 1.7675937, 0.90175873, 1.2150893, 1, 1, 0.7000561, 0.8546755, 1, 1.6304435, 1.1476828, 1.3583935, 1, 1, 0.6090998, 0.79421926, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tdfx7"]
+gradient = SubResource("Gradient_6ybgc")
+use_hdr = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gonr5"]
+lifetime_randomness = 0.05
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+angle_min = -179.99998
+angle_max = 180.00002
+gravity = Vector3(0, 0, 0)
+scale_min = 0.14999999
+scale_max = 0.17
+color_ramp = SubResource("GradientTexture1D_tdfx7")
+alpha_curve = SubResource("CurveTexture_y33j4")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="FulgorRune" type="Node2D"]
+script = ExtResource("1_06po7")
 
-[node name="Fulgor" type="Sprite2D" parent="."]
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_8r8fq")
+[node name="BackParticles" parent="." instance=ExtResource("1_76bpd")]
+unique_name_in_owner = true
+
+[node name="vfx_common_glow" parent="BackParticles" index="0"]
+self_modulate = Color(1.182, 0.36356327, 0.6102324, 1)
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_dfv3r")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(0.4, 0.4)
+
+[node name="BreakParticles" parent="." instance=ExtResource("3_gonr5")]
+unique_name_in_owner = true
+position = Vector2(2, -6)
+
+[node name="FrontParticles" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_06po7")
+
+[node name="vfx_lightning" type="GPUParticles2D" parent="FrontParticles"]
+material = SubResource("ShaderMaterial_glfp8")
+emitting = false
+amount = 1
+texture = ExtResource("6_7y712")
+lifetime = 0.45
+one_shot = true
+explosiveness = 0.85
+process_material = SubResource("ParticleProcessMaterial_yulf8")
+
+[node name="vfx_lightning2" type="GPUParticles2D" parent="FrontParticles"]
+material = SubResource("ShaderMaterial_glfp8")
+emitting = false
+amount = 2
+texture = ExtResource("7_f4mep")
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.65
+process_material = SubResource("ParticleProcessMaterial_gonr5")
+
+[editable path="BackParticles"]

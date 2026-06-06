@@ -1,6 +1,8 @@
 #region
 
 using BaseLib.Utils;
+using Godot;
+using GodotPlugins.Game;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Nodes.Cards;

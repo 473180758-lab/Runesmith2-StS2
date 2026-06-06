@@ -17,6 +17,7 @@ public partial class NRuneVisualsAccel : NRuneVisuals
         tween.TweenInterval(0.2);
         tween.TweenProperty(this, "CurrTimeScale", track0TimeScale, 0.5).SetEase(Tween.EaseType.InOut)
             .SetTrans(Tween.TransitionType.Quad);
+        tween.TweenCallback(Callable.From(() => AnimationFinished(TriggerKey)));
         
         SetAnimTimeScaleTween(tween);
     };

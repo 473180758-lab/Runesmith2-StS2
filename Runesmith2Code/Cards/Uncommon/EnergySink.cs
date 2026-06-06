@@ -26,7 +26,7 @@ public class EnergySink : Runesmith2Card
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
-        var runeQueue = Owner.PlayerCombatState?.RuneQueue();
+        var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         if (runeQueue != null && runeQueue.HasAny())
         {
             var energyToGain = runeQueue.Runes.Count(r => r.ChargeVal > 0);

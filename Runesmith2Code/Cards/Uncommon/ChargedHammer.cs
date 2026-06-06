@@ -40,7 +40,7 @@ public class ChargedHammer : Runesmith2Card
 
         RuneCmd.ChargeAll(choiceContext, Owner, DynamicVars[ChargeGainVar.defaultName].IntValue);
 
-        var runeQueue = Owner.PlayerCombatState?.RuneQueue();
+        var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         if (runeQueue != null && runeQueue.HasAny())
             foreach (var rune in runeQueue.Runes)
             {

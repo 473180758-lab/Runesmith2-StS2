@@ -19,7 +19,7 @@ internal class NCreatureReadyPatch
     private static void UpdateRuneNavigation(NCreature __instance)
     {
         var runeManager = RunesmithNode.NRuneManager[__instance];
-        if (runeManager != null) __instance.Hitbox.FocusNeighborTop = runeManager.DefaultFocusOwner.GetPath();
+        if (runeManager is { DefaultFocusOwner: not null }) __instance.Hitbox.FocusNeighborTop = runeManager.DefaultFocusOwner.GetPath();
     }
 
     [HarmonyPrefix]
@@ -57,7 +57,7 @@ internal class NCreatureAnimDiePatch
     private static async Task Postfix(Task results, NCreature __instance)
     {
         await results;
-        if (!RunManager.Instance.IsSinglePlayerOrFakeMultiplayer)
+        if (!RunManager.Instance.IsSingleplayerOrFakeMultiplayer)
         {
             var runeManager = RunesmithNode.NRuneManager[__instance];
             runeManager?.ClearRunes();

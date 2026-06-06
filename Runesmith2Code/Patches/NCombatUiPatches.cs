@@ -18,9 +18,9 @@ internal class NCombatUiPatches
     private static void Postfix(NCombatUi __instance, CombatState state)
     {
         var elementsCounter = RunesmithNode.NElementsCounter[__instance];
-        if (elementsCounter == null) return;
         elementsCounter.Initialize(LocalContext.GetMe(state)!);
         elementsCounter.Reparent(__instance._energyCounter);
+        elementsCounter.ShowBehindParent = true;
         elementsCounter.Position = new Vector2(0, -120);
         elementsCounter.Size = new Vector2(128, 128);
     }

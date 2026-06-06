@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dps6ax8f7vpi7"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://c6giec3omc1h" path="res://Runesmith2/animations/runes/aetus/aetus.atlas" id="1_hs176"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b62bcqebd8sjr" path="res://Runesmith2/animations/runes/aetus/aetus.skel" id="2_wdr18"]
+
+[resource]
+atlas_res = ExtResource("1_hs176")
+skeleton_file_res = ExtResource("2_wdr18")
+default_mix = 0.15

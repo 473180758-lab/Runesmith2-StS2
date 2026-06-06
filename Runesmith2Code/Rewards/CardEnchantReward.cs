@@ -74,7 +74,6 @@ public class CardEnchantReward(
         if (!Player.Deck.Cards.Any(c => Filter(c) && enchantment.CanEnchant(c)))
             // make the reward selection does nothing
             return false;
-        MainFile.Logger.Info($"Player {Player.NetId} obtained card enchantment from reward");
 
         var prefs = new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, 1)
         {

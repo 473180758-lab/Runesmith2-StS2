@@ -153,8 +153,11 @@ public static class CardModelExtension
 
         public bool HasPotency()
         {
-            return cardModel.DynamicVars.ContainsKey(PotencyVar.defaultName) &&
-                   cardModel.DynamicVars[PotencyVar.defaultName].BaseValue > 0;
+            var hasPotencyVar = cardModel.DynamicVars.ContainsKey(PotencyVar.defaultName) &&
+                                cardModel.DynamicVars[PotencyVar.defaultName].BaseValue > 0;
+            if (hasPotencyVar) return true;
+            if (cardModel is Runesmith2Card runesmithCard) return runesmithCard.HasPotencyOverride;
+            return false;
         }
 
         public bool CanEnhance()

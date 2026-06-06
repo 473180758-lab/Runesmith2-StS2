@@ -23,9 +23,10 @@ public class FulgorRune : RuneModel
     public override decimal PassiveVal { get; set; } = 5;
     public override int ChargeVal { get; set; } = 4;
 
+    public override bool IsUsingPotency => true;    
+    
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;
-
-
+    
     public override (bool, bool) ShowTopLabel => (true, true);
     public override (decimal, decimal) TopValue => (PassiveVal, PassiveVal);
     public override (Color, Color, Color) TopLabelColor => NRune.DefaultFontColor;
@@ -53,7 +54,7 @@ public class FulgorRune : RuneModel
         {
             PlayPassiveSfx();
             Trigger();
-            await ApplyFireDamage(choiceContext, PassiveVal, 2);
+            await ApplyLightningDamage(choiceContext, PassiveVal, 2);
             UseCharge();
         }
     }
@@ -61,10 +62,10 @@ public class FulgorRune : RuneModel
     public override async Task Break(PlayerChoiceContext choiceContext)
     {
         PlayBreakSfx();
-        await ApplyFireDamage(choiceContext, PassiveVal, 4);
+        await ApplyLightningDamage(choiceContext, PassiveVal, 4);
     }
 
-    private async Task ApplyFireDamage(PlayerChoiceContext choiceContext, decimal amount, int count)
+    private async Task ApplyLightningDamage(PlayerChoiceContext choiceContext, decimal amount, int count)
     {
         PlayPassiveSfx();
         for (var i = 0; i < count; i++)
@@ -75,7 +76,7 @@ public class FulgorRune : RuneModel
             var target = Owner.RunState.Rng.CombatTargets.NextItem(list);
             if (target == null) break; // Should be okay to break when there are no valid targets
 
-            NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(target));
+            VfxCmd.PlayOnCreature(target, "vfx/vfx_attack_lightning");
             await CreatureCmd.Damage(choiceContext, target, amount, ValueProp.Unpowered, Owner.Creature);
         }
     }

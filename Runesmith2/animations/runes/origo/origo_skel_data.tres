@@ -1,0 +1,20 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=5 format=3 uid="uid://danvy803h1n0y"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cw4ayiuh3m5d2" path="res://Runesmith2/animations/runes/origo/origo.atlas" id="1_7wkti"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://c724681j5q0l2" path="res://Runesmith2/animations/runes/origo/origo.skel" id="2_jd083"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_7wkti"]
+from = "idle/loop_2"
+to = "trigger"
+mix = 0.05
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_jd083"]
+from = "trigger"
+to = "idle/loop_2"
+mix = 0.15
+
+[resource]
+atlas_res = ExtResource("1_7wkti")
+skeleton_file_res = ExtResource("2_jd083")
+default_mix = 0.15
+animation_mixes = [SubResource("SpineAnimationMix_7wkti"), SubResource("SpineAnimationMix_jd083")]

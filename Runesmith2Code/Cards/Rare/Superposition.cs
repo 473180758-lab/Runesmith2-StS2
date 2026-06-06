@@ -21,7 +21,7 @@ public class Superposition : Runesmith2Card
         WithBlock(11, 4);
         WithVar(new DisplayVar<Superposition>("OddEven", c =>
         {
-            var runeQueue = c.Owner.PlayerCombatState?.RuneQueue();
+            var runeQueue = c.Owner.PlayerCombatState?.GetRuneQueue();
             var count = 0;
             if (runeQueue != null)
             {
@@ -40,7 +40,7 @@ public class Superposition : Runesmith2Card
     {
         ArgumentNullException.ThrowIfNull(play.Target);
 
-        var runeQueue = Owner.PlayerCombatState?.RuneQueue();
+        var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         var isOdd = false;
         if (runeQueue != null)
         {

@@ -132,6 +132,8 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
         }
     }
 
+    public virtual bool HasPotencyOverride => false;
+
     // DeepCloneFields
     protected override void DeepCloneFields()
     {
@@ -238,7 +240,7 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
 
     protected bool HasRune()
     {
-        if (IsInCombat) return Owner.PlayerCombatState?.RuneQueue()?.HasAny() ?? false;
+        if (IsInCombat) return Owner.PlayerCombatState?.GetRuneQueue()?.HasAny() ?? false;
 
         return false;
     }
@@ -246,14 +248,14 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
     public bool HasElements()
     {
         if (!IsInCombat) return true;
-        var elements = Owner.PlayerCombatState?.Elements() ?? new Elements();
+        var elements = Owner.PlayerCombatState?.GetElements() ?? new Elements();
         return elements.CanSpend(GetElementsCostWithModifiers().ClampZero());
     }
 
     protected bool IsRuneSlotsFull()
     {
         if (!IsInCombat) return false;
-        var runeQueue = Owner.PlayerCombatState?.RuneQueue();
+        var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         return runeQueue != null && runeQueue.IsFull();
     }
 

@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://l6lhk02bgopt"
+path="res://.godot/imported/incendium.atlas-5195598073316e0df268138da4719223.spatlas"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/incendium/incendium.atlas"
+dest_files=["res://.godot/imported/incendium.atlas-5195598073316e0df268138da4719223.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

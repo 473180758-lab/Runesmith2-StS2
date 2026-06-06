@@ -116,6 +116,7 @@ texture = ExtResource("4_26slg")
 one_shot = true
 explosiveness = 0.86
 local_coords = true
+draw_order = 0
 process_material = SubResource("ParticleProcessMaterial_y3f1m")
 
 [node name="vfx_spark" type="GPUParticles2D" parent="FrontParticles"]

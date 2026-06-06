@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://d0esvs1f0u8qn"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://l6lhk02bgopt" path="res://Runesmith2/animations/runes/incendium/incendium.atlas" id="1_1moup"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dhjf1bibm3c3l" path="res://Runesmith2/animations/runes/incendium/incendium.skel" id="2_2makb"]
+
+[resource]
+atlas_res = ExtResource("1_1moup")
+skeleton_file_res = ExtResource("2_2makb")
+default_mix = 0.1

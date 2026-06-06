@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://yri7gsas2nap"
+path="res://.godot/imported/fulgor.skel-e9ba714e70040d548066c3178590fef8.spskel"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/fulgor/fulgor.skel"
+dest_files=["res://.godot/imported/fulgor.skel-e9ba714e70040d548066c3178590fef8.spskel"]
+
+[params]
+

@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cw4ayiuh3m5d2"
+path="res://.godot/imported/origo.atlas-6e896b732e1d00342b0d5b476fb4f8d1.spatlas"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/origo/origo.atlas"
+dest_files=["res://.godot/imported/origo.atlas-6e896b732e1d00342b0d5b476fb4f8d1.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

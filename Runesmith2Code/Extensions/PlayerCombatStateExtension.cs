@@ -22,8 +22,10 @@ public static class PlayerCombatStateExtension
                 if (field == value) return;
                 var elements = field;
                 field = value;
-                CombatManager.Instance.History.ElementsModified(combatState._player.Creature.CombatState,
-                    field - elements, combatState._player);
+                var state = combatState._player.Creature.CombatState;
+                if (state != null)
+                    CombatManager.Instance.History.ElementsModified(state,
+                        field - elements, combatState._player);
                 ElementsChanged?.Invoke(elements, field);
             }
         } = new();
@@ -49,13 +51,13 @@ public static class PlayerCombatStateExtension
 
     extension(PlayerCombatState playerCombatState)
     {
-        public RuneQueue? RuneQueue()
+        public RuneQueue? GetRuneQueue()
         {
             var runesmithCombatState = playerCombatState.Runesmith();
             return runesmithCombatState?.RuneQueue;
         }
 
-        public Elements Elements()
+        public Elements GetElements()
         {
             var runesmithCombatState = playerCombatState.Runesmith();
             return runesmithCombatState?.Elements ?? new Elements();

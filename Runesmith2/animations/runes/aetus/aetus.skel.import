@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://b62bcqebd8sjr"
+path="res://.godot/imported/aetus.skel-739d9781cb5d8c0a835dd21d0b0d2734.spskel"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/aetus/aetus.skel"
+dest_files=["res://.godot/imported/aetus.skel-739d9781cb5d8c0a835dd21d0b0d2734.spskel"]
+
+[params]
+

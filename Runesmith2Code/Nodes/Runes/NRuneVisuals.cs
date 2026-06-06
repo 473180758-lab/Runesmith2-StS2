@@ -12,8 +12,7 @@ namespace Runesmith2.Runesmith2Code.Nodes.Runes;
 [GlobalClass]
 public partial class NRuneVisuals : Node2D
 {
-    private const string TimeScaleKey = "time_scale";
-    private const string TriggerKey = "trigger";
+    protected const string TriggerKey = "trigger";
 
     private readonly List<string> _currAnimationList = [];
 
@@ -33,8 +32,8 @@ public partial class NRuneVisuals : Node2D
 
     private int _triggerTrack = 1;
 
-    private Tween? _tween;
-    private Tween? _tween2;
+    private Tween? _timeScaleTween;
+    private Tween? _depletedTween;
     private Node2D? _visual;
     private MegaSprite? _spineVisuals;
 
@@ -91,11 +90,9 @@ public partial class NRuneVisuals : Node2D
     private void OnAnimationCompleted(GodotObject _, GodotObject __, GodotObject trackEntry)
     {
         var track = new MegaTrackEntry(trackEntry);
-        if (track.GetAnimation().GetName() == "trigger")
-        {
-            OnTriggerCompleted();
-            AnimationFinished(TriggerKey);
-        }
+        if (track.GetAnimation().GetName() != "trigger") return;
+        OnTriggerCompleted();
+        AnimationFinished(TriggerKey);
     }
 
     protected virtual void OnTriggerCompleted()
@@ -108,15 +105,17 @@ public partial class NRuneVisuals : Node2D
         if (new MegaEvent(spineEvent).GetData().GetEventName() == "trigger_end") OnTriggerEnd();
     }
 
-    protected void OnStart()
+    private void OnStart()
     {
         var skelData = _spineVisuals?.GetSkeleton()?.GetData();
         if (skelData == null) return;
 
-        _hasTrigger = skelData.FindAnimation("trigger") != null;
+        var animNames = skelData.GetAnimationNames().ToHashSet();
+        
+        _hasTrigger = animNames.Contains("trigger");
 
         // default option, don't call spine functions too much
-        if (skelData.FindAnimation("idle_loop") != null)
+        if (animNames.Contains("idle_loop"))
         {
             var track = SpineAnimation.SetAnimation("idle_loop", true);
             var timeScale = Rng.Chaotic.NextFloat(0.9f, 1.1f);
@@ -132,7 +131,7 @@ public partial class NRuneVisuals : Node2D
         while (true)
         {
             var name = $"idle/loop_{index + 1}";
-            if (skelData.FindAnimation(name) != null)
+            if (animNames.Contains(name))
             {
                 var track = SpineAnimation.SetAnimation(name, true, index);
                 var timeScale = Rng.Chaotic.NextFloat(0.9f, 1.1f);
@@ -154,7 +153,7 @@ public partial class NRuneVisuals : Node2D
     }
 
     // Called when the Rune is triggered from any source
-    public virtual void OnTrigger()
+    public void OnTrigger()
     {
         _backParticles?.Restart();
         if (!_hasTrigger && CustomTrigger == null) return;
@@ -183,19 +182,15 @@ public partial class NRuneVisuals : Node2D
     {
         _breakParticles?.Restart();
         _frontParticles?.PlayOneShot();
-        _tween?.Kill();
-        _tween2?.Kill();
+        _timeScaleTween?.Kill();
+        _depletedTween?.Kill();
         _visual?.Modulate = Colors.Transparent;
     }
 
     protected void SetAnimTimeScaleTween(Tween tween)
     {
-        if (_tween != null && _tween.IsRunning()) _tween.Kill();
-        _tween = tween;
-
-        _currAnimationList.Add(TimeScaleKey);
-        _tween.TweenCallback(Callable.From(() => AnimationFinished(TimeScaleKey)));
-        MainFile.Logger.Info("Setting anim time scale tween");
+        if (_timeScaleTween != null && _timeScaleTween.IsRunning()) _timeScaleTween.Kill();
+        _timeScaleTween = tween;
     }
 
     private void SetAllTimeScale(float scale)
@@ -203,32 +198,37 @@ public partial class NRuneVisuals : Node2D
         foreach (var data in TrackDict.Values) data.Track.SetTimeScale(scale * data.TimeScale);
     }
 
-    private void AnimationFinished(string source)
+    protected void AnimationFinished(string source)
     {
         _currAnimationList.Remove(source);
 
-        UpdateAfterAnimationFinished();
+        UpdateChargeVisualAfterAnimationFinished();
     }
 
-    private void UpdateAfterAnimationFinished()
+    // Change visual based on charge status. If trigger anim and/or anim scale tween is playing, waits until all are finished playing before darkening.
+    private void UpdateChargeVisualAfterAnimationFinished()
     {
         if (_currAnimationList.Count != 0) return;
-
-        if (_targetModulate == _visual?.Modulate && Math.Abs(CurrTimeScale - _targetTimeScale) < 0.01) return;
-        if (_tween2 != null && _tween2.IsRunning()) _tween2.Kill();
-        _tween2 = CreateTween();
-        _tween2.SetParallel();
-        _tween2.TweenProperty(_visual, "modulate", _targetModulate, 0.1);
-        _tween2.TweenProperty(this, "CurrTimeScale", _targetTimeScale, 0.1);
+        
+        if (_depletedTween != null && _depletedTween.IsRunning()) _depletedTween.Kill();
+        _depletedTween = CreateTween();
+        _depletedTween.SetParallel();
+        _depletedTween.TweenProperty(_visual, "modulate", _targetModulate, 0.1);
+        _depletedTween.TweenProperty(this, "CurrTimeScale", _targetTimeScale, 0.1);
     }
 
-    // Change visual based on charge status. If trigger anim and/or anim scale tween is playing, waits until all are finished playing.
+    private bool _currChargeDepleted = true;
+
+
     public void SetChargeStatus(bool isDepleted, Color darkenedColor)
     {
+        if (isDepleted == _currChargeDepleted) return;
+        
         _targetModulate = isDepleted ? darkenedColor : Colors.White;
         _targetTimeScale = isDepleted ? 0 : 1;
+        _currChargeDepleted = isDepleted;
         
-        UpdateAfterAnimationFinished();
+        UpdateChargeVisualAfterAnimationFinished();
     }
 
     protected class TrackData(MegaTrackEntry track, float timeScale)

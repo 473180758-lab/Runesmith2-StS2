@@ -6,6 +6,7 @@ render_mode blend_mix;
 uniform vec2 tex_scroll_speed = vec2(0);
 
 uniform float lut_scroll_speed = 1;
+uniform float lut_zoom = 1;
 uniform sampler2D lut: repeat_enable;
 
 uniform vec2 pivot_offset = vec2(0.0, 0.0);
@@ -32,7 +33,7 @@ void fragment() {
 	
 	vec4 texture_color =  texture(TEXTURE, UV + noise_offset + lifetime * tex_scroll_speed);
 
-	vec4 lut_color = texture(lut, vec2(texture_color.r + lifetime * lut_scroll_speed));
+	vec4 lut_color = texture(lut, vec2(texture_color.r + lifetime * lut_scroll_speed) * lut_zoom);
 	
 	vec4 mask_color = texture(mask, UV + noise_offset);
 

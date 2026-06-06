@@ -11,7 +11,6 @@ using MegaCrit.Sts2.Core.ValueProps;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Cards.Rare;
 using Runesmith2.Runesmith2Code.Nodes.Runes;
-using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 
@@ -22,6 +21,8 @@ public class VulcanusRune : RuneModel
 {
     public override decimal PassiveVal { get; set; } = 4;
     public override int ChargeVal { get; set; } = 3;
+    
+    public override bool IsUsingPotency => true;
 
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;
 

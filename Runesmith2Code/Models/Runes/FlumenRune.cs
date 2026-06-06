@@ -6,8 +6,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Cards.Uncommon;
-using Runesmith2.Runesmith2Code.Hooks;
-using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 

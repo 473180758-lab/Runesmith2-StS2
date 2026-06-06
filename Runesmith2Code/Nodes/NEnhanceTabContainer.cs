@@ -24,11 +24,11 @@ public partial class NEnhanceTabContainer : Control
 
     private static readonly Vector3 BlueHsv = new(0.478f, 1.574f, 1.0f);
 
-    private ShaderMaterial _hsv;
+    private ShaderMaterial? _hsv;
 
-    private TextureRect _enhanceTab;
+    private TextureRect? _enhanceTab;
 
-    private TextureRect _stasisOverlay;
+    private TextureRect? _stasisOverlay;
 
     private MegaLabel? _enhanceLabel;
 
@@ -92,14 +92,14 @@ public partial class NEnhanceTabContainer : Control
 
             if (modifier.Enhanced > 0)
             {
-                if (!_enhanceTab.Visible) _enhanceTab.Visible = true;
+                if (_enhanceTab is not {Visible: true}) _enhanceTab?.Visible = true;
                 var locString = RunesmithHoverTipFactory.StaticBanner(RunesmithHoverTip.Enhanced,
                     new DynamicVar("Amount", modifier.Enhanced));
                 _enhanceLabel?.SetTextAutoSize(locString.GetFormattedText());
             }
             else
             {
-                _enhanceTab.Visible = false;
+                _enhanceTab?.Visible = false;
                 _enhanceLabel?.Text = "";
             }
 
@@ -108,14 +108,14 @@ public partial class NEnhanceTabContainer : Control
                 UpdateShaderHsv(BlueHsv);
                 _enhanceLabel?.AddThemeColorOverride(ThemeConstants.Label.FontColor, StasisFontColor.Item1);
                 _enhanceLabel?.AddThemeColorOverride(ThemeConstants.Label.FontOutlineColor, StasisFontColor.Item3);
-                _stasisOverlay.Visible = true;
+                _stasisOverlay?.Visible = true;
             }
             else
             {
                 UpdateShaderHsv(Vector3.One);
                 _enhanceLabel?.AddThemeColorOverride(ThemeConstants.Label.FontColor, FontColor.Item1);
                 _enhanceLabel?.AddThemeColorOverride(ThemeConstants.Label.FontOutlineColor, FontColor.Item3);
-                _stasisOverlay.Visible = false;
+                _stasisOverlay?.Visible = false;
             }
 
             return;
@@ -126,6 +126,7 @@ public partial class NEnhanceTabContainer : Control
 
     private void UpdateShaderHsv(Vector3 vec)
     {
+        if (_hsv == null) return;
         _hsv.SetShaderParameter("h", vec.X);
         _hsv.SetShaderParameter("s", vec.Y);
         _hsv.SetShaderParameter("v", vec.Z);

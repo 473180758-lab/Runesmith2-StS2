@@ -23,7 +23,7 @@ public class MetalForming : Runesmith2Card
         WithCalculatedBlock(0, 2, (card, _) =>
             {
                 if (card.CombatState == null || card.Owner.PlayerCombatState == null) return 0;
-                return card.Owner.PlayerCombatState.Elements().Terra +
+                return card.Owner.PlayerCombatState.GetElements().Terra +
                        RunesmithHook.ModifyElementsGain(card.CombatState, card.Owner,
                            Elements.WithTerra(card.DynamicVars[TerraVar.defaultName].IntValue),
                            ValueProp.Move, card, out var _).Terra;

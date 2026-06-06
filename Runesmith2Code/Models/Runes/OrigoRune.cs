@@ -19,7 +19,7 @@ namespace Runesmith2.Runesmith2Code.Models.Runes;
 public class OrigoRune : RuneModel
 {
     // TODO show upgraded visual
-    public override decimal PassiveVal { get; set; } = -1;
+    public override decimal PassiveVal { get; set; } = 0;
     public override int ChargeVal { get; set; } = 3;
 
     public override (bool, bool) ShowTopLabel => (false, true);

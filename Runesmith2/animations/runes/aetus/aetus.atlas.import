@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://c6giec3omc1h"
+path="res://.godot/imported/aetus.atlas-01ed8fb8e274228e26345b7f46219903.spatlas"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/aetus/aetus.atlas"
+dest_files=["res://.godot/imported/aetus.atlas-01ed8fb8e274228e26345b7f46219903.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

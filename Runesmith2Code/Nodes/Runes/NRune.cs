@@ -67,6 +67,8 @@ public partial class NRune : NClickableControl
     private Control _bounds = null!;
 
     private CpuParticles2D _flashParticle = null!;
+    
+    private GpuParticles2D _chargeSparks = null!;
 
     private NSelectionReticle _selectionReticle = null!;
 
@@ -106,6 +108,7 @@ public partial class NRune : NClickableControl
         _visualContainer = GetNode<Control>("%VisualContainer");
         _labelContainer = GetNode<Control>("%LabelContainer");
         _flashParticle = GetNode<CpuParticles2D>("%Flash");
+        _chargeSparks = GetNode<GpuParticles2D>("%ChargeSparks");
         _chargePanel = GetNode<Panel>("%ChargePanel");
         _chargeCross = GetNode<HSeparator>("%ChargeCross");
         for (var i = 1; i < 9; i++) _chargeSeparators.Add(GetNode<VSeparator>($"%Separator{i}"));
@@ -130,8 +133,10 @@ public partial class NRune : NClickableControl
         _labelContainer.AddChildSafely(_bottomBreakLabel);
 
         this.AddChildSafely(_chargeLabel);
-        _chargeLabel.Position = new Vector2(-12, 28);
-        _chargeLabel.Size = new Vector2(24, 31);
+        _chargeLabel.HorizontalAlignment = HorizontalAlignment.Center;
+        _chargeLabel.VerticalAlignment = VerticalAlignment.Center;
+        _chargeLabel.Position = new Vector2(-50, 20);
+        _chargeLabel.Size = new Vector2(100, 40);
 
         this.AddChildSafely(_selectionReticle);
         _selectionReticle.Size = new Vector2(90, 90);
@@ -169,13 +174,17 @@ public partial class NRune : NClickableControl
     public override void _EnterTree()
     {
         base._EnterTree();
-        if (Model != null) Model.Triggered += Trigger;
+        if (Model == null) return;
+        Model.Triggered += Trigger;
+        Model.Charged += Charged;
     }
 
     public override void _ExitTree()
     {
         base._ExitTree();
-        if (Model != null) Model.Triggered -= Trigger;
+        if (Model == null) return;
+        Model.Triggered -= Trigger;
+        Model.Charged -= Charged;
     }
 
     public void ReplaceRune(RuneModel? model)
@@ -305,9 +314,32 @@ public partial class NRune : NClickableControl
     private void Trigger()
     {
         _flashParticle.Restart();
-        _flashParticle.Emitting = true;
 
         _sprite?.OnTrigger();
+    }
+
+    // TODO create VFX using VfxCmd instead of embedding vfx in the Rune scene?
+    private void Charged(bool isPositive)
+    {
+        if (isPositive) CreateTween().TweenCallback(Callable.From(PlayCharged)).SetDelay(0.15);
+        
+        UpdateVisuals(false);
+    }
+
+    private void PlayCharged()
+    {
+        if (_chargeSparks.Emitting)
+        {
+            var newEmitter = (GpuParticles2D) _chargeSparks.Duplicate();
+            newEmitter.Emitting = true;
+            _chargeSparks.AddSibling(newEmitter);
+            newEmitter.Restart();
+            newEmitter.Connect("finished", Callable.From(() => newEmitter.QueueFree()));
+        }
+        else
+        {
+            _chargeSparks.Restart();
+        }
     }
 
     public void OnBreak()
@@ -317,10 +349,9 @@ public partial class NRune : NClickableControl
         var tween = CreateTween().SetParallel();
         tween.TweenProperty(_chargePanel, "modulate", Colors.Transparent, 0.25);
         tween.TweenProperty(_labelContainer, "modulate", Colors.Transparent, 0.25);
+        tween.TweenProperty(_chargeLabel, "modulate", Colors.Transparent, 0.25);
     }
-
-    // TODO create and call trigger animation for Runes
-
+    
     protected override void OnFocus()
     {
         if (Model == null && !_isLocal) return;

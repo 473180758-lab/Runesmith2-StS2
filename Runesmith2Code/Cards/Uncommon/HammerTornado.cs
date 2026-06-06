@@ -23,7 +23,7 @@ public class HammerTornado : Runesmith2Card
         WithVar(new CardsVar(1));
         WithCalculatedVar(CalculatedHitsKey, 1, (card, _) =>
         {
-            var runeQueue = card.Owner.PlayerCombatState?.RuneQueue();
+            var runeQueue = card.Owner.PlayerCombatState?.GetRuneQueue();
             return runeQueue is { Runes.Count: > 0 } ? runeQueue.Runes[0].ChargeVal : 0;
         });
         WithTip(RunesmithHoverTip.Charge);

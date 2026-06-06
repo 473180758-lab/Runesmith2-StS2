@@ -34,7 +34,7 @@ public class Recycler : Runesmith2Relic
     {
         if (player != Owner) return;
 
-        var runeQueue = Owner.PlayerCombatState?.RuneQueue();
+        var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null) return;
 
         var index = 0;

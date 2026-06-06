@@ -1,0 +1,20 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=5 format=3 uid="uid://2cr5g1g0d6uy"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dvqy2yqurctm0" path="res://Runesmith2/animations/runes/vulcanus/vulcanus.atlas" id="1_qafsc"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://btfvei7voko8" path="res://Runesmith2/animations/runes/vulcanus/vulcanus.skel" id="2_pkurg"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_qafsc"]
+from = "idle/loop_2"
+to = "trigger"
+mix = 0.05
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_pkurg"]
+from = "trigger"
+to = "idle/loop_2"
+mix = 0.1
+
+[resource]
+atlas_res = ExtResource("1_qafsc")
+skeleton_file_res = ExtResource("2_pkurg")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_qafsc"), SubResource("SpineAnimationMix_pkurg")]

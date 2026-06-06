@@ -35,7 +35,7 @@ public class Teleport : Runesmith2Card
         ArgumentNullException.ThrowIfNull(play.Target?.Player);
         if (HasRune())
         {
-            var runes = Owner.PlayerCombatState?.RuneQueue()?.Runes;
+            var runes = Owner.PlayerCombatState?.GetRuneQueue()?.Runes;
             var runeOrig = runes?[^1];
             if (runeOrig == null) return;
             var runeCopy = (RuneModel)runeOrig.MutableClone();

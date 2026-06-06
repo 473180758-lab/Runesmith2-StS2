@@ -1,9 +1,132 @@
-[gd_scene load_steps=2 format=3 uid="uid://dageb1fnv2iql"]
+[gd_scene load_steps=23 format=3 uid="uid://dageb1fnv2iql"]
 
-[ext_resource type="Texture2D" uid="uid://do2cgvtp0vi3w" path="res://Runesmith2/images/runes/morbus_rune.png" id="1_cd858"]
+[ext_resource type="PackedScene" uid="uid://qoq8amhbengs" path="res://Runesmith2/scenes/vfx/runes/rune_particles_glow.tscn" id="1_jj7xm"]
+[ext_resource type="Script" uid="uid://7wp8phd4gsr3" path="res://Runesmith2Code/Nodes/Runes/NRuneVisualsOneTrack.cs" id="1_vn8g7"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bb064x2tgwrha" path="res://Runesmith2/animations/runes/morbus/morbus_skel_data.tres" id="2_7gfxw"]
+[ext_resource type="PackedScene" uid="uid://bfudt51kp1y4d" path="res://Runesmith2/scenes/vfx/runes/rune_break_particles.tscn" id="3_0dv70"]
+[ext_resource type="Script" uid="uid://c0nvyc7bf102m" path="res://Runesmith2Code/Nodes/NRuneParticlesContainer.cs" id="4_vn8g7"]
+[ext_resource type="Shader" uid="uid://borcjky0kbutk" path="res://Runesmith2/shaders/vfx_virus_particle_shader.gdshader" id="5_0dv70"]
+[ext_resource type="Texture2D" uid="uid://bqtw67o41ruqk" path="res://Runesmith2/images/vfx/explosion_vfx.png" id="6_mm1mm"]
+
+[sub_resource type="Curve" id="Curve_vn8g7"]
+_data = [Vector2(0, 0.99052644), 0.0, 0.0, 0, 0, Vector2(0.49921998, 0.50737834), -1.1961001, -1.1961001, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8osan"]
+curve = SubResource("Curve_vn8g7")
+
+[sub_resource type="Curve" id="Curve_knqy1"]
+_data = [Vector2(0, 0.91000175), -2.4980805, -2.4980805, 0, 0, Vector2(0.67862713, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.026174145, 0.026174145, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_a7vbm"]
+curve = SubResource("Curve_knqy1")
+
+[sub_resource type="Gradient" id="Gradient_c6b5p"]
+offsets = PackedFloat32Array(0, 0.11774461, 0.2885572, 0.4859038, 0.7048093, 0.8905473, 1)
+colors = PackedColorArray(0.7484012, 0.22167432, 0.88, 0.7294118, 0.6338798, 0.07686591, 0.87916666, 1, 0.45801014, 0.056699984, 0.63, 0.8509804, 0.6397602, 0.07919998, 0.88, 0.61960787, 0.45801014, 0.056699984, 0.63, 0.8509804, 0.6338798, 0.07686591, 0.87916666, 1, 0.7484012, 0.22167432, 0.88, 0.7294118)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hm1ej"]
+gradient = SubResource("Gradient_c6b5p")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5yw0h"]
+load_path = "res://.godot/imported/noises.png-2dc0aeec1c2f8a53dbf5b871c6d4f80c.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aftwp"]
+shader = ExtResource("5_0dv70")
+shader_parameter/frame_count = 4.0
+shader_parameter/flipbook_size = Vector2(2, 2)
+shader_parameter/lut_scroll_speed = 1.0
+shader_parameter/lut = SubResource("GradientTexture1D_hm1ej")
+shader_parameter/pivot_offset = Vector2(0, 0)
+shader_parameter/erosion_btm_curve = SubResource("CurveTexture_8osan")
+shader_parameter/erosion_curve = SubResource("CurveTexture_a7vbm")
+shader_parameter/erosion_offset = 0.79
+shader_parameter/noise = SubResource("CompressedTexture2D_5yw0h")
+shader_parameter/noise_offset_scale = Vector2(0.039, 0.053)
+
+[sub_resource type="Curve" id="Curve_mm1mm"]
+_data = [Vector2(0, 0.3728177), 0.0, 1.0525626, 0, 0, Vector2(0.46388447, 0.6241787), -0.027642991, -0.027642991, 0, 0, Vector2(0.7560193, 0.37769848), -1.7484245, -1.7484245, 0, 0, Vector2(1, 0), -1.7250328, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_knqy1"]
+curve = SubResource("Curve_mm1mm")
+
+[sub_resource type="Curve" id="Curve_8osan"]
+_data = [Vector2(0, 0.06288707), 0.0, 1.0525624, 0, 0, Vector2(0.27126807, 0.2556786), 0.0, 0.0, 0, 0, Vector2(0.6484751, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_mm1mm"]
+curve = SubResource("Curve_8osan")
+
+[sub_resource type="Curve" id="Curve_c6b5p"]
+_data = [Vector2(0, 0.106814325), 0.0, 2.2805524, 0, 0, Vector2(0.3916533, 0.76328135), 0.9773796, 0.9773796, 0, 0, Vector2(1, 1), 0.019491859, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_aftwp"]
+curve = SubResource("Curve_c6b5p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r5ye2"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+spread = 180.0
+initial_velocity_min = 6.69
+initial_velocity_max = 21.789999
+gravity = Vector3(0, 0, 0)
+damping_min = 3.7450001
+damping_max = 6.0350003
+scale_min = 0.56
+scale_max = 0.74
+scale_curve = SubResource("CurveTexture_aftwp")
+alpha_curve = SubResource("CurveTexture_knqy1")
+emission_curve = SubResource("CurveTexture_mm1mm")
+hue_variation_min = -0.010000022
+hue_variation_max = 0.009999977
+anim_offset_max = 1.0
 
 [node name="MorbusRune" type="Node2D"]
+script = ExtResource("1_vn8g7")
 
-[node name="Morbus" type="Sprite2D" parent="."]
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_cd858")
+[node name="BackParticles" parent="." instance=ExtResource("1_jj7xm")]
+unique_name_in_owner = true
+
+[node name="vfx_common_glow" parent="BackParticles" index="0"]
+self_modulate = Color(0.8606271, 0.14954664, 1.298, 1)
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_7gfxw")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(-1.9999999, 3.9999998)
+scale = Vector2(0.4, 0.4)
+
+[node name="BreakParticles" parent="." instance=ExtResource("3_0dv70")]
+unique_name_in_owner = true
+position = Vector2(3, -4)
+
+[node name="FrontParticles" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_vn8g7")
+
+[node name="vfx_virus" type="GPUParticles2D" parent="FrontParticles"]
+material = SubResource("ShaderMaterial_aftwp")
+position = Vector2(-1, -9)
+skew = -0.14431477
+emitting = false
+amount = 4
+texture = ExtResource("6_mm1mm")
+lifetime = 1.2
+one_shot = true
+explosiveness = 0.8
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_r5ye2")
+
+[editable path="BackParticles"]

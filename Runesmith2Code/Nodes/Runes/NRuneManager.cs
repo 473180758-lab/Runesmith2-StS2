@@ -21,11 +21,11 @@ namespace Runesmith2.Runesmith2Code.Nodes.Runes;
 [GlobalClass]
 public partial class NRuneManager : Control
 {
-    private Control _runeContainer;
+    private Control? _runeContainer;
 
     private readonly List<NRune> _runes = new();
 
-    private NCreature _creatureNode;
+    private NCreature? _creatureNode;
 
     private const float Radius = 320f;
 
@@ -43,13 +43,13 @@ public partial class NRuneManager : Control
 
     public bool IsLocal { get; private set; }
 
-    private Player Player => _creatureNode.Entity.Player!;
+    private Player Player => _creatureNode?.Entity.Player ?? throw new Exception("RuneManager does not have a Player");
 
-    public Control DefaultFocusOwner
+    public Control? DefaultFocusOwner
     {
         get
         {
-            if (_runes.Count <= 0 || _runes.First().Model == null) return _creatureNode.Hitbox;
+            if (_runes.Count <= 0 || _runes.First().Model == null) return _creatureNode?.Hitbox;
 
             return _runes.First();
         }
@@ -106,7 +106,7 @@ public partial class NRuneManager : Control
 
         var nRune = NRune.Create(LocalContext.IsMe(Player));
         var count = _runes.Count;
-        _runeContainer.AddChildSafely(nRune);
+        _runeContainer?.AddChildSafely(nRune);
         _runes.Add(nRune);
         nRune.Position = GetRunePosition(count);
 
@@ -116,7 +116,7 @@ public partial class NRuneManager : Control
 
     public void AddRuneAnim()
     {
-        var queue = Player.PlayerCombatState?.RuneQueue();
+        var queue = Player.PlayerCombatState?.GetRuneQueue();
         if (queue == null) return;
         var runeModel = queue.Runes.Count > 0 ? queue.Runes[^1] : null; // Get last (should be the newly added one)
         if (_runes.Count(r => r.Model != null) >= RuneQueue.MaxCapacity) return; // cannot add rune to full RuneQueue
@@ -135,7 +135,7 @@ public partial class NRuneManager : Control
             emptyRune.AddSibling(newRune);
             _runes.Insert(_runes.IndexOf(emptyRune), newRune);
             newRune.Position = emptyRune.Position;
-            _runeContainer.RemoveChildSafely(emptyRune);
+            _runeContainer?.RemoveChildSafely(emptyRune);
             _runes.Remove(emptyRune);
             emptyRune.QueueFreeSafely();
         }
@@ -167,13 +167,12 @@ public partial class NRuneManager : Control
         }
 
         var newEmptyRune = NRune.Create(LocalContext.IsMe(Player));
-        _runeContainer.AddChildSafely(newEmptyRune);
+        _runeContainer?.AddChildSafely(newEmptyRune);
         var position = GetRunePosition(_runes.Count);
         _runes.Add(newEmptyRune);
         newEmptyRune.Position = position;
-        if (breakRune.HasFocus()) _creatureNode.Hitbox.TryGrabFocus();
-
-        // TODO tween layout after tween + break finished?
+        if (breakRune.HasFocus()) _creatureNode?.Hitbox.TryGrabFocus();
+        
         TweenLayout();
         UpdateControllerNavigation();
     }
@@ -187,10 +186,10 @@ public partial class NRuneManager : Control
             rune.FocusNeighborRight = path;
             _runes[i].FocusNeighborLeft = i < _runes.Count - 1 ? _runes[i + 1].GetPath() : _runes[0].GetPath();
             _runes[i].FocusNeighborTop = _runes[i].GetPath();
-            _runes[i].FocusNeighborBottom = _creatureNode.Hitbox.GetPath();
+            _runes[i].FocusNeighborBottom = _creatureNode?.Hitbox.GetPath();
         }
 
-        _creatureNode.UpdateNavigation();
+        _creatureNode?.UpdateNavigation();
     }
 
     private void TweenLayout()

@@ -1,9 +1,185 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6f0hx5qwvkna"]
+[gd_scene load_steps=36 format=3 uid="uid://c6f0hx5qwvkna"]
 
-[ext_resource type="Texture2D" uid="uid://cwufar0colbak" path="res://Runesmith2/images/runes/aetus_rune.png" id="1_30drn"]
+[ext_resource type="Script" uid="uid://7wp8phd4gsr3" path="res://Runesmith2Code/Nodes/Runes/NRuneVisualsOneTrack.cs" id="1_576hk"]
+[ext_resource type="PackedScene" uid="uid://qoq8amhbengs" path="res://Runesmith2/scenes/vfx/runes/rune_particles_glow.tscn" id="2_wqtdi"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dps6ax8f7vpi7" path="res://Runesmith2/animations/runes/aetus/aetus_skel_data.tres" id="3_yp3lf"]
+[ext_resource type="PackedScene" uid="uid://bfudt51kp1y4d" path="res://Runesmith2/scenes/vfx/runes/rune_break_particles.tscn" id="4_gxhu0"]
+[ext_resource type="Script" uid="uid://c0nvyc7bf102m" path="res://Runesmith2Code/Nodes/NRuneParticlesContainer.cs" id="5_ee2ok"]
+[ext_resource type="Shader" uid="uid://tgumpqsq3b1" path="res://Runesmith2/shaders/vfx_ring_polar_shader.gdshader" id="6_ee2ok"]
+[ext_resource type="Texture2D" uid="uid://bp1e1c712g5o3" path="res://Runesmith2/images/vfx/common_ring_polar.png" id="7_hx722"]
+[ext_resource type="Shader" uid="uid://ftbal22sm5uo" path="res://Runesmith2/shaders/vfx_ray_shader.gdshader" id="8_xsvfb"]
+[ext_resource type="Texture2D" uid="uid://c2uhylvr2big1" path="res://Runesmith2/images/vfx/common_ray_vfx.png" id="9_b4nth"]
+
+[sub_resource type="Curve" id="Curve_h565o"]
+_data = [Vector2(0, 0.68974304), 0.0, -0.7084595, 0, 0, Vector2(0.5085803, 0.4955365), -0.0669761, -0.0669761, 0, 0, Vector2(1, 0.9005283), 1.4270384, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gkhwb"]
+curve = SubResource("Curve_h565o")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a0pvm"]
+shader = ExtResource("6_ee2ok")
+shader_parameter/erosion_curve = SubResource("CurveTexture_gkhwb")
+shader_parameter/erosion_offset = 0.3
+
+[sub_resource type="Curve" id="Curve_ydqwq"]
+_data = [Vector2(0, 0), 0.0, 7.952693, 0, 0, Vector2(0.20385234, 0.7315562), 0.0, 0.0, 0, 0, Vector2(0.5441413, 0.6144171), -0.5732535, -0.5732535, 0, 0, Vector2(1, 0), -2.0039783, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_rahu0"]
+curve = SubResource("Curve_ydqwq")
+
+[sub_resource type="Gradient" id="Gradient_rf7dd"]
+offsets = PackedFloat32Array(0, 0.2991453, 0.47692308, 0.7589744, 1)
+colors = PackedColorArray(0.6158749, 0.6588598, 1, 1, 1.1424452, 1.2601829, 1.3565136, 1, 0.901401, 1.0090225, 1.2575966, 1, 0.27368152, 0.354959, 1, 1, 0.079996586, 0.18294811, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dfr4o"]
+gradient = SubResource("Gradient_rf7dd")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_ky5tb"]
+_data = [Vector2(0, 0), 0.0, 1.1855654, 0, 0, Vector2(1, 0.8853013), -0.04471661, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h5ery"]
+curve = SubResource("Curve_ky5tb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tf2ic"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.76
+scale_max = 0.84
+scale_curve = SubResource("CurveTexture_h5ery")
+color_ramp = SubResource("GradientTexture1D_dfr4o")
+alpha_curve = SubResource("CurveTexture_rahu0")
+
+[sub_resource type="Gradient" id="Gradient_mxf8o"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qj3is"]
+gradient = SubResource("Gradient_mxf8o")
+
+[sub_resource type="Gradient" id="Gradient_33cwd"]
+offsets = PackedFloat32Array(0, 0.27197346, 0.66169155)
+colors = PackedColorArray(0, 0, 0, 1, 0.2406015, 0.2406015, 0.2406015, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ktm46"]
+gradient = SubResource("Gradient_33cwd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kcvym"]
+shader = ExtResource("8_xsvfb")
+shader_parameter/pivot_offset = Vector2(0, -0.5)
+shader_parameter/lut = SubResource("GradientTexture1D_qj3is")
+shader_parameter/vertical_alpha = SubResource("GradientTexture1D_ktm46")
+
+[sub_resource type="Curve" id="Curve_ktswy"]
+_data = [Vector2(0, 0), 0.0, 3.787424, 0, 0, Vector2(0.17977528, 0.47775483), 1.2760236, 1.2760236, 0, 0, Vector2(0.5329053, 0.59001315), -0.8186591, -0.8186591, 0, 0, Vector2(1, 0), -1.6182802, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_tdtfm"]
+curve = SubResource("Curve_ktswy")
+
+[sub_resource type="Gradient" id="Gradient_o8t7o"]
+offsets = PackedFloat32Array(0.09059829, 0.34700856, 0.6615385, 1)
+colors = PackedColorArray(0.901401, 1.0090225, 1.2575966, 1, 0.549362, 0.666536, 1.0813012, 1, 0.3870139, 0.5085932, 1, 1, 0.21537328, 0.34462076, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eqogm"]
+gradient = SubResource("Gradient_o8t7o")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_1ogau"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jdte7"]
+curve = SubResource("Curve_1ogau")
+
+[sub_resource type="Curve" id="Curve_bvuee"]
+_data = [Vector2(0, 0.29716533), 0.0, 1.3161396, 0, 0, Vector2(1, 0.41430444), -0.7297766, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_8keqn"]
+_data = [Vector2(0, 0.52168196), 0.0, 4.1810126, 0, 0, Vector2(0.31942213, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_lkf6r"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_am5t5"]
+curve_x = SubResource("Curve_bvuee")
+curve_y = SubResource("Curve_8keqn")
+curve_z = SubResource("Curve_lkf6r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c5vpt"]
+lifetime_randomness = 0.36
+particle_flag_disable_z = true
+angle_min = -179.99998
+angle_max = 180.00002
+angular_velocity_min = -55.500015
+angular_velocity_max = 55.49998
+gravity = Vector3(0, 0, 0)
+damping_min = 10.0
+damping_max = 10.0
+damping_curve = SubResource("CurveTexture_jdte7")
+scale_min = 0.22999999
+scale_max = 0.29
+scale_curve = SubResource("CurveXYZTexture_am5t5")
+color_ramp = SubResource("GradientTexture1D_eqogm")
+alpha_curve = SubResource("CurveTexture_tdtfm")
 
 [node name="AetusRune" type="Node2D"]
+script = ExtResource("1_576hk")
 
-[node name="Aetus" type="Sprite2D" parent="."]
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_30drn")
+[node name="BackParticles" parent="." instance=ExtResource("2_wqtdi")]
+unique_name_in_owner = true
+
+[node name="vfx_common_glow" parent="BackParticles" index="0"]
+self_modulate = Color(0.19979584, 0.20777144, 1.182, 1)
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("3_yp3lf")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(0.4, 0.4)
+
+[node name="BreakParticles" parent="." instance=ExtResource("4_gxhu0")]
+unique_name_in_owner = true
+position = Vector2(2, -6)
+
+[node name="FrontParticles" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_ee2ok")
+
+[node name="vfx_ring" type="GPUParticles2D" parent="FrontParticles"]
+material = SubResource("ShaderMaterial_a0pvm")
+position = Vector2(2, -8)
+emitting = false
+amount = 2
+texture = ExtResource("7_hx722")
+lifetime = 0.9
+one_shot = true
+explosiveness = 0.32
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_tf2ic")
+
+[node name="vfx_ray" type="GPUParticles2D" parent="FrontParticles"]
+material = SubResource("ShaderMaterial_kcvym")
+position = Vector2(2, -8)
+emitting = false
+amount = 9
+texture = ExtResource("9_b4nth")
+lifetime = 1.16
+one_shot = true
+explosiveness = 0.94
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_c5vpt")
+
+[editable path="BackParticles"]

@@ -1,6 +1,7 @@
 #region
 
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -42,8 +43,8 @@ public static class RuneCmd
         if (!CombatManager.Instance.IsOverOrEnding && player.Creature.CombatState != null)
         {
             var combatState = player.Creature.CombatState;
-            var runeQueue = player.PlayerCombatState?.RuneQueue();
-            if (runeQueue == null) return; // TODO log/throw warning/error? (for all usages of this check)
+            var runeQueue = player.PlayerCombatState?.GetRuneQueue();
+            if (runeQueue == null) return;
             rune.AssertMutable();
 
             if (runeQueue.IsFull())
@@ -56,9 +57,12 @@ public static class RuneCmd
             }
 
             var modifiedPotency = potency;
-            modifiedPotency = RunesmithHook.ModifyPotency(combatState, player, modifiedPotency, ValueProp.Move,
-                cardPlay?.Card, cardPlay, out var potencyModifiers);
-            await RunesmithHook.AfterModifyingPotency(combatState, potencyModifiers);
+            if (rune.IsUsingPotency)
+            {
+                modifiedPotency = RunesmithHook.ModifyPotency(combatState, player, modifiedPotency, ValueProp.Move,
+                    cardPlay?.Card, cardPlay, out var potencyModifiers);
+                await RunesmithHook.AfterModifyingPotency(combatState, potencyModifiers);
+            }
             var modifiedCharge = charge;
             modifiedCharge = RunesmithHook.ModifyCharge(combatState, player, modifiedCharge, ValueProp.Move,
                 cardPlay?.Card, cardPlay, out var chargeModifiers);
@@ -71,7 +75,6 @@ public static class RuneCmd
             rune.Owner = player;
             if (await runeQueue.TryEnqueue(rune))
             {
-                // TODO add combat history
                 rune.PlayCraftedSfx();
                 var nCreature = NCombatRoom.Instance?.GetCreatureNode(player.Creature);
                 if (nCreature != null)
@@ -88,7 +91,7 @@ public static class RuneCmd
     public static async Task AddRune(PlayerChoiceContext choiceContext, RuneModel rune, Player player,
         CardPlay? cardPlay)
     {
-        var runeQueue = player.PlayerCombatState?.RuneQueue();
+        var runeQueue = player.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null) return;
 
         if (runeQueue.IsFull())
@@ -102,7 +105,6 @@ public static class RuneCmd
 
         if (await runeQueue.TryEnqueue(rune))
         {
-            // TODO add combat history
             rune.PlayCraftedSfx();
             var nCreature = NCombatRoom.Instance?.GetCreatureNode(player.Creature);
             if (nCreature != null)
@@ -119,7 +121,7 @@ public static class RuneCmd
         if (!CombatManager.Instance.IsOverOrEnding && player.Creature.CombatState != null)
         {
             var combatState = player.Creature.CombatState;
-            var runeQueue = player.PlayerCombatState?.RuneQueue();
+            var runeQueue = player.PlayerCombatState?.GetRuneQueue();
             if (runeQueue == null) return;
 
             var modifiedPotency = potency;
@@ -134,7 +136,7 @@ public static class RuneCmd
     public static void RemovePotency(IEnumerable<RuneModel> runes, Player player, decimal potency = 0)
     {
         if (CombatManager.Instance.IsOverOrEnding) return;
-        var runeQueue = player.PlayerCombatState?.RuneQueue();
+        var runeQueue = player.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null) return;
 
         foreach (var rune in runes) rune.PassiveVal = (int)Math.Max(0, rune.PassiveVal - potency);
@@ -144,7 +146,7 @@ public static class RuneCmd
         int chargeAmount)
     {
         if (CombatManager.Instance.IsOverOrEnding) return null;
-        var runeQueue = player.PlayerCombatState?.RuneQueue();
+        var runeQueue = player.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null || runeQueue.Runes.Count <= 0) return null;
         var oldestRune = runeQueue.Runes[0];
         oldestRune.ModifyCharge(chargeAmount);
@@ -155,7 +157,7 @@ public static class RuneCmd
         int chargeAmount)
     {
         if (CombatManager.Instance.IsOverOrEnding) return null;
-        var runeQueue = player.PlayerCombatState?.RuneQueue();
+        var runeQueue = player.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null || runeQueue.Runes.Count <= 0) return null;
         var oldestRune = runeQueue.Runes[^1];
         oldestRune.ModifyCharge(chargeAmount);
@@ -164,12 +166,11 @@ public static class RuneCmd
 
     public static void ChargeAll(PlayerChoiceContext choiceContext, Player player, int chargeAmount)
     {
-        var runeQueue = player.PlayerCombatState?.RuneQueue();
+        var runeQueue = player.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null || runeQueue.Runes.Count <= 0) return;
         Charge(choiceContext, runeQueue.Runes, chargeAmount);
     }
-
-    // TODO Make charge cmd async and await animation.
+    
     public static void Charge(PlayerChoiceContext choiceContext, IEnumerable<RuneModel> runes, int chargeAmount)
     {
         foreach (var rune in runes)
@@ -200,7 +201,7 @@ public static class RuneCmd
     public static async Task<RuneModel?> BreakOldest(PlayerChoiceContext choiceContext, Player player,
         bool dequeue = true)
     {
-        var runeQueue = player.PlayerCombatState?.RuneQueue();
+        var runeQueue = player.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null || !runeQueue.HasAny()) return null;
         var rune = runeQueue.Runes[0];
         choiceContext.PushModel(rune);
@@ -213,7 +214,7 @@ public static class RuneCmd
         bool dequeue = true)
     {
         if (CombatManager.Instance.IsOverOrEnding || brokenRune == null) return;
-        var runeQueue = player.PlayerCombatState?.RuneQueue();
+        var runeQueue = player.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null) return;
         if (!runeQueue.HasAny()) return;
         var removed = false;

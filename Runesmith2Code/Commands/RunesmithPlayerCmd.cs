@@ -43,7 +43,7 @@ public static class RunesmithPlayerCmd
     {
         if (!CombatManager.Instance.IsEnding)
         {
-            var elements = player.PlayerCombatState?.Elements() ?? new Elements();
+            var elements = player.PlayerCombatState?.GetElements() ?? new Elements();
             await LoseElements(elements, player);
         }
     }

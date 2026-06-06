@@ -33,7 +33,7 @@ public class Overload : Runesmith2Card
     private bool IfWillBreak()
     {
         if (!IsInCombat) return false;
-        var runeQueue = Owner.PlayerCombatState?.RuneQueue();
+        var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null || !runeQueue.HasAny()) return false;
         var rune = runeQueue.Runes[0];
         return rune.ChargeVal + DynamicVars[ChargeGainVar.defaultName].BaseValue >=

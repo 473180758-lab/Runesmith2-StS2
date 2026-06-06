@@ -13,6 +13,8 @@ using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 
+namespace Runesmith2.Runesmith2Code.Nodes;
+
 [GlobalClass]
 public partial class NElementsCounter : Control
 {
@@ -122,12 +124,10 @@ public partial class NElementsCounter : Control
     public override void _ExitTree()
     {
         base._ExitTree();
-        if (_player != null && _isListeningToCombatState)
-        {
-            var runesmithCombatState = _player.PlayerCombatState?.Runesmith();
-            runesmithCombatState?.ElementsChanged -= OnElementsChanged;
-            _isListeningToCombatState = false;
-        }
+        if (_player == null || !_isListeningToCombatState) return;
+        var runesmithCombatState = _player.PlayerCombatState?.Runesmith();
+        runesmithCombatState?.ElementsChanged -= OnElementsChanged;
+        _isListeningToCombatState = false;
     }
 
     private void ConnectElementsChangedSignal()
@@ -157,6 +157,16 @@ public partial class NElementsCounter : Control
         RefreshVisibility();
     }
 
+    private static readonly Color TranslucentColor = new("8080805a");
+
+    private bool _isTranslucent;
+
+    private void ToggleVisibility()
+    {
+        _isTranslucent = !_isTranslucent;
+        Modulate = _isTranslucent ? TranslucentColor : Colors.White;
+    }
+
     public override void _Process(double delta)
     {
         if (_player == null) return;
@@ -173,10 +183,24 @@ public partial class NElementsCounter : Control
         SetElementsCountText(new Elements(Mathf.RoundToInt(_lerpingIgnisCount), Mathf.RoundToInt(_lerpingTerraCount),
             Mathf.RoundToInt(_lerpingAquaCount)));
     }
+    
+    public override void _GuiInput(InputEvent inputEvent)
+    {
+        if (inputEvent is not InputEventMouseButton eventMouseButton) return;
+        var isClicked = eventMouseButton.ButtonIndex switch
+        {
+            MouseButton.Left or MouseButton.Right => true,
+            _ => false
+        };
+        if (isClicked && inputEvent.IsReleased())
+        {
+            ToggleVisibility();
+        }
+    }
 
     private static Elements GetPlayerElements(Player player)
     {
-        var elements = player.PlayerCombatState?.Elements() ?? new Elements();
+        var elements = player.PlayerCombatState?.GetElements() ?? new Elements();
         return elements;
     }
 

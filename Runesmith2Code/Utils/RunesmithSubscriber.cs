@@ -20,7 +20,7 @@ public static class RunesmithSubscriber
     private static IEnumerable<RuneModel> CollectRuneModels(CombatState combatState)
     {
         return combatState.Players
-            .Select(p => p.PlayerCombatState?.RuneQueue())
+            .Select(p => p.PlayerCombatState?.GetRuneQueue())
             .OfType<RuneQueue>()
             .SelectMany(rq => rq.Runes)
             .Where(r => r is { HasBeenRemovedFromState: false, Owner.IsActiveForHooks: true });

@@ -1,0 +1,20 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=5 format=3 uid="uid://bb064x2tgwrha"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://clxwqmtxu7ovi" path="res://Runesmith2/animations/runes/morbus/morbus.atlas" id="1_e2qmw"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b8fkkgmpr5qrw" path="res://Runesmith2/animations/runes/morbus/morbus.skel" id="2_0gtw2"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_4ixep"]
+from = "idle_loop"
+to = "trigger"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_6vyi4"]
+from = "trigger"
+to = "idle_loop"
+mix = 0.2
+
+[resource]
+atlas_res = ExtResource("1_e2qmw")
+skeleton_file_res = ExtResource("2_0gtw2")
+default_mix = 0.2
+animation_mixes = [SubResource("SpineAnimationMix_4ixep"), SubResource("SpineAnimationMix_6vyi4")]

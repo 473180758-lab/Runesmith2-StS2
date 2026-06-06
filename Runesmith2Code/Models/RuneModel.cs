@@ -1,6 +1,5 @@
 ﻿#region
 
-using System.Diagnostics.CodeAnalysis;
 using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using Godot;
@@ -19,9 +18,7 @@ using Runesmith2.Runesmith2Code.Character;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Hooks;
 using Runesmith2.Runesmith2Code.HoverTips;
-using Runesmith2.Runesmith2Code.Models.Runes;
 using Runesmith2.Runesmith2Code.Nodes.Runes;
-using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 
@@ -30,10 +27,10 @@ namespace Runesmith2.Runesmith2Code.Models;
 public abstract class RuneModel : AbstractModel, ICustomModel
 {
     public const string LocTable = "runes";
-    
-    private RuneModel _canonicalInstance;
 
     public virtual decimal PassiveVal { get; set; }
+
+    public virtual bool IsUsingPotency => false;
 
     public virtual decimal CalculatedPassiveVal => PassiveVal;
 
@@ -148,25 +145,23 @@ public abstract class RuneModel : AbstractModel, ICustomModel
     public CompressedTexture2D Icon => PreloadManager.Cache.GetCompressedTexture2D(IconPath);
 
     public virtual Color DarkenedColor => new("a0a0a0");
-
-    private RuneModel CanonicalInstance
+    
+    private RuneModel? CanonicalInstance
     {
-        get => !IsMutable ? this : _canonicalInstance;
+        get => !IsMutable ? this : field;
         set
         {
             AssertMutable();
-            _canonicalInstance = value;
+            field = value;
         }
     }
-
-    [field: AllowNull]
-    [field: MaybeNull]
+    
     public Player Owner
     {
         get
         {
             AssertMutable();
-            return field;
+            return field ?? throw new Exception("Rune " + Id.Entry + " does not have an owner.");
         }
         set
         {
@@ -183,6 +178,8 @@ public abstract class RuneModel : AbstractModel, ICustomModel
     public override bool ShouldReceiveCombatHooks => true;
 
     public event Action? Triggered;
+    
+    public event Action<bool>? Charged;
 
     protected void PlayPassiveSfx()
     {
@@ -263,6 +260,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
     {
         base.AfterCloned();
         Triggered = null;
+        Charged = null;
     }
 
     public void RemoveInternal()
@@ -278,11 +276,13 @@ public abstract class RuneModel : AbstractModel, ICustomModel
     public void ModifyCharge(int amount)
     {
         ChargeVal = Math.Max(0, ChargeVal + amount);
+        Charged?.Invoke(amount > 0);
     }
 
     public void SetCharge(int amount)
     {
         ChargeVal = Math.Max(0, amount);
+        Charged?.Invoke(amount > 0);
     }
 
     public void Upgrade()

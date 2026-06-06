@@ -20,7 +20,7 @@ public class HeatExchange : Runesmith2Card
 {
     public HeatExchange() : base(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
     {
-        WithCalculatedDamage(6, 1, (card, _) => card.Owner.PlayerCombatState?.Elements().Ignis ?? 0,
+        WithCalculatedDamage(6, 1, (card, _) => card.Owner.PlayerCombatState?.GetElements().Ignis ?? 0,
             ValueProp.Move, 0, 1);
         WithVar("IgnisLoss", 1);
         WithTip(RunesmithHoverTip.Elements);

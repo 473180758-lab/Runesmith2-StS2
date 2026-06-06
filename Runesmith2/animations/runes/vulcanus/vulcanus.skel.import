@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://btfvei7voko8"
+path="res://.godot/imported/vulcanus.skel-4f56501f63e3edd6bce221ecb682d7cd.spskel"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/vulcanus/vulcanus.skel"
+dest_files=["res://.godot/imported/vulcanus.skel-4f56501f63e3edd6bce221ecb682d7cd.spskel"]
+
+[params]
+

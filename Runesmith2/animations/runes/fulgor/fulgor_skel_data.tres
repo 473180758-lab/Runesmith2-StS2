@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dyb4x8el4n006"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://57p7h4jf1irm" path="res://Runesmith2/animations/runes/fulgor/fulgor.atlas" id="1_f0ho8"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://yri7gsas2nap" path="res://Runesmith2/animations/runes/fulgor/fulgor.skel" id="2_s4s11"]
+
+[resource]
+atlas_res = ExtResource("1_f0ho8")
+skeleton_file_res = ExtResource("2_s4s11")
+default_mix = 0.04

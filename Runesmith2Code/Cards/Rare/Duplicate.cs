@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using Runesmith2.Runesmith2Code.Commands;
+using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Structs;
@@ -19,6 +20,18 @@ public class Duplicate : Runesmith2Card
     {
         WithTip(RunesmithHoverTip.Craft);
         WithCostUpgradeBy(-1);
+    }
+
+    public override bool HasPotencyOverride {
+        get
+        {
+            var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
+            if (runeQueue != null && runeQueue.HasAny())
+            {
+                return runeQueue.Runes[^1].IsUsingPotency;
+            }
+            return false;
+        }
     }
 
     protected override void AddExtraArgsToDescription(LocString description)
@@ -37,7 +50,7 @@ public class Duplicate : Runesmith2Card
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
-        var runeQueue = Owner.PlayerCombatState?.RuneQueue();
+        var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         if (runeQueue != null && runeQueue.HasAny())
         {
             var clonedRune = runeQueue.Runes[^1].CreateClone();

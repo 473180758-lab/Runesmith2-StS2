@@ -27,7 +27,7 @@ public class SyntheticBloodPower : Runesmith2Power
     {
         if (target != Owner) return amount;
 
-        var elements = Owner.Player?.PlayerCombatState?.Elements() ?? new Elements(0);
+        var elements = Owner.Player?.PlayerCombatState?.GetElements() ?? new Elements(0);
 
         if (elements.Total <= 0 || Owner.Player == null) return amount;
 

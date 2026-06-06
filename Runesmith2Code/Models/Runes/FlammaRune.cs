@@ -21,6 +21,8 @@ public class FlammaRune : RuneModel
     public override decimal PassiveVal { get; set; } = 4;
     public override int ChargeVal { get; set; } = 2;
 
+    public override bool IsUsingPotency => true;
+
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Flamma>();

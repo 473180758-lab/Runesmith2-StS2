@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://b8fkkgmpr5qrw"
+path="res://.godot/imported/morbus.skel-f206944d3e076640d0ed0c9ce0b1d277.spskel"
+
+[deps]
+
+source_file="res://Runesmith2/animations/runes/morbus/morbus.skel"
+dest_files=["res://.godot/imported/morbus.skel-f206944d3e076640d0ed0c9ce0b1d277.spskel"]
+
+[params]
+
