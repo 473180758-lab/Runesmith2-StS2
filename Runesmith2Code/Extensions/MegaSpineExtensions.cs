@@ -1,5 +1,8 @@
-using Godot;
+#region
+
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+
+#endregion
 
 namespace Runesmith2.Runesmith2Code.Extensions;
 
@@ -7,7 +10,7 @@ public static class MegaSpineExtensions
 {
     public static void SetMixBlend(this MegaTrackEntry trackEntry, MixBlend mixBlend)
     {
-        trackEntry.BoundObject.Call("set_mix_blend", (int) mixBlend);
+        trackEntry.BoundObject.Call("set_mix_blend", (int)mixBlend);
     }
 }
 

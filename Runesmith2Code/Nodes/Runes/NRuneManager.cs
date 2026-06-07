@@ -146,7 +146,7 @@ public partial class NRuneManager : Control
         TweenLayout();
         UpdateControllerNavigation();
     }
-    
+
     public void BreakRuneAnim(RuneModel rune)
     {
         var breakRune = _runes.Last(n => n.Model == rune);
@@ -173,7 +173,7 @@ public partial class NRuneManager : Control
         _runes.Add(newEmptyRune);
         newEmptyRune.Position = position;
         if (breakRune.HasFocus()) _creatureNode?.Hitbox.TryGrabFocus();
-        
+
         TweenLayout();
         UpdateControllerNavigation();
     }

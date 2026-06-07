@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using Runesmith2.Runesmith2Code.Commands;
-using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Structs;
@@ -22,14 +21,12 @@ public class Duplicate : Runesmith2Card
         WithCostUpgradeBy(-1);
     }
 
-    public override bool HasPotencyOverride {
+    public override bool HasPotencyOverride
+    {
         get
         {
             var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
-            if (runeQueue != null && runeQueue.HasAny())
-            {
-                return runeQueue.Runes[^1].IsUsingPotency;
-            }
+            if (runeQueue != null && runeQueue.HasAny()) return runeQueue.Runes[^1].IsUsingPotency;
             return false;
         }
     }

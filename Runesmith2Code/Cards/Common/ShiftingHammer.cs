@@ -9,7 +9,6 @@ using Runesmith2.Runesmith2Code.CardSelection;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
-using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
@@ -23,7 +22,6 @@ public class ShiftingHammer : Runesmith2Card
         WithDamage(7, 3);
         WithVar(new EnhanceByVar(2));
         WithVar(new CardsVar(1));
-        WithTip(RunesmithHoverTip.Enhance);
         WithTags(RunesmithTags.Hammer);
     }
 

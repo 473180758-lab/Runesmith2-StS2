@@ -67,11 +67,14 @@ public class RunesmithEnhanceSingletonModel() : CustomSingletonModel(HookType.Co
 
         return 1 + cardSource.GetEnhanceMultiplier();
     }
-    
+
     // TODO: Temp solution before placing this inside CombatManager.SetupPlayerTurn
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext,
+        ICombatState combatState)
     {
-        var runeQueue = player.PlayerCombatState != null ? RunesmithField.RunesmithCombatState[player.PlayerCombatState]?.RuneQueue : null;
+        var runeQueue = player.PlayerCombatState != null
+            ? RunesmithField.RunesmithCombatState[player.PlayerCombatState]?.RuneQueue
+            : null;
         if (runeQueue != null) await runeQueue.SetupTurnStart(choiceContext);
     }
 }

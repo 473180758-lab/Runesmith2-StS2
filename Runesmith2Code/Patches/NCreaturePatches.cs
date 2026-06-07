@@ -19,7 +19,8 @@ internal class NCreatureReadyPatch
     private static void UpdateRuneNavigation(NCreature __instance)
     {
         var runeManager = RunesmithNode.NRuneManager[__instance];
-        if (runeManager is { DefaultFocusOwner: not null }) __instance.Hitbox.FocusNeighborTop = runeManager.DefaultFocusOwner.GetPath();
+        if (runeManager is { DefaultFocusOwner: not null })
+            __instance.Hitbox.FocusNeighborTop = runeManager.DefaultFocusOwner.GetPath();
     }
 
     [HarmonyPrefix]

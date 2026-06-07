@@ -19,7 +19,9 @@ internal class OrbQueueBeforeTurnEndPatch
     {
         await results;
         var playerCombatState = __instance._owner.PlayerCombatState;
-        var runeQueue = playerCombatState != null ? RunesmithField.RunesmithCombatState[playerCombatState]?.RuneQueue : null;
+        var runeQueue = playerCombatState != null
+            ? RunesmithField.RunesmithCombatState[playerCombatState]?.RuneQueue
+            : null;
         if (runeQueue == null) return;
 
         await runeQueue.BeforeTurnEnd(choiceContext);

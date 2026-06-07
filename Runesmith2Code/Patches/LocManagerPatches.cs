@@ -16,5 +16,6 @@ public class LocManagerLoadLocFormattersPatch
     private static void AddCustomFormatters()
     {
         Smart.Default.AddExtensions(new ElementsIconsFormatter());
+        Smart.Default.AddExtensions(new PreviewPluralFormatter());
     }
 }

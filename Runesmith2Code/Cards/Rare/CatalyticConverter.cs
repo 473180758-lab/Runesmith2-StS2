@@ -20,6 +20,7 @@ public class CatalyticConverter : Runesmith2Card
     public CatalyticConverter() : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
         WithVar(new ElementsVar(2).WithUpgrade(2));
+        WithVar("Amount", 1, 1);
         WithTip(RunesmithHoverTip.Elements);
     }
 
@@ -30,6 +31,6 @@ public class CatalyticConverter : Runesmith2Card
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await RunesmithPlayerCmd.GainElements(new Elements(this), Owner, play);
         await Cmd.CustomScaledWait(0.1f, 0.2f);
-        await CommonActions.ApplySelf<CatalyticConverterPower>(choiceContext, this, 1);
+        await CommonActions.ApplySelf<CatalyticConverterPower>(choiceContext, this, DynamicVars["Amount"].IntValue);
     }
 }

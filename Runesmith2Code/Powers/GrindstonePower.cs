@@ -18,7 +18,7 @@ public class GrindstonePower : Runesmith2Power
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
-    
+
     private class Data
     {
         public CardModel? OwnerCard;
@@ -28,7 +28,7 @@ public class GrindstonePower : Runesmith2Power
     {
         return new Data();
     }
-    
+
     public void SetOwnerCard(CardModel card)
     {
         GetInternalData<Data>().OwnerCard = card;

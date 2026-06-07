@@ -155,11 +155,11 @@ public static class RunesmithHook
         return modifiedCost;
     }
 
-    public static (bool, Elements) TryModifyElementsCost(ICombatState combatState, CardModel card, Elements modifiedCost)
+    public static (bool, Elements) TryModifyElementsCost(ICombatState combatState, CardModel card,
+        Elements modifiedCost)
     {
         var isModified = false;
         foreach (var model in combatState.IterateHookListeners())
-        {
             switch (model)
             {
                 case IModifyElementsCost modifyElementsCost:
@@ -172,7 +172,6 @@ public static class RunesmithHook
                     isModified |= voidForm.TryModifyElementsCost(card, modifiedCost, out modifiedCost);
                     break;
             }
-        }
 
         return (isModified, modifiedCost);
     }

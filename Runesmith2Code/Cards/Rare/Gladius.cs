@@ -6,7 +6,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Structs;
-
 using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
@@ -35,14 +34,14 @@ public class Gladius : Runesmith2Card
             await RunesmithPlayerCmd.GainElements(GetElementsCostWithModifiers().ClampZero(), Owner, cardPlay);
             return;
         }
-        
+
         await RecipeOnPlayWrapper(choiceContext, cardPlay);
     }
 
     private async Task RecipeOnPlayWrapper(PlayerChoiceContext choiceContext, CardPlay play)
     {
         if (CombatState == null) return;
-        
+
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_giant_horizontal_slash")

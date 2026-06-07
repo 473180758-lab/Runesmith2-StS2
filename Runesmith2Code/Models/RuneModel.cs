@@ -145,7 +145,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
     public CompressedTexture2D Icon => PreloadManager.Cache.GetCompressedTexture2D(IconPath);
 
     public virtual Color DarkenedColor => new("a0a0a0");
-    
+
     private RuneModel? CanonicalInstance
     {
         get => !IsMutable ? this : field;
@@ -155,7 +155,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
             field = value;
         }
     }
-    
+
     public Player Owner
     {
         get
@@ -178,7 +178,7 @@ public abstract class RuneModel : AbstractModel, ICustomModel
     public override bool ShouldReceiveCombatHooks => true;
 
     public event Action? Triggered;
-    
+
     public event Action<bool>? Charged;
 
     protected void PlayPassiveSfx()

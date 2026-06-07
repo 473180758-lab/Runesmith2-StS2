@@ -3,10 +3,7 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Helpers.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Models.Relics;
 using Runesmith2.Runesmith2Code.Cards;
-using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Hooks;
 using Runesmith2.Runesmith2Code.Structs;
 

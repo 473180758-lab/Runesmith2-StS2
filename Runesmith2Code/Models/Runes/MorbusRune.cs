@@ -6,7 +6,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Cards.Uncommon;
-using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 

@@ -70,7 +70,7 @@ public class Runesmith2 : PlaceholderCharacterModel
         "res://Runesmith2/scenes/combat/energy_counters/runesmith_energy_counter.tscn";
 
     public override Color EnergyLabelOutlineColor => new("5b4a31");
-    
+
     public override Color DialogueColor => new("59422d");
 
     public override VfxColor SpeechBubbleColor => VfxColor.Gold;

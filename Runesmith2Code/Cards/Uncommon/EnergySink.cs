@@ -16,7 +16,7 @@ public class EnergySink : Runesmith2Card
     public EnergySink() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
         WithVar("ChargeLoss", 1);
-        WithVar("PotencyLoss", 2);
+        WithVar("PotencyLoss", 2, -2);
         WithTip(RunesmithHoverTip.Charge);
         WithTip(RunesmithHoverTip.Potency);
         WithEnergyTip();

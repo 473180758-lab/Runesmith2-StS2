@@ -1,8 +1,8 @@
-using Godot;
-using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Nodes.Combat;
+#region
+
 using MegaCrit.Sts2.Core.Nodes.RestSite;
-using Runesmith2.Runesmith2Code.Utils;
+
+#endregion
 
 namespace Runesmith2.Runesmith2Code.Nodes;
 

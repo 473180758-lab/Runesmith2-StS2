@@ -7,7 +7,6 @@ using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Cards.Uncommon;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.Extensions;
-using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 

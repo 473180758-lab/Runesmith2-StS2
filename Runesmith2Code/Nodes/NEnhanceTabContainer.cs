@@ -92,7 +92,7 @@ public partial class NEnhanceTabContainer : Control
 
             if (modifier.Enhanced > 0)
             {
-                if (_enhanceTab is not {Visible: true}) _enhanceTab?.Visible = true;
+                if (_enhanceTab is not { Visible: true }) _enhanceTab?.Visible = true;
                 var locString = RunesmithHoverTipFactory.StaticBanner(RunesmithHoverTip.Enhanced,
                     new DynamicVar("Amount", modifier.Enhanced));
                 _enhanceLabel?.SetTextAutoSize(locString.GetFormattedText());

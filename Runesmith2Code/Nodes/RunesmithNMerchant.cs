@@ -1,4 +1,8 @@
+#region
+
 using MegaCrit.Sts2.Core.Nodes.Screens.Shops;
+
+#endregion
 
 namespace Runesmith2.Runesmith2Code.Nodes;
 

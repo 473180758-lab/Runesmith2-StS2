@@ -18,14 +18,14 @@ public class AssemblerPower : Runesmith2Power
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Single;
-    
+
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
     private class Data
     {
         public CardModel? PickedCard;
     }
-    
+
     protected override object InitInternalData()
     {
         return new Data();

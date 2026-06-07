@@ -11,7 +11,6 @@ using MegaCrit.Sts2.Core.ValueProps;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Cards.Common;
 using Runesmith2.Runesmith2Code.Nodes.Runes;
-using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 
@@ -22,7 +21,7 @@ public class MagmaRune : RuneModel
 {
     public override decimal PassiveVal { get; set; } = 4;
     public override int ChargeVal { get; set; } = 3;
-    
+
     public override bool IsUsingPotency => true;
 
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;

@@ -1,6 +1,5 @@
 #region
 
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
@@ -17,7 +16,7 @@ public class ParticleAcceleratorPower : Runesmith2Power, IModifyCharge, IAfterMo
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
-    
+
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
     public decimal ModifyCharge(Player player, decimal charge, ValueProp props, CardModel? cardSource)

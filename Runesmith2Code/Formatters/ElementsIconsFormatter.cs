@@ -12,6 +12,10 @@ namespace Runesmith2.Runesmith2Code.Formatters;
 
 public class ElementsIconsFormatter : IFormatter
 {
+    // Prefixed formatter name to prevent conflict with other mods
+    public string Name { get; set; } = "rs2Icon";
+    public bool CanAutoDetect { get; set; } = false;
+
     public bool TryEvaluateFormat(IFormattingInfo formattingInfo)
     {
         int amount;
@@ -87,13 +91,4 @@ public class ElementsIconsFormatter : IFormatter
             _ => throw new LocException($"Unknown value='{format}'")
         };
     }
-
-    // Prefixed formatter name to prevent conflict with other mods
-    public string Name
-    {
-        get => "rs2Icon";
-        set { }
-    }
-
-    public bool CanAutoDetect { get; set; }
 }

@@ -53,15 +53,24 @@
         </Reference>
     </ItemGroup>
 
-    <ItemGroup Condition="True"> <!--Allows private/protected field references but may cause errors.-->
+    <ItemGroup Condition="True and Exists('$(Sts2DataDir)')"> <!--Allows access to originally private/protected members but may (unlikely to) cause errors.-->
         <Publicize Include="sts2" IncludeVirtualMembers="false" IncludeCompilerGeneratedMembers="false"/>
+    </ItemGroup>
+
+    <ItemGroup Condition="!Exists('$(Sts2DataDir)')">
+        <PackageReference Include="Book.StS2.RefLib" Version="*-*" PrivateAssets="all"/>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.2.0" PrivateAssets="All" />
-        <PackageReference Include="Krafs.Publicizer" Version="2.3.0" PrivateAssets="All"/>
         <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="*"/>
         <AdditionalFiles Include="Runesmith2/localization/**/*.json"/> <!-- Used by analyzer -->
+    </ItemGroup>
+
+    <ItemGroup Condition="Exists('$(Sts2DataDir)')">
+        <PackageReference Include="Krafs.Publicizer" Version="2.3.0" PrivateAssets="All">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
@@ -103,10 +112,9 @@
       <Content Include="Sts2PathDiscovery.props" />
     </ItemGroup>
 
-    <Target Name="CheckDependencyPaths" >
-        <Error
-                Text=" Slay the Spire 2 data not found at path '$(Sts2DataDir)'"
-                Condition="'$(Sts2DataDir)' == '' or !Exists('$(Sts2DataDir)')" />
+    <Target Name="CheckDependencyPaths"
+            Condition="!Exists('$(Sts2DataDir)') And !Exists('$(ModsPath)')">
+        <Error Text="Cannot copy build output to mods folder: neither '$(Sts2DataDir)' nor '$(ModsPath)' exists. Install STS2 locally or pass /p:ModsPath=... in CI."/>
     </Target>
 
     <Target Name="CopyToModsFolderOnBuild" AfterTargets="PostBuildEvent">

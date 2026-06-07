@@ -41,7 +41,7 @@ public class ShockTherapy : Runesmith2Card
         CardPlay play)
     {
         if (CombatState == null) return;
-        
+
         var cards = await CardSelectCmd.FromHand(choiceContext, Owner,
             new CardSelectorPrefs(RunesmithCardSelectorPrefs.StasisSelectionPrompt, DynamicVars.Cards.IntValue),
             card => card.CanStasis(),

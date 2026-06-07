@@ -4,10 +4,6 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.ValueProps;
-using Runesmith2.Runesmith2Code.Commands;
-using Runesmith2.Runesmith2Code.Extensions;
-using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Structs;
 
 #endregion
@@ -35,9 +31,9 @@ public class Prism : Runesmith2Card
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        
+
         await CommonActions.CardBlock(this, play);
-        
+
         await CommonActions.Draw(this, choiceContext);
     }
 }

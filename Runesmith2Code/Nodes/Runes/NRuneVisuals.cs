@@ -97,7 +97,6 @@ public partial class NRuneVisuals : Node2D
 
     protected virtual void OnTriggerCompleted()
     {
-        
     }
 
     private void OnAnimationEvent(GodotObject _, GodotObject __, GodotObject ___, GodotObject spineEvent)
@@ -111,7 +110,7 @@ public partial class NRuneVisuals : Node2D
         if (skelData == null) return;
 
         var animNames = skelData.GetAnimationNames().ToHashSet();
-        
+
         _hasTrigger = animNames.Contains("trigger");
 
         // default option, don't call spine functions too much
@@ -209,7 +208,7 @@ public partial class NRuneVisuals : Node2D
     private void UpdateChargeVisualAfterAnimationFinished()
     {
         if (_currAnimationList.Count != 0) return;
-        
+
         if (_depletedTween != null && _depletedTween.IsRunning()) _depletedTween.Kill();
         _depletedTween = CreateTween();
         _depletedTween.SetParallel();
@@ -223,11 +222,11 @@ public partial class NRuneVisuals : Node2D
     public void SetChargeStatus(bool isDepleted, Color darkenedColor)
     {
         if (isDepleted == _currChargeDepleted) return;
-        
+
         _targetModulate = isDepleted ? darkenedColor : Colors.White;
         _targetTimeScale = isDepleted ? 0.35f : 1;
         _currChargeDepleted = isDepleted;
-        
+
         UpdateChargeVisualAfterAnimationFinished();
     }
 

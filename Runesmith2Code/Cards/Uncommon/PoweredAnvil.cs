@@ -10,7 +10,6 @@ using Runesmith2.Runesmith2Code.CardSelection;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
-using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Powers;
 
 #endregion
@@ -22,7 +21,8 @@ public class PoweredAnvil : Runesmith2Card
     public PoweredAnvil() : base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
         WithVar(new EnhanceByVar(0).WithUpgrade(2));
-        WithTip(RunesmithHoverTip.Enhance);
+        WithVar("Amount", 1);
+        WithCards(0, 1);
     }
 
     protected override async Task OnPlay(
@@ -35,7 +35,7 @@ public class PoweredAnvil : Runesmith2Card
             var card = (await CardSelectCmd.FromHand(
                 choiceContext,
                 Owner,
-                new CardSelectorPrefs(RunesmithCardSelectorPrefs.EnhanceSelectionPrompt, 1),
+                new CardSelectorPrefs(RunesmithCardSelectorPrefs.EnhanceSelectionPrompt, DynamicVars.Cards.IntValue),
                 card => card.CanEnhance(),
                 this
             )).FirstOrDefault();
@@ -44,6 +44,6 @@ public class PoweredAnvil : Runesmith2Card
                     DynamicVars[EnhanceByVar.defaultName].IntValue);
         }
 
-        await CommonActions.ApplySelf<PoweredAnvilPower>(choiceContext, this, 1);
+        await CommonActions.ApplySelf<PoweredAnvilPower>(choiceContext, this, DynamicVars["Amount"].IntValue);
     }
 }

@@ -22,7 +22,7 @@ public class Empowerment : Runesmith2Card
     {
         WithTips(_ =>
         [
-            HoverTipFactory.FromPower<VigorPower>(), 
+            HoverTipFactory.FromPower<VigorPower>(),
             HoverTipFactory.FromPower<BracePower>(),
             HoverTipFactory.FromPower<AmpPower>()
         ]);

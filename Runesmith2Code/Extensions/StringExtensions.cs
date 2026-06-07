@@ -47,7 +47,7 @@ public static class StringExtensions
     {
         return Path.Join(MainFile.ModId, "images", "relics", "big", path);
     }
-    
+
     public static string PotionImagePath(this string path)
     {
         return Path.Join(MainFile.ModId, "images", "potions", path);
@@ -67,15 +67,15 @@ public static class StringExtensions
     {
         return Path.Join(MainFile.ModId, "scenes", "runes", "rune_visuals", path + ".tscn");
     }
-    
+
     public static string TopPanelScenePath(this string path)
     {
         return Path.Join(MainFile.ModId, "scenes", "top_panel", path + ".tscn");
     }
-    
-    
+
+
     public static string ScenePath(this string path, string dir)
     {
         return Path.Join(MainFile.ModId, "scenes", dir, path + ".tscn");
-    } 
+    }
 }

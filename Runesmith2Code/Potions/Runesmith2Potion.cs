@@ -23,7 +23,7 @@ public abstract class Runesmith2Potion : CustomPotionModel
         }
     }
 
-    public override string? CustomPackedOutlinePath 
+    public override string? CustomPackedOutlinePath
     {
         get
         {

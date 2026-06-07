@@ -1,5 +1,3 @@
-using Runesmith2.Runesmith2Code.Extensions;
-
 namespace Runesmith2.Runesmith2Code.Nodes.Runes;
 
 public partial class NRuneVisualsOneTrack : NRuneVisuals

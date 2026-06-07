@@ -23,7 +23,7 @@ public class CompleteCircuit : Runesmith2Card
         CardPlay play)
     {
         if (CombatState == null) return;
-        
+
         var hittableEnemies = CombatState.HittableEnemies;
         foreach (var enemy in hittableEnemies)
             VfxCmd.PlayOnCreature(enemy, "vfx/vfx_attack_lightning");

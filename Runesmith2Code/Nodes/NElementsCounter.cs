@@ -183,7 +183,7 @@ public partial class NElementsCounter : Control
         SetElementsCountText(new Elements(Mathf.RoundToInt(_lerpingIgnisCount), Mathf.RoundToInt(_lerpingTerraCount),
             Mathf.RoundToInt(_lerpingAquaCount)));
     }
-    
+
     public override void _GuiInput(InputEvent inputEvent)
     {
         if (inputEvent is not InputEventMouseButton eventMouseButton) return;
@@ -192,10 +192,7 @@ public partial class NElementsCounter : Control
             MouseButton.Left or MouseButton.Right => true,
             _ => false
         };
-        if (isClicked && inputEvent.IsReleased())
-        {
-            ToggleVisibility();
-        }
+        if (isClicked && inputEvent.IsReleased()) ToggleVisibility();
     }
 
     private static Elements GetPlayerElements(Player player)
@@ -274,7 +271,7 @@ public partial class NElementsCounter : Control
 
         var elements = GetPlayerElements(_player);
 
-        var shouldAlwaysShowElements = _player.Character is Runesmith2.Runesmith2Code.Character.Runesmith2;
+        var shouldAlwaysShowElements = _player.Character is Character.Runesmith2;
 
         Visible = Visible || shouldAlwaysShowElements || elements.Total > 0;
     }

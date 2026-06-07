@@ -1,13 +1,11 @@
 #region
 
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Cards.Uncommon;
 using Runesmith2.Runesmith2Code.Powers;
-using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 

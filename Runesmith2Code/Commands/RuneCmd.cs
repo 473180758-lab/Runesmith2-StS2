@@ -1,7 +1,6 @@
 #region
 
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -63,6 +62,7 @@ public static class RuneCmd
                     cardPlay?.Card, cardPlay, out var potencyModifiers);
                 await RunesmithHook.AfterModifyingPotency(combatState, potencyModifiers);
             }
+
             var modifiedCharge = charge;
             modifiedCharge = RunesmithHook.ModifyCharge(combatState, player, modifiedCharge, ValueProp.Move,
                 cardPlay?.Card, cardPlay, out var chargeModifiers);
@@ -170,7 +170,7 @@ public static class RuneCmd
         if (runeQueue == null || runeQueue.Runes.Count <= 0) return;
         Charge(choiceContext, runeQueue.Runes, chargeAmount);
     }
-    
+
     public static void Charge(PlayerChoiceContext choiceContext, IEnumerable<RuneModel> runes, int chargeAmount)
     {
         foreach (var rune in runes)

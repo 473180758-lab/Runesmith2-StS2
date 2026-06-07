@@ -76,26 +76,22 @@ public class RuneQueue
             modifyingModels);
 
         foreach (var rune in Runes)
-        {
             for (var i = 0; i < count; i++)
             {
                 var wait = await rune.BeforeTurnEndEarlyRuneTrigger(choiceContext);
                 if (wait)
                     await SmallWait();
             }
-        }
 
         await SmallWait();
 
         foreach (var rune in Runes)
-        {
             for (var i = 0; i < count; i++)
             {
                 var wait = await rune.BeforeTurnEndRuneTrigger(choiceContext);
                 if (wait)
                     await SmallWait();
             }
-        }
     }
 
     public async Task SetupTurnStart(PlayerChoiceContext choiceContext)
@@ -108,14 +104,12 @@ public class RuneQueue
             modifyingModels);
 
         foreach (var rune in Runes)
-        {
             for (var i = 0; i < count; i++)
             {
                 var wait = await rune.SetupTurnStartRuneTrigger(choiceContext);
                 if (wait)
                     await SmallWait();
             }
-        }
     }
 
     private async Task SmallWait()

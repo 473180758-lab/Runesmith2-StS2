@@ -95,7 +95,7 @@ public partial class NElementsIcon : TextureRect
         int index)
     {
         var (fontColor, _, fontOutlineColor) = GetFontColor(index);
-        
+
         if (card.WasElementsCostJustUpgraded)
         {
             fontColor = StsColors.green;

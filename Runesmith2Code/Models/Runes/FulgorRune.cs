@@ -3,15 +3,11 @@
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Cards.Ancient;
 using Runesmith2.Runesmith2Code.Nodes.Runes;
-using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 
@@ -23,10 +19,10 @@ public class FulgorRune : RuneModel
     public override decimal PassiveVal { get; set; } = 5;
     public override int ChargeVal { get; set; } = 4;
 
-    public override bool IsUsingPotency => true;    
-    
+    public override bool IsUsingPotency => true;
+
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;
-    
+
     public override (bool, bool) ShowTopLabel => (true, true);
     public override (decimal, decimal) TopValue => (PassiveVal, PassiveVal);
     public override (Color, Color, Color) TopLabelColor => NRune.DefaultFontColor;

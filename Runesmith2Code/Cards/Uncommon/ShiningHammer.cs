@@ -1,11 +1,12 @@
 #region
 
+using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using Runesmith2.Runesmith2Code.Commands;
+using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
-using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
@@ -17,8 +18,7 @@ public class ShiningHammer : Runesmith2Card
     public ShiningHammer() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
         WithDamage(11, 1);
-        WithCalculatedVar("EnhanceBy", 1, GetEnhanceBonus, 1);
-        WithTip(RunesmithHoverTip.Enhance);
+        WithVar(new EnhanceByVar(1).WithUpgrade(1));
         WithTags(RunesmithTags.Hammer);
     }
 
@@ -42,7 +42,7 @@ public class ShiningHammer : Runesmith2Card
                 .SelectMany(p => p.Cards)
                 .Where(c => c != this && c.Tags.Contains(RunesmithTags.Hammer) && c.CanEnhance());
             await RunesmithCardCmd.Enhance(choiceContext, Owner, cards, play,
-                DynamicVars["EnhanceByBase"].IntValue);
+                DynamicVars[EnhanceByVar.defaultName].IntValue);
         }
     }
 }

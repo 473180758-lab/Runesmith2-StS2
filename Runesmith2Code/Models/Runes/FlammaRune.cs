@@ -9,7 +9,6 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Cards.Basic;
-using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 

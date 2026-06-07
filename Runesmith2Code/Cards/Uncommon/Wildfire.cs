@@ -16,6 +16,7 @@ public class Wildfire : Runesmith2Card
     public Wildfire() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
         WithKeyword(CardKeyword.Innate, UpgradeType.Add);
+        WithVar("Amount", 1);
         WithTip(RunesmithHoverTip.Elements);
     }
 
@@ -24,6 +25,6 @@ public class Wildfire : Runesmith2Card
         CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        await CommonActions.ApplySelf<WildfirePower>(choiceContext, this, 1);
+        await CommonActions.ApplySelf<WildfirePower>(choiceContext, this, DynamicVars["Amount"].IntValue);
     }
 }

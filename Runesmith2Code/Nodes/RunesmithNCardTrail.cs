@@ -1,6 +1,8 @@
-using Godot;
-using MegaCrit.Sts2.Core.Assets;
+#region
+
 using MegaCrit.Sts2.Core.Nodes.Vfx;
+
+#endregion
 
 namespace Runesmith2.Runesmith2Code.Nodes;
 

@@ -1,11 +1,12 @@
 #region
 
+using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using Runesmith2.Runesmith2Code.Commands;
+using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
-using Runesmith2.Runesmith2Code.HoverTips;
 
 #endregion
 
@@ -16,8 +17,7 @@ public class GrandSlam : Runesmith2Card
     public GrandSlam() : base(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
     {
         WithDamage(10);
-        WithCalculatedVar("EnhanceBy", 1, GetEnhanceBonus, 1);
-        WithTip(RunesmithHoverTip.Enhance);
+        WithVar(new EnhanceByVar(1).WithUpgrade(1));
     }
 
     protected override async Task OnPlay(
@@ -25,7 +25,7 @@ public class GrandSlam : Runesmith2Card
         CardPlay play)
     {
         if (CombatState == null) return;
-        
+
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .TargetingAllOpponents(CombatState)
             .SpawningHitVfxOnEachCreature()
@@ -34,6 +34,6 @@ public class GrandSlam : Runesmith2Card
 
         await RunesmithCardCmd.Enhance(choiceContext, Owner,
             PileType.Hand.GetPile(Owner).Cards.Where(c => c.CanEnhance()), play,
-            DynamicVars["EnhanceByBase"].IntValue);
+            DynamicVars[EnhanceByVar.defaultName].IntValue);
     }
 }

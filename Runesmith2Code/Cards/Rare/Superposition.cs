@@ -6,7 +6,6 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
 
 #endregion
@@ -23,10 +22,7 @@ public class Superposition : Runesmith2Card
         {
             var runeQueue = c.Owner.PlayerCombatState?.GetRuneQueue();
             var count = 0;
-            if (runeQueue != null)
-            {
-                count = runeQueue.Runes.Count;
-            }
+            if (runeQueue != null) count = runeQueue.Runes.Count;
 
             return count % 2 == 0
                 ? new LocString("cards", "RUNESMITH2-SUPERPOSITION.isEven").GetFormattedText()

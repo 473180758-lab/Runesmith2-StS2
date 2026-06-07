@@ -5,7 +5,6 @@ using BaseLib.Extensions;
 using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using Runesmith2.Runesmith2Code.Character;
@@ -223,12 +222,12 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
         WasElementsCostJustUpgraded = false;
         if (BaseElementsCost.Total >= baseElementsCost.Total)
             return;
-        TemporaryElementsCosts.RemoveAll((Predicate<TemporaryCardCost>) (c => c.Cost > BaseElementsCost.Total));
+        TemporaryElementsCosts.RemoveAll((Predicate<TemporaryCardCost>)(c => c.Cost > BaseElementsCost.Total));
     }
 
     protected override void AfterDowngraded()
     {
-        var cardModel = (Runesmith2Card) ModelDb.GetById<CardModel>(Id).ToMutable();
+        var cardModel = (Runesmith2Card)ModelDb.GetById<CardModel>(Id).ToMutable();
         BaseElementsCost = cardModel.CanonicalElementsCost;
     }
 
@@ -257,10 +256,5 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
         if (!IsInCombat) return false;
         var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         return runeQueue != null && runeQueue.IsFull();
-    }
-
-    protected static decimal GetEnhanceBonus(CardModel c, Creature? _)
-    {
-        return c.CombatState != null ? RunesmithHook.ModifyEnhanceAmount(c.CombatState, c.Owner, 0, c, out var _) : 0;
     }
 }

@@ -1,5 +1,9 @@
+#region
+
 using Godot;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
+
+#endregion
 
 namespace Runesmith2.Runesmith2Code.Nodes;
 
@@ -14,7 +18,8 @@ public partial class RunesmithNCardTrailVfx : NCardTrailVfx
         var bigSparks = GetNode<CpuParticles2D>("%BigSparks");
         bigSparks.Texture = ResourceLoader.Load<CompressedTexture2D>("res://images/vfx/brush_particle_2.png");
         var littleSparks = GetNode<CpuParticles2D>("%LittleSparks");
-        littleSparks.Texture = ResourceLoader.Load<CompressedTexture2D>("res://images/vfx/vfx_ghostly_power_up/sparkle.png");
+        littleSparks.Texture =
+            ResourceLoader.Load<CompressedTexture2D>("res://images/vfx/vfx_ghostly_power_up/sparkle.png");
         var sprite2 = GetNode<Sprite2D>("%Sprite2D2");
         sprite2.Texture = ResourceLoader.Load<CompressedTexture2D>("res://images/packed/vfx/small_card_silhouette.png");
         var sprite3 = GetNode<Sprite2D>("%Sprite2D3");

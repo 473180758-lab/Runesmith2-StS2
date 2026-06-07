@@ -1,11 +1,9 @@
 #region
 
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Structs;
@@ -34,7 +32,7 @@ public class ElementalDecay : Runesmith2Card
             null,
             this
         )).ToList();
-        
+
         var totalCost = cards.Select(c => c.EnergyCost.GetAmountToSpend())
             .Aggregate(0, (a, b) => a + b);
 

@@ -6,7 +6,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Cards.Common;
-using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 
@@ -17,7 +16,7 @@ public class SaxumRune : RuneModel
 {
     public override decimal PassiveVal { get; set; } = 3;
     public override int ChargeVal { get; set; } = 3;
-    
+
     public override bool IsUsingPotency => true;
 
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.EndTurn;

@@ -67,7 +67,7 @@ public partial class NRune : NClickableControl
     private Control _bounds = null!;
 
     private CpuParticles2D _flashParticle = null!;
-    
+
     private GpuParticles2D _chargeSparks = null!;
 
     private NSelectionReticle _selectionReticle = null!;
@@ -264,9 +264,9 @@ public partial class NRune : NClickableControl
             _topBreakLabel.Visible = false;
             _bottomBreakLabel.Visible = false;
         }
-        
+
         _sprite.SetChargeStatus(Model.ChargeVal <= 0, Model.DarkenedColor);
-        
+
         UpdateChargeDisplay(Model.ChargeVal);
     }
 
@@ -322,7 +322,7 @@ public partial class NRune : NClickableControl
     private void Charged(bool isPositive)
     {
         if (isPositive) CreateTween().TweenCallback(Callable.From(PlayCharged)).SetDelay(0.15);
-        
+
         UpdateVisuals(false);
     }
 
@@ -330,7 +330,7 @@ public partial class NRune : NClickableControl
     {
         if (_chargeSparks.Emitting)
         {
-            var newEmitter = (GpuParticles2D) _chargeSparks.Duplicate();
+            var newEmitter = (GpuParticles2D)_chargeSparks.Duplicate();
             newEmitter.Emitting = true;
             _chargeSparks.AddSibling(newEmitter);
             newEmitter.Restart();
@@ -351,7 +351,7 @@ public partial class NRune : NClickableControl
         tween.TweenProperty(_labelContainer, "modulate", Colors.Transparent, 0.25);
         tween.TweenProperty(_chargeLabel, "modulate", Colors.Transparent, 0.25);
     }
-    
+
     protected override void OnFocus()
     {
         if (Model == null && !_isLocal) return;
