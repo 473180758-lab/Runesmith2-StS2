@@ -30,20 +30,19 @@ public class AssemblerPower : Runesmith2Power
     {
         return new Data();
     }
-    
-    private CardModel? PickedCard { get; set; }
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips
     {
         get
         {
-            if (PickedCard == null) return [];
-            return [HoverTipFactory.FromCard(PickedCard)];
+            var pickedCard = GetInternalData<Data>().PickedCard;
+            if (pickedCard == null) return [];
+            return [HoverTipFactory.FromCard(pickedCard)];
         }
     }
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DisplayVar<AssemblerPower>("CardTitle", p => p.PickedCard?.Title ?? "")];
+        [new DisplayVar<AssemblerPower>("CardTitle", p => p.GetInternalData<Data>().PickedCard?.Title ?? "")];
 
     public void PickCard(CardModel card)
     {
