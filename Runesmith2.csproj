@@ -59,6 +59,7 @@
 
     <ItemGroup Condition="!Exists('$(Sts2DataDir)')">
         <PackageReference Include="Book.StS2.RefLib" Version="*-*" PrivateAssets="all"/>
+        <PackageReference Include="SmartFormat.NET" Version="3.6.1" />
     </ItemGroup>
 
     <ItemGroup>
