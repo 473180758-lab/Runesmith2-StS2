@@ -33,7 +33,7 @@ public class IronSupplement : Runesmith2Potion
 
     public override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        RunesmithHoverTipFactory.CreateElementsHoverTip()
+        RunesmithHoverTipFactory.Static(RunesmithHoverTip.Enhance)
     ];
 
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)

@@ -32,6 +32,7 @@ offset_left = -81.0
 offset_top = -171.0
 offset_right = 81.0
 offset_bottom = -131.0
+mouse_filter = 2
 script = ExtResource("1_8ael8")
 
 [node name="EnhanceTab" type="TextureRect" parent="."]
@@ -62,6 +63,7 @@ offset_left = -44.0
 offset_top = 8.0
 offset_right = 206.0
 offset_bottom = 42.0
+mouse_filter = 2
 texture = ExtResource("6_jk5k3")
 expand_mode = 1
 stretch_mode = 4

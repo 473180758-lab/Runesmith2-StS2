@@ -18,7 +18,7 @@ public class Aetus : Runesmith2RecipeCard
 {
     public Aetus() : base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
     {
-        WithVars(new ChargeVar(3).WithUpgrade(1));
+        WithVars(new ChargeVar(4).WithUpgrade(2));
         WithTip(RunesmithHoverTip.Craft);
         WithRuneTip<AetusRune>();
         WithEnergyTip();

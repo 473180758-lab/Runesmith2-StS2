@@ -16,7 +16,7 @@ public class Prism : Runesmith2Card
     {
         WithDamage(8, 3);
         WithBlock(6, 2);
-        WithCards(1, 1);
+        WithCards(2, 1);
     }
 
     public override Elements CanonicalElementsCost => new(1);

@@ -6,9 +6,8 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
-using MegaCrit.Sts2.Core.ValueProps;
 using Runesmith2.Runesmith2Code.Commands;
-using Runesmith2.Runesmith2Code.Extensions;
+using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Structs;
 
@@ -20,9 +19,8 @@ public class HeatExchange : Runesmith2Card
 {
     public HeatExchange() : base(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
     {
-        WithCalculatedDamage(6, 1, (card, _) => card.Owner.PlayerCombatState?.GetElements().Ignis ?? 0,
-            ValueProp.Move, 0, 1);
-        WithVar("IgnisLoss", 1);
+        WithDamage(8, 3);
+        WithVar(new IgnisVar(1));
         WithTip(RunesmithHoverTip.Elements);
     }
 
@@ -31,13 +29,19 @@ public class HeatExchange : Runesmith2Card
         CardPlay play)
     {
         if (CombatState == null) return;
+        
         var hittableEnemies = CombatState.HittableEnemies;
+        var elementsGain = new Elements(this);
+        foreach (var _ in hittableEnemies)
+        {
+            await RunesmithPlayerCmd.GainElements(elementsGain, Owner, play);
+        }
+        
         foreach (var enemy in hittableEnemies)
             NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(enemy));
-        await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_blunt")
             .Execute(choiceContext);
-        await RunesmithPlayerCmd.LoseElements(Elements.WithIgnis(DynamicVars["IgnisLoss"].IntValue), Owner);
     }
 }

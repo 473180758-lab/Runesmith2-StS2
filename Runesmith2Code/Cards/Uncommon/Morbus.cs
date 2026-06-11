@@ -19,7 +19,7 @@ public class Morbus : Runesmith2RecipeCard
 {
     public Morbus() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
-        WithVars(new ChargeVar(3).WithUpgrade(1));
+        WithVars(new ChargeVar(2).WithUpgrade(1));
         WithTip(RunesmithHoverTip.Craft);
         WithRuneTip<MorbusRune>();
         WithTip(typeof(WeakPower));

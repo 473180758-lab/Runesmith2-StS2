@@ -12,9 +12,7 @@ namespace Runesmith2.Runesmith2Code.Nodes.Runes;
 [GlobalClass]
 public partial class NRuneVisuals : Node2D
 {
-    protected const string TriggerKey = "trigger";
-
-    private readonly List<string> _currAnimationList = [];
+    private bool _isTriggering;
 
     private NRuneParticlesContainer? _backParticles;
 
@@ -92,7 +90,7 @@ public partial class NRuneVisuals : Node2D
         var track = new MegaTrackEntry(trackEntry);
         if (track.GetAnimation().GetName() != "trigger") return;
         OnTriggerCompleted();
-        AnimationFinished(TriggerKey);
+        TriggerFinished();
     }
 
     protected virtual void OnTriggerCompleted()
@@ -157,7 +155,7 @@ public partial class NRuneVisuals : Node2D
         _backParticles?.Restart();
         if (!_hasTrigger && CustomTrigger == null) return;
 
-        _currAnimationList.Add(TriggerKey);
+        _isTriggering = true;
         if (CustomTrigger == null)
         {
             var track = SpineAnimation.SetAnimation("trigger", false, _triggerTrack);
@@ -172,7 +170,7 @@ public partial class NRuneVisuals : Node2D
 
     // Called when trigger_end event has been emitted from animation. Used for triggering particles.
     // Can also be called manually if no event was included
-    protected virtual void OnTriggerEnd()
+    protected void OnTriggerEnd()
     {
         _frontParticles?.PlayOneShot();
     }
@@ -197,9 +195,9 @@ public partial class NRuneVisuals : Node2D
         foreach (var data in TrackDict.Values) data.Track.SetTimeScale(scale * data.TimeScale);
     }
 
-    protected void AnimationFinished(string source)
+    protected void TriggerFinished()
     {
-        _currAnimationList.Remove(source);
+        _isTriggering = false;
 
         UpdateChargeVisualAfterAnimationFinished();
     }
@@ -207,7 +205,7 @@ public partial class NRuneVisuals : Node2D
     // Change visual based on charge status. If trigger anim and/or anim scale tween is playing, waits until all are finished playing before darkening.
     private void UpdateChargeVisualAfterAnimationFinished()
     {
-        if (_currAnimationList.Count != 0) return;
+        if (_isTriggering) return;
 
         if (_depletedTween != null && _depletedTween.IsRunning()) _depletedTween.Kill();
         _depletedTween = CreateTween();

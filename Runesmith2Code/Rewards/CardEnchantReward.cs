@@ -94,7 +94,7 @@ public class CardEnchantReward(
     private bool Filter(CardModel? card)
     {
         if (card == null) return false;
-        if (filter.HasFlag(EnchantRewardFilter.CanEnhance) && card.CanEnhance()) return true;
+        if (filter.HasFlag(EnchantRewardFilter.CanEnhance)) return true;
         if (filter.HasFlag(EnchantRewardFilter.Attack) && card.Type == CardType.Attack) return true;
         if (filter.HasFlag(EnchantRewardFilter.Skill) && card.Type == CardType.Skill) return true;
         if (filter.HasFlag(EnchantRewardFilter.Power) && card.Type == CardType.Power) return true;

@@ -1,5 +1,6 @@
 #region
 
+using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -9,6 +10,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using Runesmith2.Runesmith2Code.Combat;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.DynamicVars;
+using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Hooks;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Structs;
@@ -19,32 +21,21 @@ namespace Runesmith2.Runesmith2Code.Cards.Uncommon;
 
 public class WhiteBalance : Runesmith2Card
 {
-    public WhiteBalance() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+    public WhiteBalance() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
     {
-        WithVar(new ElementsVar(1));
-        WithCalculatedDamage(0, 2, (card, _) =>
-        {
-            if (card.CombatState == null) return 0;
-
-            var baseElements = RunesmithHook.ModifyElementsGain(card.CombatState, card.Owner,
-                new Elements(card.DynamicVars[ElementsVar.defaultName].IntValue),
-                ValueProp.Move, card, out var _).Total;
-
-            return GetElementsGainedThisTurn(card) + baseElements;
-        }, ValueProp.Move, 0, 1);
+        WithDamage(9, 3);
+        WithEnergy(1);
         WithTip(RunesmithHoverTip.Elements);
+        WithEnergyTip();
     }
 
-    private static int GetElementsGainedThisTurn(CardModel card)
+    protected override bool ShouldGlowGoldInternal => HasAllElements();
+
+    private bool HasAllElements()
     {
-        return CombatManager.Instance.History.Entries
-            .OfType<ElementsModifiedEntry>()
-            .Where(eme =>
-                eme.HappenedThisTurn(card.CombatState) && card.Owner == eme.Player && eme.Amount.Total > 0)
-            .Select(eme => eme.Amount)
-            .Aggregate(new Elements(0), (e1, e2) => e1 + e2)
-            .Total;
-    }
+        var elements = Owner.PlayerCombatState?.GetElements() ?? new Elements(0);
+        return elements is { Ignis: > 0, Terra: > 0, Aqua: > 0 };
+    } 
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -52,14 +43,13 @@ public class WhiteBalance : Runesmith2Card
     {
         ArgumentNullException.ThrowIfNull(play.Target);
 
-        var damageToDeal = DynamicVars.CalculatedDamage.Calculate(play.Target);
-
-        await RunesmithPlayerCmd.GainElements(new Elements(DynamicVars[ElementsVar.defaultName].IntValue), Owner, play);
-
-        await DamageCmd.Attack(damageToDeal)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_blunt")
             .Execute(choiceContext);
+
+        if (HasAllElements())
+            await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
     }
 }

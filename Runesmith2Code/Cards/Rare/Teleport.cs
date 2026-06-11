@@ -25,7 +25,12 @@ public class Teleport : Runesmith2Card
     public Teleport() : base(0, CardType.Skill, CardRarity.Rare, TargetType.AnyAlly)
     {
         WithTip(RunesmithHoverTip.Break);
-        WithVar(new ChargeGainVar(0).WithUpgrade(2));
+        WithTips(static (card) =>
+        {
+            if (card.IsUpgraded) return [RunesmithHoverTipFactory.Static(RunesmithHoverTip.Charge)];
+            return [];
+        });
+        WithVar(new ChargeGainVar(0, false).WithUpgrade(2));
     }
 
     protected override async Task OnPlay(

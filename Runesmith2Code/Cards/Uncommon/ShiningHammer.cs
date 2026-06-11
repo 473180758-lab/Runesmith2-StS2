@@ -17,8 +17,8 @@ public class ShiningHammer : Runesmith2Card
 {
     public ShiningHammer() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
-        WithDamage(11, 1);
-        WithVar(new EnhanceByVar(1).WithUpgrade(1));
+        WithDamage(11, 4);
+        WithVar(new EnhanceByVar(1));
         WithTags(RunesmithTags.Hammer);
     }
 

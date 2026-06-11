@@ -14,9 +14,9 @@ namespace Runesmith2.Runesmith2Code.Cards.Common;
 
 public class QuickCharge : Runesmith2Card
 {
-    public QuickCharge() : base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
+    public QuickCharge() : base(0, CardType.Skill, CardRarity.Common, TargetType.Self)
     {
-        WithVar(new ChargeGainVar(3).WithUpgrade(1));
+        WithVar(new ChargeGainVar(2).WithUpgrade(1));
         WithTip(RunesmithHoverTip.Charge);
     }
 

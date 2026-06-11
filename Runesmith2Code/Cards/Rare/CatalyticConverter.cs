@@ -19,8 +19,9 @@ public class CatalyticConverter : Runesmith2Card
 {
     public CatalyticConverter() : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
-        WithVar(new ElementsVar(2).WithUpgrade(2));
-        WithVar("Amount", 1, 1);
+        WithVar(new ElementsVar(2));
+        WithVar("Amount", 1);
+        WithCostUpgradeBy(-1);
         WithTip(RunesmithHoverTip.Elements);
     }
 

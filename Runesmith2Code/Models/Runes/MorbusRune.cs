@@ -15,7 +15,7 @@ namespace Runesmith2.Runesmith2Code.Models.Runes;
 public class MorbusRune : RuneModel
 {
     public override decimal PassiveVal { get; set; } = 0;
-    public override int ChargeVal { get; set; } = 3;
+    public override int ChargeVal { get; set; } = 2;
 
     public override (bool, bool) ShowBottomLabel => (false, true);
 

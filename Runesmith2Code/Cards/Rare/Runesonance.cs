@@ -36,8 +36,6 @@ public class Runesonance : Runesmith2Card
         description.Add("HasRune", HasRune());
     }
 
-    protected override bool ShouldGlowGoldInternal => HasRune();
-
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)

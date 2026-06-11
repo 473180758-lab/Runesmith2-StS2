@@ -11,14 +11,14 @@ public class ChargeGainVar : DynamicVar
 {
     public const string defaultName = "ChargeGain";
 
-    public ChargeGainVar(int charge)
-        : this(defaultName, charge)
+    public ChargeGainVar(int charge, bool tip = true)
+        : this(defaultName, charge, tip)
     {
     }
 
-    public ChargeGainVar(string name, int charge)
+    public ChargeGainVar(string name, int charge, bool tip)
         : base(name, charge)
     {
-        this.WithTooltip("RUNESMITH2-CHARGE");
+        if (tip) this.WithTooltip("RUNESMITH2-CHARGE");
     }
 }

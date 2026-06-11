@@ -19,15 +19,13 @@ public class HammerTornado : Runesmith2Card
 
     public HammerTornado() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
-        WithDamage(9, 3);
+        WithDamage(10, 3);
         WithVar(new CardsVar(1));
         WithCalculatedVar(CalculatedHitsKey, 1, (card, _) =>
         {
             var runeQueue = card.Owner.PlayerCombatState?.GetRuneQueue();
-            return runeQueue is { Runes.Count: > 0 } ? runeQueue.Runes[0].ChargeVal : 0;
+            return runeQueue?.Runes.Count ?? 0;
         });
-        WithTip(RunesmithHoverTip.Charge);
-        WithTip(RunesmithHoverTip.Break);
         WithTags(RunesmithTags.Hammer);
     }
 
@@ -46,7 +44,5 @@ public class HammerTornado : Runesmith2Card
             .WithHitFx("vfx/vfx_attack_blunt")
             .SpawningHitVfxOnEachCreature()
             .Execute(choiceContext);
-
-        await RuneCmd.BreakOldest(choiceContext, Owner);
     }
 }

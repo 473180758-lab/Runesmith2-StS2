@@ -17,7 +17,7 @@ public class Forged : Runesmith2Enchantment
 
     public override bool CanEnchant(CardModel card)
     {
-        return card.CanEnhance();
+        return card.CanEnhance() && base.CanEnchant(card);
     }
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)

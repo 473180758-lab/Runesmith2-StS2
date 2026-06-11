@@ -1,5 +1,6 @@
 #region
 
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -18,7 +19,11 @@ public class EnergySink : Runesmith2Card
         WithVar("ChargeLoss", 1);
         WithVar("PotencyLoss", 2, -2);
         WithTip(RunesmithHoverTip.Charge);
-        WithTip(RunesmithHoverTip.Potency);
+        WithTips(static (card) =>
+        {
+            if (!card.IsUpgraded) return [RunesmithHoverTipFactory.Static(RunesmithHoverTip.Potency)];
+            return [];
+        });
         WithEnergyTip();
     }
 

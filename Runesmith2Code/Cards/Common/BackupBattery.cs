@@ -17,10 +17,11 @@ namespace Runesmith2.Runesmith2Code.Cards.Common;
 
 public class BackupBattery : Runesmith2Card
 {
-    public BackupBattery() : base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
+    public BackupBattery() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
-        WithVar(new CardsVar(1));
+        WithVar(new EnergyVar(1));
         WithVar(new ElementsVar(2).WithUpgrade(1));
+        WithEnergyTip();
         WithTip(RunesmithHoverTip.Elements);
         WithKeyword(CardKeyword.Exhaust);
     }
@@ -30,7 +31,7 @@ public class BackupBattery : Runesmith2Card
         CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
         await RunesmithPlayerCmd.GainElements(new Elements(this), Owner, play);
-        await CommonActions.Draw(this, choiceContext);
     }
 }
