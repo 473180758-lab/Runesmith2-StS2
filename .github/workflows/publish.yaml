@@ -69,6 +69,8 @@ jobs:
           for f in "$out/Runesmith2.dll" "$out/Runesmith2.pck" "$out/Runesmith2.json"; do
             [[ -f "$f" ]] || { echo "Missing: $f"; exit 1; }
           done
+      - name: Strip debug symbols
+        run: find output/mods -name '*.pdb' -delete
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
