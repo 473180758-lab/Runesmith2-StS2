@@ -22,7 +22,12 @@ public class LithiumIonPower : Runesmith2Power
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
-    
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new AquaVar(1)
+    ];
+
     public override async Task AfterSideTurnStart(
         CombatSide side,
         IReadOnlyList<Creature> participants,
@@ -32,10 +37,11 @@ public class LithiumIonPower : Runesmith2Power
         if (Owner.Player == null) return;
         
         var elements = Owner.Player.PlayerCombatState?.GetElements() ?? new Elements();
-        if (elements.Aqua > 0)
+        var aquaLoss = DynamicVars[AquaVar.defaultName].IntValue;
+        if (elements.Aqua >= aquaLoss)
         {
             Flash();
-            await RunesmithPlayerCmd.LoseElements(Elements.WithAqua(1), Owner.Player);
+            await RunesmithPlayerCmd.LoseElements(Elements.WithAqua(aquaLoss), Owner.Player);
             await PowerCmd.Apply<AmpPower>(new ThrowingPlayerChoiceContext(), Owner, Amount, Owner, null);
         }
     }

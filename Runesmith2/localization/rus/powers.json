@@ -41,10 +41,16 @@
   "RUNESMITH2-SCRAPPER_POWER.description": "Когда [gold]Руна[/gold] [gold]Разрушается[/gold], другие [gold]Руны[/gold] получают [blue]1[/blue] [gold]Заряд[/gold].",
   "RUNESMITH2-SCRAPPER_POWER.smartDescription": "Когда [gold]Руна[/gold] [gold]Разрушается[/gold], другие [gold]Руны[/gold] получают [blue]{Amount}[/blue] [gold]{Amount:plural(ru):Заряд|Заряда|Зарядов}[/gold].",
   "RUNESMITH2-SCRAPPER_POWER.title": "Барахольщик",
-  "RUNESMITH2-SYNTHETIC_BLOOD_POWER.description": "Вместо потери ОЗ, в течение 2 ходов, вы теряете {elements:rs2Icon(all)}.",
-  "RUNESMITH2-SYNTHETIC_BLOOD_POWER.smartDescription": "Вместо потери ОЗ, {Amount:plural:в этом ходу|в течение [blue]{}[/blue] ходов}? вы теряете {elements:rs2Icon(all)}.",
+  "RUNESMITH2-SYNTHETIC_BLOOD_POWER.description": "Вместо потери ОЗ, в течение 2 ходов, вы теряете {elements:rs2Icon(ignis)} {elements:rs2Icon(terra)} {elements:rs2Icon(aqua)}.",
+  "RUNESMITH2-SYNTHETIC_BLOOD_POWER.smartDescription": "Вместо потери ОЗ, {Amount:plural:в этом ходу|в течение [blue]{}[/blue] ходов}, вы теряете {elements:rs2Icon(ignis)} {elements:rs2Icon(terra)} {elements:rs2Icon(aqua)}.",
   "RUNESMITH2-SYNTHETIC_BLOOD_POWER.title": "Синтетическая кровь",
   "RUNESMITH2-WILDFIRE_POWER.description": "Дает {elements:rs2Icon(ignis)} и {elements:rs2Icon(terra)} в начале хода.",
   "RUNESMITH2-WILDFIRE_POWER.smartDescription": "Дает [blue]{Amount}[/blue] {elements:rs2Icon(ignis)} и [blue]{Amount}[/blue] {elements:rs2Icon(terra)} в начале хода.",
-  "RUNESMITH2-WILDFIRE_POWER.title": "Дикое пламя"
+  "RUNESMITH2-WILDFIRE_POWER.title": "Дикое пламя",
+  "RUNESMITH2-LITHIUM_ION_POWER.description": "Вы теряете {Aqua:rs2Icon(0)}, чтобы получить [gold]Импульс[/gold] в начале хода.",
+  "RUNESMITH2-LITHIUM_ION_POWER.smartDescription": "Вы теряете [blue]{Aqua}[/blue] {Aqua:rs2Icon(0)}, чтобы получить [blue]{Amount}[/blue] [gold]Импульса[/gold] в начале хода.",
+  "RUNESMITH2-LITHIUM_ION_POWER.title": "Литиевая батарея",
+  "RUNESMITH2-SEARCH_ENGINE_POWER.description": "Вы добираете [blue]1[/blue] карту, когда [gold]Куете[/gold] [gold]Руну[/gold].",
+  "RUNESMITH2-SEARCH_ENGINE_POWER.smartDescription": "Вы добираете [blue]{Amount:diff}[/blue] {Amount:plural(ru):карту|карты|карт}, когда [gold]Куете[/gold] [gold]Руну[/gold].",
+  "RUNESMITH2-SEARCH_ENGINE_POWER.title": "Поисковый механизм"
 }

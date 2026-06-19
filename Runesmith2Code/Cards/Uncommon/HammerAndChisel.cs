@@ -35,11 +35,14 @@ public class HammerAndChisel : Runesmith2Card
         var chisel = CardFactory.GetDistinctForCombat(Owner,
                 cardPool.Where(c => c.Tags.Contains(RunesmithTags.Chisel)), 1, Owner.RunState.Rng.CombatCardGeneration)
             .FirstOrDefault();
+
+        var decreasedCost = -DynamicVars.Energy.IntValue;
+        
         if (hammer != null)
         {
             if (IsUpgraded) CardCmd.Upgrade(hammer);
 
-            hammer.EnergyCost.AddThisCombat(-1);
+            hammer.EnergyCost.AddThisCombat(decreasedCost);
             await CardPileCmd.Add(hammer, PileType.Hand);
         }
 
@@ -47,7 +50,7 @@ public class HammerAndChisel : Runesmith2Card
         {
             if (IsUpgraded) CardCmd.Upgrade(chisel);
 
-            chisel.EnergyCost.AddThisCombat(-1);
+            chisel.EnergyCost.AddThisCombat(decreasedCost);
             await CardPileCmd.Add(chisel, PileType.Hand);
         }
     }
