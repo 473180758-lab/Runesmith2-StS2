@@ -131,8 +131,6 @@ public abstract class Runesmith2Card(int cost, CardType type, CardRarity rarity,
         }
     }
 
-    public virtual bool HasPotencyOverride => false;
-
     // DeepCloneFields
     protected override void DeepCloneFields()
     {

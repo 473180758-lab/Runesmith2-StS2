@@ -20,17 +20,7 @@ public class Duplicate : Runesmith2Card
         WithTip(RunesmithHoverTip.Craft);
         WithCostUpgradeBy(-1);
     }
-
-    public override bool HasPotencyOverride
-    {
-        get
-        {
-            var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
-            if (runeQueue != null && runeQueue.HasAny()) return runeQueue.Runes[^1].IsUsingPotency;
-            return false;
-        }
-    }
-
+    
     protected override void AddExtraArgsToDescription(LocString description)
     {
         base.AddExtraArgsToDescription(description);

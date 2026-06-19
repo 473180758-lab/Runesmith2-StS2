@@ -214,7 +214,7 @@ public partial class NRuneVisuals : Node2D
         _depletedTween.TweenProperty(this, "CurrTimeScale", _targetTimeScale, 0.1);
     }
 
-    private bool _currChargeDepleted = true;
+    private bool _currChargeDepleted;
 
 
     public void SetChargeStatus(bool isDepleted, Color darkenedColor)

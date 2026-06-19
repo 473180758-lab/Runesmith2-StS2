@@ -317,8 +317,7 @@ public partial class NRune : NClickableControl
 
         _sprite?.OnTrigger();
     }
-
-    // TODO create VFX using VfxCmd instead of embedding vfx in the Rune scene?
+    
     private void Charged(bool isPositive)
     {
         if (isPositive) CreateTween().TweenCallback(Callable.From(PlayCharged)).SetDelay(0.15);

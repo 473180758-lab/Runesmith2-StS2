@@ -48,8 +48,9 @@ public static class CardModelExtension
             set
             {
                 CardModel.AssertMutable();
-                _enhanced = Math.Clamp(value, 0, 999);
-                if (_enhanced > 0) JustEnhanced = true;
+                _enhanced = Math.Clamp(value, 0, 999999);
+                if (value <= 0) return;
+                JustEnhanced = true;
                 EnhanceChanged?.Invoke();
             }
         }
@@ -153,11 +154,8 @@ public static class CardModelExtension
 
         public bool HasPotency()
         {
-            var hasPotencyVar = cardModel.DynamicVars.ContainsKey(PotencyVar.defaultName) &&
-                                cardModel.DynamicVars[PotencyVar.defaultName].BaseValue > 0;
-            if (hasPotencyVar) return true;
-            if (cardModel is Runesmith2Card runesmithCard) return runesmithCard.HasPotencyOverride;
-            return false;
+            return cardModel.DynamicVars.ContainsKey(PotencyVar.defaultName) &&
+                   cardModel.DynamicVars[PotencyVar.defaultName].BaseValue > 0;
         }
 
         public bool CanEnhance()
