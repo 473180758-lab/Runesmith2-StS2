@@ -15,7 +15,7 @@ public class LaserTurret : Runesmith2Card
 {
     public LaserTurret() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
-        WithVar("Amount", 3, 1);
+        WithVar("Amount", 2, 1);
         WithTip(RunesmithHoverTip.Elements);
     }
 

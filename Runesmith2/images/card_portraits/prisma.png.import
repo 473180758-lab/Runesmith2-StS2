@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bg4fcqgjmtj4b"
-path="res://.godot/imported/prism.png-c9113ac1c8d38f13a8f0da863d1f2a4a.ctex"
+path="res://.godot/imported/prisma.png-1b6d0bba77da0607571b127a9d051d21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Runesmith2/images/card_portraits/prism.png"
-dest_files=["res://.godot/imported/prism.png-c9113ac1c8d38f13a8f0da863d1f2a4a.ctex"]
+source_file="res://Runesmith2/images/card_portraits/prisma.png"
+dest_files=["res://.godot/imported/prisma.png-1b6d0bba77da0607571b127a9d051d21.ctex"]
 
 [params]
 
