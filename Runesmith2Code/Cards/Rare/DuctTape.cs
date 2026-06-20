@@ -14,8 +14,8 @@ public class DuctTape : Runesmith2Card
 {
     public DuctTape() : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
-        WithTip(RunesmithHoverTip.Enhance);
         WithTip(RunesmithHoverTip.Stasis);
+        WithTip(RunesmithHoverTip.Enhance);
         WithKeyword(CardKeyword.Innate, UpgradeType.Add);
     }
 

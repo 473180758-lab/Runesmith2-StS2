@@ -56,12 +56,12 @@ public partial class NEnhanceTabContainer : Control
 
         if (_enhanceLabel != null) return;
         _enhanceLabel = new MegaLabel();
-        _enhanceLabel.MaxFontSize = 17;
+        _enhanceLabel.MaxFontSize = 21;
         _enhanceLabel.AutoSizeEnabled = true;
         _enhanceLabel.HorizontalAlignment = HorizontalAlignment.Center;
         _enhanceLabel.VerticalAlignment = VerticalAlignment.Center;
-        _enhanceLabel.Size = new Vector2(140, 26);
-        _enhanceLabel.Position = new Vector2(11, 10);
+        _enhanceLabel.Size = new Vector2(140, 28);
+        _enhanceLabel.Position = new Vector2(11, 8);
         _enhanceLabel.AddThemeColorOverride("font_color", FontColor.Item1);
         _enhanceLabel.AddThemeColorOverride("font_shadow_color", FontColor.Item2);
         _enhanceLabel.AddThemeColorOverride("font_outline_color", FontColor.Item3);

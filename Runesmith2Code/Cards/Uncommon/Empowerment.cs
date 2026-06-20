@@ -1,5 +1,6 @@
 #region
 
+using BaseLib.Extensions;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -7,6 +8,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models.Powers;
 using Runesmith2.Runesmith2Code.Commands;
+using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.HoverTips;
 using Runesmith2.Runesmith2Code.Powers;
@@ -26,21 +28,23 @@ public class Empowerment : Runesmith2Card
             HoverTipFactory.FromPower<BracePower>(),
             HoverTipFactory.FromPower<AmpPower>()
         ]);
+        WithVar(new ElementsVar(1).WithUpgrade(1));
         WithTip(RunesmithHoverTip.Elements);
-        WithKeyword(CardKeyword.Exhaust, UpgradeType.Remove);
+        WithKeyword(CardKeyword.Exhaust);
     }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var elements = Owner.PlayerCombatState?.GetElements() ?? new Elements();
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        
+        await RunesmithPlayerCmd.GainElements(new Elements(this), Owner);
+        
+        var elements = Owner.PlayerCombatState?.GetElements() ?? new Elements();
 
         if (elements.Ignis > 0) await CommonActions.ApplySelf<VigorPower>(choiceContext, this, elements.Ignis);
         if (elements.Terra > 0) await CommonActions.ApplySelf<BracePower>(choiceContext, this, elements.Terra);
         if (elements.Aqua > 0) await CommonActions.ApplySelf<AmpPower>(choiceContext, this, elements.Aqua);
-
-        await RunesmithPlayerCmd.LoseElements(new Elements(1), Owner);
     }
 }

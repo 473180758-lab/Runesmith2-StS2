@@ -1,11 +1,13 @@
 ﻿#region
 
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Random;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Hooks;
@@ -65,5 +67,24 @@ public static class RunesmithCardCmd
         if (targetCard.IsStasis()) return;
 
         targetCard.SetStasis(true);
+    }
+
+    // Code taken from https://github.com/lamali292/Downfall/blob/develop-2/DownfallCode/Commands/DownfallCardCmd.cs
+    public static async Task<T> GiveCard<T>(Player player,
+        PileType pileType,
+        CardPilePosition position = CardPilePosition.Bottom,
+        bool upgraded = false,
+        float animationTime = 0.6f,
+        CardPreviewStyle animationStyle = CardPreviewStyle.HorizontalLayout,
+        bool skipAnimation = false,
+        Action<T>? action = null) where T : CardModel
+    {
+        var card = (T)player.Creature.CombatState!.CreateCard(ModelDb.Card<T>(), player);
+        if (upgraded) card.UpgradeInternal();
+        action?.Invoke(card);
+        var result = await CardPileCmd.AddGeneratedCardToCombat(card, pileType, player, position);
+        if (result.success && !skipAnimation && pileType != PileType.Hand)
+            CardCmd.PreviewCardPileAdd(result, animationTime, animationStyle);
+        return (T)result.cardAdded;
     }
 }

@@ -1,8 +1,11 @@
 #region
 
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.Hooks;
@@ -15,11 +18,33 @@ public class DuctTapePower : Runesmith2Power, IAfterCardEnhanced
 {
     public override PowerType Type => PowerType.Buff;
 
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
+    
+    protected override object InitInternalData() => new Data();
+    
+    private class Data
+    {
+        public int CardsStasisThisTurn;
+    }
+    
+    public override Task BeforeSideTurnStart(
+        PlayerChoiceContext choiceContext,
+        CombatSide side,
+        IReadOnlyList<Creature> participants,
+        ICombatState combatState)
+    {
+        if (!participants.Contains(Owner))
+            return Task.CompletedTask;
+        GetInternalData<Data>().CardsStasisThisTurn = 0;
+        return Task.CompletedTask;
+    }
 
     public Task AfterCardEnhanced(PlayerChoiceContext choiceContext, CardModel card, int enhanceAmount)
     {
-        if (card.Owner != Owner.Player || card.IsStasis()) return Task.CompletedTask;
+        if (card.Owner != Owner.Player || card.IsStasis() || enhanceAmount <= 0) return Task.CompletedTask;
+        var data = GetInternalData<Data>();
+        if (data.CardsStasisThisTurn >= Amount) return Task.CompletedTask;
+        ++data.CardsStasisThisTurn;
         Flash();
         RunesmithCardCmd.Stasis(card);
         return Task.CompletedTask;
