@@ -17,7 +17,7 @@ public class SecretRecipe : Runesmith2Card
 {
     public SecretRecipe() : base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
     {
-        WithCostUpgradeBy(-1);
+        WithCards(2, 1);
         WithKeyword(CardKeyword.Exhaust);
     }
 
@@ -28,11 +28,10 @@ public class SecretRecipe : Runesmith2Card
         var cards = CardFactory.GetDistinctForCombat(Owner,
                 ModelDb.CardPool<Runesmith2CardPool>()
                     .GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint)
-                    .Where(c => c.Tags.Contains(RunesmithTags.Recipe) && c is not Mundus), 3,
+                    .Where(c => c.Tags.Contains(RunesmithTags.Recipe)), DynamicVars.Cards.IntValue,
                 Owner.RunState.Rng.CombatCardGeneration
             )
             .ToList();
-
         var card = await CardSelectCmd.FromChooseACardScreen(choiceContext, cards, Owner, true);
 
         if (card != null)

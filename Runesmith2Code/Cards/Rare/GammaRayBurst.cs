@@ -25,16 +25,24 @@ public class GammaRayBurst : Runesmith2Card
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var chargeAmount = ResolveEnergyXValue() + DynamicVars["Amount"].IntValue;
+        var xValue = ResolveEnergyXValue() + DynamicVars["Amount"].IntValue;
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        RuneCmd.ChargeAll(choiceContext, Owner, chargeAmount);
+        
+        if (xValue <= 0) return;
+        
+        RuneCmd.ChargeAll(choiceContext, Owner, xValue);
         
         var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         if (runeQueue != null && runeQueue.HasAny())
+        {
             foreach (var rune in runeQueue.Runes)
             {
-                await Cmd.CustomScaledWait(0.1f, 0.2f);
-                await RuneCmd.Passive(choiceContext, rune);
+                for (var i = 0; i < xValue; i++)
+                {
+                    await Cmd.CustomScaledWait(0.1f, 0.2f);
+                    await RuneCmd.Passive(choiceContext, rune);
+                }
             }
+        }
     }
 }

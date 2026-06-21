@@ -14,7 +14,7 @@ public static class RunesmithSubscriber
 {
     public static void Subscribe()
     {
-        ModHelper.SubscribeForCombatStateHooks(MainFile.ModId, CollectRuneModels);
+        ModHelper.SubscribeForCombatStateHooks(Runesmith2Mod.ModId, CollectRuneModels);
     }
 
     private static IEnumerable<RuneModel> CollectRuneModels(CombatState combatState)

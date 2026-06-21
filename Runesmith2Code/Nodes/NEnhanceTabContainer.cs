@@ -67,8 +67,8 @@ public partial class NEnhanceTabContainer : Control
         _enhanceLabel.AddThemeColorOverride("font_outline_color", FontColor.Item3);
         _enhanceLabel.AddThemeConstantOverride("shadow_offset_x", 1);
         _enhanceLabel.AddThemeConstantOverride("shadow_offset_y", 1);
-        _enhanceLabel.AddThemeConstantOverride("outline_size", 9);
-        _enhanceLabel.AddThemeConstantOverride("shadow_outline_size", 9);
+        _enhanceLabel.AddThemeConstantOverride("outline_size", 11);
+        _enhanceLabel.AddThemeConstantOverride("shadow_outline_size", 11);
         _enhanceLabel.AddThemeFontOverride("font", BaseResourceIndex.FontKreonRegularSpaceOne);
         _enhanceLabel.Text = "";
 

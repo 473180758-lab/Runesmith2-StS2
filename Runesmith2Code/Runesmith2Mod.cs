@@ -14,7 +14,7 @@ using Logger = MegaCrit.Sts2.Core.Logging.Logger;
 namespace Runesmith2.Runesmith2Code;
 
 [ModInitializer(nameof(Initialize))]
-public partial class MainFile : Node
+public partial class Runesmith2Mod : Node
 {
     public const string ModId = "Runesmith2"; //Used for resource filepath
 

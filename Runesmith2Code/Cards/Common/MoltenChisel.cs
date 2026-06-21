@@ -19,7 +19,7 @@ public class MoltenChisel : Runesmith2Card
 {
     public MoltenChisel() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
     {
-        WithDamage(6, 2);
+        WithDamage(7, 2);
         WithPower<VulnerablePower>(1, 1);
         WithVars(new IgnisVar(1), new TerraVar(1));
         WithTip(RunesmithHoverTip.Elements);

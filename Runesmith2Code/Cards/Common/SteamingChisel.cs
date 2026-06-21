@@ -20,7 +20,7 @@ public class SteamingChisel : Runesmith2Card
     public SteamingChisel() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
     {
         WithDamage(3, 1);
-        WithBlock(3, 1);
+        WithBlock(2, 1);
         WithPower<WeakPower>(1, 1);
         WithVars(new IgnisVar(1), new AquaVar(1));
         WithTip(RunesmithHoverTip.Elements);

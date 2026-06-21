@@ -14,14 +14,14 @@ using Runesmith2.Runesmith2Code.Utils;
 
 namespace Runesmith2.Runesmith2Code.Cards.Common;
 
-public class ChiselStab : Runesmith2Card
+public class ChiselStrike : Runesmith2Card
 {
-    public ChiselStab() : base(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    public ChiselStrike() : base(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
     {
         WithDamage(5, 2);
         WithVar(new IgnisVar(2).WithUpgrade(1));
         WithTip(RunesmithHoverTip.Elements);
-        WithTags(RunesmithTags.Chisel);
+        WithTags(RunesmithTags.Chisel, CardTag.Strike);
     }
 
     protected override async Task OnPlay(

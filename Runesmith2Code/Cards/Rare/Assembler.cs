@@ -17,7 +17,7 @@ public class Assembler : Runesmith2Card
 {
     public Assembler() : base(3, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
-        WithCostUpgradeBy(-1);
+        WithKeyword(CardKeyword.Retain, UpgradeType.Add);
         WithTip(RunesmithHoverTip.Craft);
     }
 

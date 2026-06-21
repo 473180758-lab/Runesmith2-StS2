@@ -49,6 +49,6 @@ public class BrokenRuby : Runesmith2Relic
 
     public override RelicModel GetUpgradeReplacement()
     {
-        return ModelDb.Get<CoreCrystal>().ToMutable();
+        return ModelDb.Relic<CoreCrystal>();
     }
 }
