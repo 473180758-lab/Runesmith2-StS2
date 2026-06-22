@@ -18,7 +18,7 @@ public class Incendium : Runesmith2RecipeCard
 {
     public Incendium() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
-        WithVars(new PotencyVar(4).WithUpgrade(2), new ChargeVar(3));
+        WithVars(new PotencyVar(5).WithUpgrade(2), new ChargeVar(3));
         WithTip(RunesmithHoverTip.Craft);
         WithRuneTip<IncendiumRune>();
     }

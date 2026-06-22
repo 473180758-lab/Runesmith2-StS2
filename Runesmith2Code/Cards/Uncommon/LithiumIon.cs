@@ -18,8 +18,8 @@ public class LithiumIon : Runesmith2Card
 {
     public LithiumIon() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
-        WithVar("Amount", 3, 1);
-        WithVar(new AquaVar(1));
+        WithVar("Amount", 2, 1);
+        WithVar(new AquaVar(2));
         WithTip(RunesmithHoverTip.Elements);
         WithTip(typeof(AmpPower));
     }

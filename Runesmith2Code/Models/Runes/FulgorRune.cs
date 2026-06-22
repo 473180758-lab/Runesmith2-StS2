@@ -13,11 +13,11 @@ using Runesmith2.Runesmith2Code.Nodes.Runes;
 
 namespace Runesmith2.Runesmith2Code.Models.Runes;
 
-// Deal damage multiple times
+// Deal damage 2 times
 public class FulgorRune : RuneModel
 {
     public override decimal PassiveVal { get; set; } = 5;
-    public override int ChargeVal { get; set; } = 4;
+    public override int ChargeVal { get; set; } = 3;
 
     public override bool IsUsingPotency => true;
 

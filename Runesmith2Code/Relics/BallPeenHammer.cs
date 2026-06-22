@@ -118,8 +118,8 @@ public class BallPeenHammer : Runesmith2Relic
 
     public override Task AfterCombatEnd(CombatRoom _)
     {
-        Status = RelicStatus.Normal;
         IsActivating = false;
+        Status = RelicStatus.Normal;
         return Task.CompletedTask;
     }
 }

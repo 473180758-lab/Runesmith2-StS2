@@ -19,8 +19,8 @@ namespace Runesmith2.Runesmith2Code.Models.Runes;
 // Deal damage, gain Block
 public class MagmaRune : RuneModel
 {
-    public override decimal PassiveVal { get; set; } = 4;
-    public override int ChargeVal { get; set; } = 3;
+    public override decimal PassiveVal { get; set; } = 5;
+    public override int ChargeVal { get; set; } = 2;
 
     public override bool IsUsingPotency => true;
 
