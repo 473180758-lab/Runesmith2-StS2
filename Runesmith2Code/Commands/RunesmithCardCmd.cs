@@ -46,8 +46,11 @@ public static class RunesmithCardCmd
                 if (!targetCard.CanEnhance()) throw new InvalidOperationException($"Cannot enhance {targetCard.Id}.");
 
                 targetCard.AddEnhance(modifiedEnhance);
-                // TODO Enhance vfx
                 await RunesmithHook.AfterCardEnhanced(combatState, choiceContext, targetCard, modifiedEnhance);
+                if (!skipVisuals)
+                {
+                    // TODO Enhance vfx
+                }
             }
         }
     }

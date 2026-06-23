@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.HoverTips;
+using Runesmith2.Runesmith2Code.Models;
 
 #endregion
 
@@ -39,12 +40,14 @@ public class GammaRayBurst : Runesmith2Card
         }
         
         var index = 0;
+        RuneModel? currRune = null;
         while (index < runeQueue.Runes.Count)
         {
-            var currRune = runeQueue.Runes[index];
-            if (currRune.ChargeVal == 0)
+            var nextRune = runeQueue.Runes[index];
+            if (nextRune.ChargeVal == 0 && nextRune != currRune)
             {
-                await RuneCmd.Break(choiceContext, Owner, currRune);
+                currRune = nextRune;
+                await RuneCmd.Break(choiceContext, Owner, nextRune);
                 await Cmd.CustomScaledWait(0.1f, 0.2f);
             }
             else

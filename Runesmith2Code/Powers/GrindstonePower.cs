@@ -6,8 +6,13 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Cards;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
+using MegaCrit.Sts2.Core.Nodes.Vfx.Cards;
 using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.Extensions;
+using Runesmith2.Runesmith2Code.Nodes.Vfx;
+using Runesmith2.Runesmith2Code.Utils;
 
 #endregion
 
@@ -47,15 +52,31 @@ public class GrindstonePower : Runesmith2Power
             return;
         }
 
+        var hasActivated = false;
         if (card.IsUpgradable)
         {
             CardCmd.Upgrade(card);
             Flash();
+            hasActivated = true;
         }
         else if (card.CanEnhance())
         {
-            await RunesmithCardCmd.Enhance(choiceContext, Owner.Player, card, cardPlay, 1);
+            await RunesmithCardCmd.Enhance(choiceContext, Owner.Player, card, cardPlay, 1, true);
             Flash();
+            hasActivated = true;
+        }
+
+        if (RunesmithConfig.EnableGrindstoneVfx && hasActivated && cardPlay.ResultPile != PileType.None)
+        {
+            var cardNode = NCard.FindOnTable(card);
+            if (cardNode == null) return;
+
+            var vfx = NCardGrindstoneVfx.Create(cardNode, card);
+            if (vfx == null) return;
+            
+            RunesmithModSounds.PlayGrindStoneSfx();
+            await vfx.PlayAnimation(true);
+            await Cmd.CustomScaledWait(0.25f, 0.4f);
         }
     }
 

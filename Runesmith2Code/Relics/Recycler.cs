@@ -10,6 +10,7 @@ using Runesmith2.Runesmith2Code.Commands;
 using Runesmith2.Runesmith2Code.DynamicVars;
 using Runesmith2.Runesmith2Code.Extensions;
 using Runesmith2.Runesmith2Code.HoverTips;
+using Runesmith2.Runesmith2Code.Models;
 using Runesmith2.Runesmith2Code.Structs;
 
 #endregion
@@ -39,14 +40,16 @@ public class Recycler : Runesmith2Relic
 
         var index = 0;
         var elements = new Elements(0);
+        RuneModel? currRune = null;
         while (index < runeQueue.Runes.Count)
         {
-            var currRune = runeQueue.Runes[index];
-            if (currRune.ChargeVal == 0)
+            var nextRune = runeQueue.Runes[index];
+            if (nextRune.ChargeVal == 0 && nextRune != currRune)
             {
                 Flash();
 
-                elements += currRune.RecipeCard.CanonicalElementsCost;
+                currRune = nextRune;
+                elements += nextRune.RecipeCard.CanonicalElementsCost;
 
                 await RuneCmd.Break(choiceContext, Owner, currRune);
                 await Cmd.CustomScaledWait(0.1f, 0.2f);

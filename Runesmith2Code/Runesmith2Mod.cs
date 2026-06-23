@@ -1,6 +1,8 @@
 #region
 
 using System.Reflection;
+using BaseLib.Audio;
+using BaseLib.Config;
 using Godot;
 using Godot.Bridge;
 using HarmonyLib;
@@ -30,5 +32,7 @@ public partial class Runesmith2Mod : Node
         ScriptManagerBridge.LookupScriptsInAssembly(Assembly.GetExecutingAssembly());
 
         RunesmithSubscriber.Subscribe();
+        
+        ModConfigRegistry.Register(ModId, new RunesmithConfig());
     }
 }

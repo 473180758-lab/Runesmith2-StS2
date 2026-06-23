@@ -1,5 +1,7 @@
 #region
 
+using BaseLib.Abstracts;
+using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -14,7 +16,7 @@ using Runesmith2.Runesmith2Code.Hooks;
 
 namespace Runesmith2.Runesmith2Code.Powers;
 
-public class DuctTapePower : Runesmith2Power, IAfterCardEnhanced
+public class DuctTapePower : Runesmith2Power, IAfterCardEnhanced, IHasSecondAmount
 {
     public override PowerType Type => PowerType.Buff;
 
@@ -36,6 +38,7 @@ public class DuctTapePower : Runesmith2Power, IAfterCardEnhanced
         if (!participants.Contains(Owner))
             return Task.CompletedTask;
         GetInternalData<Data>().CardsStasisThisTurn = 0;
+        this.InvokeSecondAmountChanged();
         return Task.CompletedTask;
     }
 
@@ -47,6 +50,13 @@ public class DuctTapePower : Runesmith2Power, IAfterCardEnhanced
         ++data.CardsStasisThisTurn;
         Flash();
         RunesmithCardCmd.Stasis(card);
+        this.InvokeSecondAmountChanged();
         return Task.CompletedTask;
+    }
+
+    public string GetSecondAmount()
+    {
+        var data = GetInternalData<Data>();
+        return $"{Math.Max(Amount - data.CardsStasisThisTurn, 0)}";
     }
 }
