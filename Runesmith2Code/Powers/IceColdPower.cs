@@ -28,15 +28,6 @@ public class IceColdPower : Runesmith2Power
         new DisplayVar<IceColdPower>("Decrement", pow => (pow.Amount - pow.Amount / 2).ToString())
     ];
 
-    public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
-        if (Owner.Player == null) return;
-        var card = cardPlay.Card;
-        if (card.IsUpgradable)
-            CardCmd.Upgrade(card);
-        else if (card.CanEnhance()) await RunesmithCardCmd.Enhance(choiceContext, Owner.Player, card, cardPlay, 1);
-    }
-
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer,
         CardModel? cardSource)
     {

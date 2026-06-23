@@ -18,6 +18,8 @@ public class MundusRune : RuneModel
 
     public override bool IsUsingPotency => true;
 
+    public override bool CanPassive => false;
+
     public override ChargeDepletionType ChargeDepletion => ChargeDepletionType.None;
     public override (decimal, decimal) BottomValue => (PassiveVal, PassiveVal);
     public override (Color, Color, Color) BottomBreakColor => NRune.DefaultFontColor;

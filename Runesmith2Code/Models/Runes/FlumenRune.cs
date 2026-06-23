@@ -34,23 +34,19 @@ public class FlumenRune : RuneModel
         return ret;
     }
 
-    public override Task<bool> SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
+    public override Task SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal <= 0) return Task.FromResult(false);
         Trigger();
         CardToDraw += 1;
         UseCharge();
-        return Task.FromResult(true);
+        return Task.CompletedTask;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal > 0)
-        {
-            Trigger();
-            await DrawCard(choiceContext, 1);
-            UseCharge();
-        }
+        Trigger();
+        await DrawCard(choiceContext, 1);
+        UseCharge();
     }
 
     public override async Task Break(PlayerChoiceContext choiceContext)

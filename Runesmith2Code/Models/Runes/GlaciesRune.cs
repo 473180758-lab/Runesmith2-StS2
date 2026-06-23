@@ -29,21 +29,16 @@ public class GlaciesRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Glacies>();
 
-    public override async Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal <= 0) return false;
         await Passive(choiceContext);
-        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal > 0)
-        {
-            Trigger();
-            await ApplyIceCold(choiceContext, CalculatedPassiveVal);
-            UseCharge();
-        }
+        Trigger();
+        await ApplyIceCold(choiceContext, CalculatedPassiveVal);
+        UseCharge();
     }
 
     public override async Task Break(PlayerChoiceContext choiceContext)

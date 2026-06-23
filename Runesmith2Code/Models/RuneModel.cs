@@ -83,6 +83,8 @@ public abstract class RuneModel : AbstractModel, ICustomModel
 
     public virtual (Color, Color, Color) BottomBreakColor => NRune.BreakFontColor;
 
+    public virtual bool CanPassive => ChargeVal > 0;
+
     protected virtual string PassiveSfx => "";
 
     protected virtual string BreakSfx => "";
@@ -217,19 +219,19 @@ public abstract class RuneModel : AbstractModel, ICustomModel
     }
 
     // These triggers should return if it was triggerred or not
-    public virtual Task<bool> BeforeTurnEndEarlyRuneTrigger(PlayerChoiceContext choiceContext)
+    public virtual Task BeforeTurnEndEarlyRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        return Task.FromResult(false);
+        return Task.CompletedTask;
     }
 
-    public virtual Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public virtual Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        return Task.FromResult(false);
+        return Task.CompletedTask;
     }
 
-    public virtual Task<bool> SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
+    public virtual Task SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        return Task.FromResult(false);
+        return Task.CompletedTask;
     }
 
     public virtual Task Passive(PlayerChoiceContext choiceContext)

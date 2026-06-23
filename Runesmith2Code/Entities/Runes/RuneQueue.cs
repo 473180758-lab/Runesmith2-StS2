@@ -78,9 +78,9 @@ public class RuneQueue
         foreach (var rune in Runes)
             for (var i = 0; i < count; i++)
             {
-                var wait = await rune.BeforeTurnEndEarlyRuneTrigger(choiceContext);
-                if (wait)
-                    await SmallWait();
+                if (!rune.CanPassive) continue;
+                await rune.BeforeTurnEndEarlyRuneTrigger(choiceContext);
+                await SmallWait();
             }
 
         await SmallWait();
@@ -88,9 +88,9 @@ public class RuneQueue
         foreach (var rune in Runes)
             for (var i = 0; i < count; i++)
             {
-                var wait = await rune.BeforeTurnEndRuneTrigger(choiceContext);
-                if (wait)
-                    await SmallWait();
+                if (!rune.CanPassive) continue;
+                await rune.BeforeTurnEndRuneTrigger(choiceContext);
+                await SmallWait();
             }
     }
 
@@ -106,9 +106,9 @@ public class RuneQueue
         foreach (var rune in Runes)
             for (var i = 0; i < count; i++)
             {
-                var wait = await rune.SetupTurnStartRuneTrigger(choiceContext);
-                if (wait)
-                    await SmallWait();
+                if (!rune.CanPassive) continue;
+                await rune.SetupTurnStartRuneTrigger(choiceContext);
+                await SmallWait();
             }
     }
 

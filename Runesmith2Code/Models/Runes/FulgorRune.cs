@@ -37,27 +37,20 @@ public class FulgorRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Fulgor>();
 
-    public override async Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal <= 0) return false;
         await Passive(choiceContext);
-        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal > 0)
-        {
-            PlayPassiveSfx();
-            Trigger();
-            await ApplyLightningDamage(choiceContext, PassiveVal, 2);
-            UseCharge();
-        }
+        Trigger();
+        await ApplyLightningDamage(choiceContext, PassiveVal, 2);
+        UseCharge();
     }
 
     public override async Task Break(PlayerChoiceContext choiceContext)
     {
-        PlayBreakSfx();
         await ApplyLightningDamage(choiceContext, PassiveVal, 4);
     }
 

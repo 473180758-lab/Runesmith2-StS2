@@ -19,7 +19,7 @@ public static class RunesmithNode
     {
         var elementsCounter = PreloadManager.Cache.GetScene(RunesmithResource.NElementsCounterPath)
             .Instantiate<NElementsCounter>();
-        ui.AddChildSafely(elementsCounter);
+        ui.AddChild(elementsCounter);
         return elementsCounter;
     });
 
@@ -28,12 +28,18 @@ public static class RunesmithNode
         var elementsIcon = PreloadManager.Cache.GetScene(RunesmithResource.NElementsIconPath)
             .Instantiate<NElementsIcon>().WithData(card);
         var cardContainer = card.GetChild(0)!;
-        cardContainer.AddChildSafely(elementsIcon);
+        cardContainer.AddChild(elementsIcon);
         cardContainer.MoveChild(elementsIcon, cardContainer.GetNode("%StarIcon").GetIndex());
         return elementsIcon;
     });
 
-    public static readonly SpireField<NCard, NEnhanceTabContainer> NEnhanceTab = new(() => null);
+    public static readonly AddedNode<NCard, NEnhanceTabContainer> NEnhanceTab = new((card) =>
+    {
+        var enhanceTab = PreloadManager.Cache.GetScene(RunesmithResource.NEnhanceTabPath)
+            .Instantiate<NEnhanceTabContainer>()
+            .WithData(card);
+        return enhanceTab;
+    });
 
     public static readonly SpireField<NCreature, NRuneManager> NRuneManager = new(() => null);
 }

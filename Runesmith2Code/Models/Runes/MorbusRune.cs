@@ -25,22 +25,17 @@ public class MorbusRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Morbus>();
 
-    public override async Task<bool> SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal <= 0) return false;
         await Passive(choiceContext);
-        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal > 0)
-        {
-            PlayPassiveSfx();
-            Trigger();
-            await ApplyDebuff(choiceContext, 1);
-            UseCharge();
-        }
+        PlayPassiveSfx();
+        Trigger();
+        await ApplyDebuff(choiceContext, 1);
+        UseCharge();
     }
 
     public override async Task Break(PlayerChoiceContext choiceContext)

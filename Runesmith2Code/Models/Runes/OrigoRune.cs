@@ -41,21 +41,16 @@ public class OrigoRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Origo>();
 
-    public override async Task<bool> SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task SetupTurnStartRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal <= 0) return false;
         await Passive(choiceContext);
-        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal > 0)
-        {
-            Trigger();
-            await CreateCard(choiceContext, 1);
-            UseCharge();
-        }
+        Trigger();
+        await CreateCard(choiceContext, 1);
+        UseCharge();
     }
 
     public override async Task Break(PlayerChoiceContext choiceContext)

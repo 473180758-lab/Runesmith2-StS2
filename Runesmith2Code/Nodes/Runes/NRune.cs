@@ -298,6 +298,8 @@ public partial class NRune : NClickableControl
                 break;
         }
 
+        _chargeLabel.Visible = _isLocal && _chargeLabel.Visible;
+
         tween.TweenProperty(_chargePanel, "modulate", modulateColor, 0.25).FromCurrent()
             .FromCurrent().SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
 

@@ -13,7 +13,7 @@ namespace Runesmith2.Runesmith2Code.Field;
 public static class RunesmithField
 {
     public static readonly SpireField<CardModel, CardModelExtension.RunesmithCardModelModifier> Modifier =
-        new(() => null);
+        new(card => new CardModelExtension.RunesmithCardModelModifier(card));
 
     public static readonly SpireField<PlayerCombatState, RunesmithCombatState> RunesmithCombatState = new(() => null);
 }

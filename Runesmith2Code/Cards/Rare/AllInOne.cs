@@ -57,7 +57,7 @@ public class AllInOne : Runesmith2Card
                 .Aggregate((a, b) => (a.PassiveVal + b.PassiveVal, a.ChargeVal + b.ChargeVal));
 
             await RuneCmd.AddPotency(choiceContext, runeQueue.Runes, Owner, play, potencyCharge.PassiveVal, ValueProp.Unpowered);
-            RuneCmd.Charge(choiceContext, runeQueue.Runes, potencyCharge.ChargeVal);
+            RuneCmd.ChargeOldest(choiceContext, Owner, potencyCharge.ChargeVal);
         }
     }
 }

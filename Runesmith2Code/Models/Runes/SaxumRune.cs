@@ -23,21 +23,16 @@ public class SaxumRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Saxum>();
 
-    public override async Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal <= 0) return false;
         await Passive(choiceContext);
-        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal > 0)
-        {
-            Trigger();
-            await GainBlock(choiceContext, PassiveVal);
-            UseCharge();
-        }
+        Trigger();
+        await GainBlock(choiceContext, PassiveVal);
+        UseCharge();
     }
 
     public override async Task Break(PlayerChoiceContext choiceContext)

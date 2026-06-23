@@ -26,21 +26,18 @@ public class AlbusRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Albus>();
 
-    public override async Task<bool> BeforeTurnEndEarlyRuneTrigger(PlayerChoiceContext choiceContext)
+    public override bool CanPassive => HasAnyValidRune() && base.CanPassive;
+
+    public override async Task BeforeTurnEndEarlyRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal <= 0 || !HasAnyValidRune()) return false;
         await Passive(choiceContext);
-        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal > 0 && HasAnyValidRune())
-        {
-            Trigger();
-            await ChargeRunes(choiceContext, 1);
-            UseCharge();
-        }
+        Trigger();
+        await ChargeRunes(choiceContext, 1);
+        UseCharge();
     }
 
     public override async Task Break(PlayerChoiceContext choiceContext)

@@ -16,6 +16,7 @@ public class GammaRayBurst : Runesmith2Card
     public GammaRayBurst() : base(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
     {
         WithVar("Amount", 0, 1);
+        WithTip(RunesmithHoverTip.Break);
         WithTip(RunesmithHoverTip.Charge);
     }
 
@@ -28,20 +29,28 @@ public class GammaRayBurst : Runesmith2Card
         var xValue = ResolveEnergyXValue() + DynamicVars["Amount"].IntValue;
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         
-        if (xValue <= 0) return;
-        
-        RuneCmd.ChargeAll(choiceContext, Owner, xValue);
-        
         var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
-        if (runeQueue != null && runeQueue.HasAny())
+        if (runeQueue == null || !runeQueue.HasAny()) return;
+        
+        for (var i = 0; i < xValue; i++)
         {
-            foreach (var rune in runeQueue.Runes)
+            if (runeQueue.Runes.All(r => !r.CanPassive)) break;
+            await RuneCmd.PassiveAll(choiceContext, Owner);
+        }
+        
+        var index = 0;
+        while (index < runeQueue.Runes.Count)
+        {
+            var currRune = runeQueue.Runes[index];
+            if (currRune.ChargeVal == 0)
             {
-                for (var i = 0; i < xValue; i++)
-                {
-                    await Cmd.CustomScaledWait(0.1f, 0.2f);
-                    await RuneCmd.Passive(choiceContext, rune);
-                }
+                await RuneCmd.Break(choiceContext, Owner, currRune);
+                await Cmd.CustomScaledWait(0.1f, 0.2f);
+            }
+            else
+            {
+                // increment index as rune wasn't broken
+                index++;
             }
         }
     }

@@ -26,21 +26,16 @@ public class FlammaRune : RuneModel
 
     public override Runesmith2RecipeCard RecipeCard => ModelDb.Get<Flamma>();
 
-    public override async Task<bool> BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
+    public override async Task BeforeTurnEndRuneTrigger(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal <= 0) return false;
         await Passive(choiceContext);
-        return true;
     }
 
     public override async Task Passive(PlayerChoiceContext choiceContext)
     {
-        if (ChargeVal > 0)
-        {
-            Trigger();
-            await ApplyFireDamage(choiceContext, PassiveVal);
-            UseCharge();
-        }
+        Trigger();
+        await ApplyFireDamage(choiceContext, PassiveVal);
+        UseCharge();
     }
 
     public override async Task Break(PlayerChoiceContext choiceContext)

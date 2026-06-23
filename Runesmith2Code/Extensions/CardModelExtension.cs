@@ -12,7 +12,7 @@ namespace Runesmith2.Runesmith2Code.Extensions;
 
 public static class CardModelExtension
 {
-    public class RunesmithCardModelModifier
+    public class RunesmithCardModelModifier(CardModel cardModel)
     {
         private bool _justEnhanced;
 
@@ -55,22 +55,16 @@ public static class CardModelExtension
             }
         }
 
-        private bool _isStasis;
-        public CardModel CardModel { get; set; }
-
-        public RunesmithCardModelModifier(CardModel cardModel)
-        {
-            CardModel = cardModel;
-        }
+        public CardModel CardModel { get; set; } = cardModel;
 
         public bool Stasis
         {
-            get => _isStasis;
+            get;
             set
             {
                 CardModel.AssertMutable();
-                _isStasis = value;
-                if (_isStasis) JustStasis = true;
+                field = value;
+                if (field) JustStasis = true;
                 StasisChanged?.Invoke();
             }
         }
@@ -96,8 +90,6 @@ public static class CardModelExtension
     {
         public RunesmithCardModelModifier GetCardModelModifier()
         {
-            if (RunesmithField.Modifier[cardModel] == null)
-                return RunesmithField.Modifier[cardModel] = new RunesmithCardModelModifier(cardModel);
             return RunesmithField.Modifier[cardModel]!;
         }
 

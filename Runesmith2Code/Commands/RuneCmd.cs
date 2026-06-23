@@ -1,6 +1,7 @@
 #region
 
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -193,11 +194,23 @@ public static class RuneCmd
 
     public static async Task Passive(PlayerChoiceContext choiceContext, RuneModel? rune)
     {
-        if (!CombatManager.Instance.IsOverOrEnding && rune != null)
+        if (!CombatManager.Instance.IsOverOrEnding && rune is { CanPassive: true })
         {
             choiceContext.PushModel(rune);
             await rune.Passive(choiceContext);
             choiceContext.PopModel(rune);
+        }
+    }
+
+    public static async Task PassiveAll(PlayerChoiceContext choiceContext, Player player)
+    {
+        var runeQueue = player.PlayerCombatState?.GetRuneQueue();
+        if (runeQueue == null || runeQueue.Runes.Count <= 0) return;
+        foreach (var rune in runeQueue.Runes)
+        {
+            if (!rune.CanPassive) continue;
+            await Passive(choiceContext, rune);
+            await Cmd.CustomScaledWait(0.1f, 0.2f);
         }
     }
 
