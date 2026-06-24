@@ -52,12 +52,9 @@ public static class RunesmithCardCmd
                 if (!skipVisuals)
                 {
                     var cardNode = NCard.FindOnTable(targetCard);
-                    if (cardNode == null) return;
-
-                    var vfx = NCardEnhanceVfx.Create(cardNode);
-                    if (vfx == null) return;
-
-                    _ = TaskHelper.RunSafely(vfx.PlayAnimation());
+                    NCardEnhanceVfx? vfx = null;
+                    if (cardNode != null) vfx = NCardEnhanceVfx.Create(cardNode);
+                    if (vfx != null) _ = TaskHelper.RunSafely(vfx.PlayAnimation());
                 }
                 await RunesmithHook.AfterCardEnhanced(combatState, choiceContext, targetCard, modifiedEnhance);
             }
