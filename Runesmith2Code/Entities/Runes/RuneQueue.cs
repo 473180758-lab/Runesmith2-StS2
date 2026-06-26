@@ -17,11 +17,11 @@ public class RuneQueue
 
     private readonly Player _owner;
 
-    private readonly List<RuneModel> _runes = new();
+    private readonly List<RuneModel> _runes = [];
 
     public IReadOnlyList<RuneModel> Runes => _runes;
 
-    public int Capacity => MaxCapacity;
+    public int Capacity { set; get; } = MaxCapacity;
 
     public RuneQueue(Player owner)
     {

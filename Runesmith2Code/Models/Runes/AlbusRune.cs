@@ -3,6 +3,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
 using Runesmith2.Runesmith2Code.Cards;
 using Runesmith2.Runesmith2Code.Cards.Uncommon;
 using Runesmith2.Runesmith2Code.Commands;
@@ -16,7 +17,7 @@ namespace Runesmith2.Runesmith2Code.Models.Runes;
 public class AlbusRune : RuneModel
 {
     public override decimal PassiveVal { get; set; } = 0;
-    public override int ChargeVal { get; set; } = 3;
+    public override int ChargeVal { get; set; } = 2;
 
     public override (bool, bool) ShowBottomLabel => (false, true);
 
@@ -38,16 +39,16 @@ public class AlbusRune : RuneModel
     {
         Trigger();
         PlayPassiveSfx();
-        await ChargeRunes(choiceContext, 1);
+        await ChargeAndAddPotency(choiceContext, 1);
         UseCharge();
     }
 
     public override async Task Break(PlayerChoiceContext choiceContext)
     {
-        await ChargeRunes(choiceContext, 2, true);
+        await ChargeAndAddPotency(choiceContext, 2, true);
     }
 
-    private async Task ChargeRunes(PlayerChoiceContext choiceContext, decimal amount, bool chargeAll = false)
+    private async Task ChargeAndAddPotency(PlayerChoiceContext choiceContext, decimal amount, bool chargeAll = false)
     {
         var runeQueue = Owner.PlayerCombatState?.GetRuneQueue();
         if (runeQueue == null) return;
@@ -55,6 +56,7 @@ public class AlbusRune : RuneModel
         RuneCmd.ChargeRunes(choiceContext,
             chargeAll ? runeQueue.Runes.Where(r => r != this) : runeQueue.Runes.Where(r => r is not AlbusRune),
             (int)amount);
+        await RuneCmd.AddPotency(choiceContext, runeQueue.Runes, Owner, null, amount, ValueProp.Unpowered);
         await Cmd.CustomScaledWait(0.2f, 0.3f);
     }
 
