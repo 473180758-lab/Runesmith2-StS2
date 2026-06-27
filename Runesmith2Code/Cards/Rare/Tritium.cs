@@ -14,7 +14,7 @@ public class Tritium : Runesmith2Card
         WithCards(3);
     }
 
-    public override Elements CanonicalElementsCost => new(3);
+    public override Elements CanonicalElementsCost => new(4);
 
     protected override void OnUpgrade()
     {

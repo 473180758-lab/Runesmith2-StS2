@@ -7,7 +7,7 @@
   "RUNESMITH2-AETUS.title": "Aetus",
   "RUNESMITH2-ALBUS.description": "[gold]Recipe[/gold].\n[gold]Craft[/gold] an [gold]Albus[/gold] Rune with {Charge:diff()} [gold]Charge{Charge:rs2Plural:|s}[/gold].{IfFull:\n[red](Rune Slots are full)[/red]|}",
   "RUNESMITH2-ALBUS.title": "Albus",
-  "RUNESMITH2-ALL_IN_ONE.description": "[gold]Break[/gold] ALL your Runes except your newest one.\nGive the remaining Rune the [gold]Charges[/gold] and [gold]Potency[/gold] of ALL [gold]Broken[/gold] Runes combined.",
+  "RUNESMITH2-ALL_IN_ONE.description": "[gold]Break[/gold] ALL your Runes except your newest one.\nGive your newest Rune the [gold]Charges[/gold] and [gold]Potency[/gold] of ALL [gold]Broken[/gold] Runes.",
   "RUNESMITH2-ALL_IN_ONE.title": "All in One",
   "RUNESMITH2-ARCHITECTS_FORGE.description": "At the end of combat, you may [gold]Enchant[/gold] a card with [purple]Forged[/purple] {Amount:diff()}.",
   "RUNESMITH2-ARCHITECTS_FORGE.title": "Architect's Forge",
@@ -160,7 +160,7 @@
   "RUNESMITH2-SHIFTING_HAMMER.title": "Shifting Hammer",
   "RUNESMITH2-SHINING_HAMMER.description": "Deal {Damage:diff()} damage.\n[gold]Enhance[/gold] ALL your other [gold]Hammer[/gold] cards{EnhanceBy:rs2Plural:| by {EnhanceBy:diff()}}.",
   "RUNESMITH2-SHINING_HAMMER.title": "Shining Hammer",
-  "RUNESMITH2-SHOCK_THERAPY.description": "Stasis {Cards:diff()} card{Cards:plural:|s}.\nFor each card with [gold]Stasis[/gold] in your [gold]Hand[/gold], deal {Damage:diff()} damage to ALL enemies.{InCombat:\n(Hits {CalculatedHits:diff()} {CalculatedHits:plural:time|times})|}",
+  "RUNESMITH2-SHOCK_THERAPY.description": "[gold]Stasis[/gold] {Cards:diff()} card{Cards:plural:|s}.\nFor each card with [gold]Stasis[/gold] in your [gold]Hand[/gold], deal {Damage:diff()} damage to ALL enemies.{InCombat:\n(Hits {CalculatedHits:diff()} {CalculatedHits:plural:time|times})|}",
   "RUNESMITH2-SHOCK_THERAPY.title": "Shock Therapy",
   "RUNESMITH2-STABILIZE.description": "Gain {Block:diff()} [gold]Block[/gold].\nSet the [gold]Charges[/gold] of ALL your Runes with at least 1 [gold]Charge[/gold] to {ChargeGain:diff()}.",
   "RUNESMITH2-STABILIZE.title": "Stabilize",
@@ -182,6 +182,6 @@
   "RUNESMITH2-WATCH_OUT.title": "Watch Out!",
   "RUNESMITH2-WHITE_BALANCE.description": "Deal {Damage:diff()} damage.\nIf you have at least 1 of each {elements:rs2Icon(all)}, gain {Energy:energyIcons()}.",
   "RUNESMITH2-WHITE_BALANCE.title": "White Balance",
-  "RUNESMITH2-WILDFIRE.description": "At the start of your turn, gain {Amount:diff()} {elements:rs2Icon(ignis)} and {Amount:diff()} {elements:rs2Icon(terra)}.",
+  "RUNESMITH2-WILDFIRE.description": "Gain {Ignis:rs2Icon()} and {Terra:rs2Icon()}.\nAt the start of your turn, gain {Amount:diff()} {elements:rs2Icon(ignis)} and {Amount:diff()} {elements:rs2Icon(terra)}.",
   "RUNESMITH2-WILDFIRE.title": "Wildfire"
 }
