@@ -28,9 +28,7 @@ public class HammerTornado : Runesmith2Card
         });
         WithTags(RunesmithTags.Hammer);
     }
-
-    public override RuneBreakType RuneBreakType => RuneBreakType.Oldest;
-
+    
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
