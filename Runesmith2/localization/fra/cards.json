@@ -92,7 +92,7 @@
   "RUNESMITH2-HAMMER_SWING.title": "Lancer de marteau",
   "RUNESMITH2-HAMMER_TORNADO.description": "Infligez {Damage:diff()} dégâts.\nFrappe une fois de plus pour chaque Rune.{InCombat:\n({CalculatedHits:plural:Frappe|Frappe} {CalculatedHits:diff()} fois)|}",
   "RUNESMITH2-HAMMER_TORNADO.title": "Tornade de marteaux",
-  "RUNESMITH2-HEAT_EXCHANGE.description": "Gagnez {Ignis:rs2Icon()} pour chaque ennemi.\nInfligez {Damage:diff()} dégâts à TOUS les ennemis.",
+  "RUNESMITH2-HEAT_EXCHANGE.description": "Infligez {Damage:diff()} dégâts à TOUS les ennemis.\nGagnez {IceColdPower:diff()} [gold]Gel[/gold].",
   "RUNESMITH2-HEAT_EXCHANGE.title": "Échange thermique",
   "RUNESMITH2-HIT_AND_RUN.description": "Infligez {Damage:diff()} dégâts.\nGagnez {BracePower:diff()} [gold]Garde[/gold].\nGagnez {Terra:rs2Icon()}.",
   "RUNESMITH2-HIT_AND_RUN.title": "Délit de fuite",
@@ -180,7 +180,7 @@
   "RUNESMITH2-VULCANUS.title": "Vulcanus",
   "RUNESMITH2-WATCH_OUT.description": "Un autre joueur gagne {BracePower:diff()} [gold]Garde[/gold].\n[gold]Renforcez[/gold] {Cards:diff()} carte{Cards:plural:|s} au hasard dans la main de ce joueur{EnhanceBy:rs2Plural:| de {EnhanceBy:diff()}}.",
   "RUNESMITH2-WATCH_OUT.title": "Attention !",
-  "RUNESMITH2-WHITE_BALANCE.description": "Infligez {Damage:diff()} dégâts.\nSi vous avez au moins 1 de chaque {elements:rs2Icon(all)}, gagnez {Energy:energyIcons()}.",
+  "RUNESMITH2-WHITE_BALANCE.description": "Infligez {Damage:diff()} dégâts à TOUS les ennemis.\nSi vous avez au moins 1 de chaque {elements:rs2Icon(all)}, gagnez {Energy:energyIcons()}.",
   "RUNESMITH2-WHITE_BALANCE.title": "Balance des blancs",
   "RUNESMITH2-WILDFIRE.description": "Gagnez {Ignis:rs2Icon()} et {Terra:rs2Icon()}.\nAu début de votre tour, gagnez {Amount:diff()} {elements:rs2Icon(ignis)} et {Amount:diff()} {elements:rs2Icon(terra)}.",
   "RUNESMITH2-WILDFIRE.title": "Feu sauvage"
